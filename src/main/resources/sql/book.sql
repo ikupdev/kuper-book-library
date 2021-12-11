@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS com.book
     author      CHARACTER VARYING(128)               DEFAULT NULL,
     description CHARACTER VARYING(512)               DEFAULT NULL,
     content     CHARACTER VARYING(1024)              DEFAULT NULL,
-    CONSTRAINT external_product_pk PRIMARY KEY (id)
+    CONSTRAINT book_pk PRIMARY KEY (id)
 )
     WITH (
         OIDS = FALSE
