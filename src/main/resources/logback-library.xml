@@ -13,10 +13,10 @@
     </appender>
 
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${baseLogPath}/service-book-library.log</file>
+        <file>${baseLogPath}/service-library.log</file>
         <append>true</append>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${baseOldLogPath}/service_book_library_${fileTimestampMark}_%i.log.zip</fileNamePattern>
+            <fileNamePattern>${baseOldLogPath}/service_library_${fileTimestampMark}_%i.log.zip</fileNamePattern>
             <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
                 <maxFileSize>5MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>

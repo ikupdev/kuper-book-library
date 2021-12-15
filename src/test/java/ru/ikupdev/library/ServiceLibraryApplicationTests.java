@@ -1,10 +1,10 @@
-package ikupdev.book.library;
+package ru.ikupdev.library;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KuperBookLibraryApplicationTests {
+class ServiceLibraryApplicationTests {
 
     @Test
     void contextLoads() {
