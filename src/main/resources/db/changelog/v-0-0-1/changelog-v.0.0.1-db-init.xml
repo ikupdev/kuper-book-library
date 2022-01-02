@@ -5,5 +5,6 @@
 
     <include file="01-create-user-table.xml" relativeToChangelogFile="true"/>
     <include file="02-create-book-table.xml" relativeToChangelogFile="true"/>
+    <include file="03-create-persistent_logins-table.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
