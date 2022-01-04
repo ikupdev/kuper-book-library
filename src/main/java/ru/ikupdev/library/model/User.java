@@ -1,5 +1,6 @@
 package ru.ikupdev.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,6 +10,7 @@ import ru.ikupdev.library.type.Role;
 import ru.ikupdev.library.type.State;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -30,7 +32,7 @@ public class User {
     private String lastName;
 
     private String login;
-
+    @JsonIgnore
     private String hashPassword;
 
     @Enumerated(value = EnumType.STRING)
@@ -46,4 +48,7 @@ public class User {
                 .build();
     }
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    List<Token> tokens;
 }

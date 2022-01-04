@@ -13,6 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import ru.ikupdev.library.security.filter.TokenAuthFilter;
+import ru.ikupdev.library.security.provider.TokenAuthenticationProvider;
 
 import javax.sql.DataSource;
 
@@ -23,19 +26,26 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Qualifier("userDetailsServiceImpl")
     @Autowired
     private UserDetailsService userDetailsService;
-
     @Autowired
     private DataSource dataSource;
+    @Autowired
+    private TokenAuthFilter tokenAuthFilter;
+    @Autowired
+    private TokenAuthenticationProvider tokenAuthenticationProvider;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
-                authorizeRequests()
+                addFilterBefore(tokenAuthFilter, BasicAuthenticationFilter.class)
+                .antMatcher("/**")
+                .authenticationProvider(tokenAuthenticationProvider)
+                .authorizeRequests()
                 .antMatchers("/users/**").hasAuthority("ADMIN")
+                .antMatchers("/api/user/**").hasAuthority("ADMIN")
+                .antMatchers("/api/**").permitAll()
                 .antMatchers("/").permitAll()
                 .antMatchers("/signUp/**").permitAll()
                 .antMatchers("/login/**").permitAll()
@@ -48,13 +58,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe()
                     .rememberMeParameter("remember-me")
-                    .tokenRepository(tokenRepository())
+                    .tokenRepository(persistentTokenRepository())
                 .and()
                 .csrf().disable();
     }
 
     @Bean
-    public PersistentTokenRepository tokenRepository() {
+    public PersistentTokenRepository persistentTokenRepository() {
         JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
         tokenRepository.setDataSource(dataSource);
         return tokenRepository;

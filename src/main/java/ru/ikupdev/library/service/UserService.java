@@ -1,0 +1,34 @@
+package ru.ikupdev.library.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ru.ikupdev.library.form.UserForm;
+import ru.ikupdev.library.model.User;
+import ru.ikupdev.library.repository.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * @author Ilya V. Kupriyanov
+ * @version 15.12.2021
+ */
+@Service
+public class UserService {
+
+    private final UserRepository userRepository;
+
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
+}

@@ -1,0 +1,38 @@
+POST http://localhost/api/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "login" : "user", "password" : "abcd1234" }
+
+###
+POST http://localhost/api/login
+Accept: */*
+Cache-Control: no-cache
+Content-Type: application/json
+
+{ "login" : "ikupdev", "password" : "1234" }
+
+###
+
+GET http://localhost/api/user/list?token=WJWEMr6Zf2
+
+
+
+
+
+###
+POST http://localhost/api/user
+Content-Type: application/json
+
+{
+  "firstName": "Мистер2",
+  "lastName": "Админ2",
+  "login": "ikupdev2",
+  "password": "1234"
+}
+
+###
+GET http://localhost/api/user/list
+Accept: */*
+Cache-Control: no-cache
