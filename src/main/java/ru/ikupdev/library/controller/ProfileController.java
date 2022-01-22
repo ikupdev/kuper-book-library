@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import ru.ikupdev.library.security.details.UserDetailsImpl;
-import ru.ikupdev.library.transfer.UserTO;
+import ru.ikupdev.library.transfer.UserView;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -18,8 +18,8 @@ public class ProfileController {
     public String getProfilePage(ModelMap model, Authentication authentication) {
         if (authentication == null) return "redirect:/login";
         UserDetailsImpl details = (UserDetailsImpl) authentication.getPrincipal();
-        UserTO userTO = UserTO.from(details.getUser());
-        model.addAttribute("user", userTO);
+        UserView userView = UserView.from(details.getUser());
+        model.addAttribute("user", userView);
         return "profile";
     }
 

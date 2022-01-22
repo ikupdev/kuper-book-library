@@ -1,6 +1,7 @@
 package ru.ikupdev.library.form;
 
 import lombok.Data;
+import ru.ikupdev.library.type.State;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -12,4 +13,6 @@ public class UserForm {
     private String lastName;
     private String login;
     private String password;
+    private State state;
+
 }

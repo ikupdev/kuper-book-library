@@ -15,9 +15,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost/api/user/list?token=WJWEMr6Zf2
-
-
+GET http://localhost/api/user/list?token=r0fa3SxRMS
 
 
 
@@ -36,3 +34,16 @@ Content-Type: application/json
 GET http://localhost/api/user/list
 Accept: */*
 Cache-Control: no-cache
+###
+
+PUT http://localhost/api/user/6/update
+Content-Type: application/json
+
+{
+  "firstName": "Мистер1_1",
+  "lastName": "Админ1_1",
+  "login": "ikupdev2",
+  "password": "1234",
+  "state": "ACTIVE",
+  "role": "USER"
+}

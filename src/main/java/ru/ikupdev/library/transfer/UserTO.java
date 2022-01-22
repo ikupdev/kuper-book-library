@@ -1,25 +1,19 @@
 package ru.ikupdev.library.transfer;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import ru.ikupdev.library.model.User;
+import ru.ikupdev.library.type.Role;
+import ru.ikupdev.library.type.State;
 
 /**
  * @author Ilya V. Kupriyanov
- * @version 15.12.2021
+ * @version 04.01.2022
  */
 @Data
-@AllArgsConstructor
-@Builder
 public class UserTO {
     private String firstName;
     private String lastName;
-
-    public static UserTO from(User user) {
-        return UserTO.builder()
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .build();
-    }
+    private String login;
+    private String password;
+    private State state;
+    private Role role;
 }

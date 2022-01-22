@@ -1,14 +1,15 @@
 package ru.ikupdev.library.controller.api;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.ikupdev.library.form.UserForm;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.service.SignUpService;
 import ru.ikupdev.library.service.UserService;
+import ru.ikupdev.library.transfer.UserTO;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -16,15 +17,10 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/api/user")
+@RequiredArgsConstructor
 public class UserApiController {
-
     private final UserService userService;
     private final SignUpService signUpService;
-
-    public UserApiController(UserService userService, SignUpService signUpService) {
-        this.userService = userService;
-        this.signUpService = signUpService;
-    }
 
     @GetMapping("/list")
     public List<User> getUsers() {
@@ -33,14 +29,20 @@ public class UserApiController {
 
     @GetMapping("/{user-id}")
     public User getUser(@PathVariable("user-id") Long userId) {
-        Optional<User> optionalUser = userService.findById(userId);
-        if (optionalUser.isPresent()) return optionalUser.get();
-        else throw new IllegalArgumentException("User not found");
+        return userService.findById(userId);
     }
 
     @PostMapping
     public ResponseEntity<Object> addUser(@RequestBody UserForm userForm) {
+        if (userService.checkIsExistByLogin(userForm.getLogin())) throw new IllegalArgumentException("User with this login exist!");
         signUpService.signUp(userForm);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/{user-id}/update")
+    public ResponseEntity<Object> updateUser(@PathVariable("user-id") Long userId,
+                                             @RequestBody UserTO userTO) {
+        userService.updateUser(userId, userTO);
         return ResponseEntity.ok().build();
     }
 

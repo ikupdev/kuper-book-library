@@ -41,7 +41,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private State state;
 
-    public static User from(UserForm userForm){
+    public static User from(UserForm userForm) {
         return User.builder()
                 .firstName(userForm.getFirstName())
                 .lastName(userForm.getLastName())
