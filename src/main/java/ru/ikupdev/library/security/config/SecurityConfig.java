@@ -8,6 +8,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,55 +27,69 @@ import javax.sql.DataSource;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    @Qualifier("userDetailsServiceImpl")
-    @Autowired
-    private UserDetailsService userDetailsService;
-    @Autowired
-    private DataSource dataSource;
-    @Autowired
-    private TokenAuthFilter tokenAuthFilter;
-    @Autowired
-    private TokenAuthenticationProvider tokenAuthenticationProvider;
+//    @Qualifier("userDetailsServiceImpl")
+//    @Autowired
+//    private UserDetailsService userDetailsService;
+//    @Autowired
+//    private DataSource dataSource;
+//    @Autowired
+//    private TokenAuthFilter tokenAuthFilter;
+//    @Autowired
+//    private TokenAuthenticationProvider tokenAuthenticationProvider;
+
+
+    private static final String ADMIN_ENDPOINT = "/api/v1/admin/**";
+    private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
+    private static final String API_ENDPOINT = "/api/**";
+    private static final String[] SWAGGER_ENDPOINT = new String[]{"/v2/api-docs/**","/swagger-ui.html"};
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.
-                addFilterBefore(tokenAuthFilter, BasicAuthenticationFilter.class)
-                .antMatcher("/**")
-                .authenticationProvider(tokenAuthenticationProvider)
+                httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .authorizeRequests()
-                .antMatchers("/users/**").hasAuthority("ADMIN")
-                .antMatchers("/api/user/**").hasAuthority("ADMIN")
-                .antMatchers("/api/**").permitAll()
-                .antMatchers("/").permitAll()
-                .antMatchers("/signUp/**").permitAll()
-                .antMatchers("/login/**").permitAll()
-                .anyRequest().permitAll()
-                .and()
-                    .formLogin()
-                        .usernameParameter("login")
-                        .defaultSuccessUrl("/")
-                        .loginPage("/login")
-                .and()
-                .rememberMe()
-                    .rememberMeParameter("remember-me")
-                    .tokenRepository(persistentTokenRepository())
-                .and()
-                .csrf().disable();
+                    .antMatchers(API_ENDPOINT).permitAll()
+                    .antMatchers(SWAGGER_ENDPOINT).permitAll();
+//                addFilterBefore(tokenAuthFilter, BasicAuthenticationFilter.class)
+//                .antMatcher("/**")
+//                .authenticationProvider(tokenAuthenticationProvider)
+//                .authorizeRequests()
+//                .antMatchers("/users/**").hasAuthority("ADMIN")
+//                .antMatchers("/api/user/**").hasAuthority("ADMIN")
+//                .antMatchers("/api/**").permitAll()
+//                .antMatchers("/").permitAll()
+//                .antMatchers("/signUp/**").permitAll()
+//                .antMatchers("/login/**").permitAll()
+//                .anyRequest().permitAll()
+//                .and()
+//                    .formLogin()
+//                        .usernameParameter("login")
+//                        .defaultSuccessUrl("/")
+//                        .loginPage("/login")
+//                .and()
+//                .rememberMe()
+//                    .rememberMeParameter("remember-me")
+//                    .tokenRepository(persistentTokenRepository())
+//                .and()
+//                .csrf().disable();
     }
 
-    @Bean
-    public PersistentTokenRepository persistentTokenRepository() {
-        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
-        tokenRepository.setDataSource(dataSource);
-        return tokenRepository;
-    }
+//    @Bean
+//    public PersistentTokenRepository persistentTokenRepository() {
+//        JdbcTokenRepositoryImpl tokenRepository = new JdbcTokenRepositoryImpl();
+//        tokenRepository.setDataSource(dataSource);
+//        return tokenRepository;
+//    }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
-        super.configure(auth);
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+//        super.configure(auth);
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
