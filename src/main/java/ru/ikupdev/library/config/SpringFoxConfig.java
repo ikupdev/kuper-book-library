@@ -1,6 +1,7 @@
 package ru.ikupdev.library.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import com.fasterxml.classmate.TypeResolver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static springfox.documentation.spring.web.paths.Paths.removeAdjacentForwardSlashes;
-
 /**
  * @author Ilya V. Kupriyanov
  * @version 30.01.2022
@@ -29,6 +28,8 @@ import static springfox.documentation.spring.web.paths.Paths.removeAdjacentForwa
 @EnableSwagger2
 public class SpringFoxConfig {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(SpringFoxConfig.class.getName());
+    @Autowired
+    protected TypeResolver typeResolver;
 
     @Bean
     public Docket api() {
@@ -46,6 +47,7 @@ public class SpringFoxConfig {
                 .globalResponseMessage(RequestMethod.DELETE, responseMessages)
                 .globalResponseMessage(RequestMethod.PATCH, responseMessages)
                 .globalResponseMessage(RequestMethod.PUT, responseMessages)
+                .additionalModels(typeResolver.resolve(ru.ikupdev.library.bean.RestResponse.class))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("ru.ikupdev.library.controller"))
                 .paths(PathSelectors.any())

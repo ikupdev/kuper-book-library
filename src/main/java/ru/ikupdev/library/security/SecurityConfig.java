@@ -1,24 +1,17 @@
-package ru.ikupdev.library.security.config;
+package ru.ikupdev.library.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import ru.ikupdev.library.security.filter.TokenAuthFilter;
-import ru.ikupdev.library.security.provider.TokenAuthenticationProvider;
-
-import javax.sql.DataSource;
+import ru.ikupdev.library.security.jwt.JwtConfigurer;
+import ru.ikupdev.library.security.jwt.JwtTokenProvider;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -26,23 +19,19 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableWebSecurity
+@AllArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Qualifier("userDetailsServiceImpl")
-//    @Autowired
-//    private UserDetailsService userDetailsService;
-//    @Autowired
-//    private DataSource dataSource;
-//    @Autowired
-//    private TokenAuthFilter tokenAuthFilter;
-//    @Autowired
-//    private TokenAuthenticationProvider tokenAuthenticationProvider;
-
+    private final JwtTokenProvider jwtTokenProvider;
 
     private static final String ADMIN_ENDPOINT = "/api/v1/admin/**";
     private static final String LOGIN_ENDPOINT = "/api/v1/auth/login";
     private static final String API_ENDPOINT = "/api/**";
-    private static final String[] SWAGGER_ENDPOINT = new String[]{"/v2/api-docs/**","/swagger-ui.html"};
+    private static final String[] SWAGGER_ENDPOINT = new String[]{"/v2/api-docs/**", "/swagger-ui.html"};
 
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -52,8 +41,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                    .antMatchers(API_ENDPOINT).permitAll()
-                    .antMatchers(SWAGGER_ENDPOINT).permitAll();
+                .antMatchers(API_ENDPOINT).permitAll()
+                .antMatchers(SWAGGER_ENDPOINT).permitAll()
+                .and()
+                .apply(new JwtConfigurer(jwtTokenProvider));
 //                addFilterBefore(tokenAuthFilter, BasicAuthenticationFilter.class)
 //                .antMatcher("/**")
 //                .authenticationProvider(tokenAuthenticationProvider)
@@ -73,7 +64,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .rememberMe()
 //                    .rememberMeParameter("remember-me")
-//                    .tokenRepository(persistentTokenRepository())
+//                .tokenRepository(persistentTokenRepository())
 //                .and()
 //                .csrf().disable();
     }
@@ -91,9 +82,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        super.configure(auth);
 //    }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
 }

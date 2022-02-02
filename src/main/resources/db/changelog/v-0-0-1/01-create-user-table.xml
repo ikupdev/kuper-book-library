@@ -3,16 +3,38 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="01-create-user-table" author="i.kupriyanov" context="default">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="user"/>
-            </not>
-        </preConditions>
-        <sqlFile path="/sql/user.sql"/>
-
-        <rollback>
-            <dropTable tableName="user" cascadeConstraints="true"/>
-        </rollback>
+    <changeSet id="1.0.0" author="i.kupriyanov">
+        <createSequence sequenceName="user_id_seq" minValue="1" maxValue="9223372036854775807" startValue="1" cacheSize="1"/>
+    </changeSet>
+    <changeSet id="1.0.1" author="i.kupriyanov">
+        <createTable tableName="user">
+            <column name="id" type="BIGSERIAL" defaultValueComputed="nextval('com.user_id_seq')">
+                <constraints primaryKey="true" primaryKeyName="user_pk" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="first_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="hash_password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(25)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
     </changeSet>
 </databaseChangeLog>

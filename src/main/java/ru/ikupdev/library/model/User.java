@@ -1,54 +1,45 @@
 package ru.ikupdev.library.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import ru.ikupdev.library.form.UserForm;
-import ru.ikupdev.library.type.Role;
-import ru.ikupdev.library.type.State;
+import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.util.List;
 
 /**
  * @author Ilya V. Kupriyanov
- * @version 18/04/2021
+ * @version 18.01.2022
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+public class User extends BaseEntity {
+    @Column(name = "username")
+    private String username;
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
-
-    private String login;
-    @JsonIgnore
+    @Column(name = "email")
+    private String email;
+    @Column(name = "hash_password")
     private String hashPassword;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns =
+            {@JoinColumn(name = "user_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
+            )
+    private List<Role> role;
 
-    @Enumerated(value = EnumType.STRING)
-    private Role role;
-
-    @Enumerated(value = EnumType.STRING)
-    private State state;
-
-    public static User from(UserForm userForm) {
-        return User.builder()
-                .firstName(userForm.getFirstName())
-                .lastName(userForm.getLastName())
-                .build();
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + hashPassword + '\'' +
+                '}';
     }
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    List<Token> tokens;
 }

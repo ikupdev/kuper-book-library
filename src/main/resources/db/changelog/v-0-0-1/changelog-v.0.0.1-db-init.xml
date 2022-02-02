@@ -4,8 +4,10 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <include file="01-create-user-table.xml" relativeToChangelogFile="true"/>
-    <include file="02-create-book-table.xml" relativeToChangelogFile="true"/>
-    <include file="03-create-persistent_logins-table.xml" relativeToChangelogFile="true"/>
-    <include file="04-create-token-table.xml" relativeToChangelogFile="true"/>
+    <include file="02-create-role-table.xml" relativeToChangelogFile="true"/>
+    <include file="03-create-user-role-table.xml" relativeToChangelogFile="true"/>
+<!--    <include file="create-book-table.xml" relativeToChangelogFile="true"/>-->
+<!--    <include file="create-persistent_logins-table.xml" relativeToChangelogFile="true"/>-->
+<!--    <include file="04-create-token-table.xml" relativeToChangelogFile="true"/>-->
 
 </databaseChangeLog>
