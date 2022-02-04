@@ -80,8 +80,4 @@ public class JwtUserDetails implements UserDetails {
         return enabled;
     }
 
-    @JsonIgnore
-    public Date getLastPasswordResetDate() {
-        return lastPasswordResetDate;
-    }
 }

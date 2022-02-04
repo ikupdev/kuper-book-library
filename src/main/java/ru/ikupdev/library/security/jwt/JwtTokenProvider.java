@@ -23,6 +23,9 @@ import java.util.stream.Collectors;
  */
 @Component
 public class JwtTokenProvider {
+    private static final String AUTHORIZATION_HEADER_NAME = "Authorization";
+    private static final String BEARER = "Bearer ";
+
     @Value("${jwt.token.secret}")
     private String secret;
     @Value("${jwt.token.expired}")
@@ -62,8 +65,8 @@ public class JwtTokenProvider {
     }
 
     public String resolveToken(HttpServletRequest req) {
-        String bearerToken = req.getHeader("Authorization");
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+        String bearerToken = req.getHeader(AUTHORIZATION_HEADER_NAME);
+        if (bearerToken != null && bearerToken.startsWith(BEARER)) {
             return bearerToken.substring(7, bearerToken.length());
         }
         return null;
