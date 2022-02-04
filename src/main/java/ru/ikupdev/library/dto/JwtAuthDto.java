@@ -10,6 +10,6 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class JwtAuthDto {
-    private String username;
+    private String login;
     private String token;
 }

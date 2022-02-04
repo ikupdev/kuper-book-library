@@ -1,11 +1,19 @@
 package ru.ikupdev.library.controller.rest;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.ikupdev.library.dto.RestResponseDto;
+import ru.ikupdev.library.dto.UserRequestDto;
+import ru.ikupdev.library.exception.ResourceConflictException;
 import ru.ikupdev.library.model.User;
+import ru.ikupdev.library.model.UserView;
+import ru.ikupdev.library.model.to.UserTO;
+import ru.ikupdev.library.service.ISignUpService;
 import ru.ikupdev.library.service.impl.UserService;
-import ru.ikupdev.library.transfer.UserTO;
 
 import java.util.List;
 
@@ -16,33 +24,46 @@ import static ru.ikupdev.library.config.AppConstants.API_V1_PATH;
  * @version 02.01.2022
  */
 @RestController
-@RequestMapping(API_V1_PATH + "/user")
 @RequiredArgsConstructor
+@RequestMapping(API_V1_PATH + "/user")
+@Api(value = "User controller", tags = {"3. Api пользователей"})
 public class UserController {
     private final UserService userService;
+    private final ISignUpService signUpService;
 
+    @ApiOperation(value = "Получить список пользователей")
     @GetMapping("/list")
-    public List<User> getUsers() {
-        return userService.getAll();
+    public RestResponseDto<List<User>> getUsers() {
+        return new RestResponseDto<>(userService.getAll());
     }
 
+    @ApiOperation(value = "Получить пользователя по id")
     @GetMapping("/{user-id}")
-    public User getUser(@PathVariable("user-id") Long userId) {
+    public User getUserById(@ApiParam(value = "id пользователя", required = true) @PathVariable("user-id") Long userId) {
         return userService.findById(userId);
     }
 
-//    @PostMapping
-//    public ResponseEntity<Object> addUser(@RequestBody UserForm userForm) {
-//        if (userService.checkIsExistByLogin(userForm.getLogin())) throw new IllegalArgumentException("User with this login exist!");
-//        signUpService.signUp(userForm);
-//        return ResponseEntity.ok().build();
-//    }
-//
-//    @PutMapping("/{user-id}/update")
-//    public ResponseEntity<Object> updateUser(@PathVariable("user-id") Long userId,
-//                                             @RequestBody UserTO userTO) {
-//        userService.updateUser(userId, userTO);
-//        return ResponseEntity.ok().build();
-//    }
+    @ApiOperation(value = "Добавить пользователя")
+    @PostMapping
+    public ResponseEntity<UserView> addUser(@RequestBody UserRequestDto dto) {
+        if (!(userService.findByLogin(dto.getLogin()) == null))
+            throw new ResourceConflictException("User with login " + dto.getLogin() + " exist!");
+        UserView userView = signUpService.signUp(dto);
+        return ResponseEntity.ok(userView);
+    }
+
+    @ApiOperation(value = "Обновить пользователя")
+    @PatchMapping("/{user-id}")
+    public ResponseEntity<UserView> updateUser(@PathVariable("user-id") Long userId,
+                                             @RequestBody UserTO userTO) {
+        return ResponseEntity.ok(userService.update(userId, userTO));
+    }
+
+    @ApiOperation(value = "Удалить пользователя")
+    @DeleteMapping("/{user-id}")
+    public ResponseEntity<Object> deleteUser(@PathVariable("user-id") Long userId) {
+        userService.delete(userId);
+        return ResponseEntity.ok().build();
+    }
 
 }

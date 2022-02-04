@@ -1,11 +1,13 @@
 package ru.ikupdev.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -13,24 +15,21 @@ import java.util.List;
  * @version 18.01.2022
  */
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Data
+@ToString
 @Entity
 @Table(name = "role")
-public class Role extends BaseEntity {
+public class Role {
+    @ApiModelProperty(notes = "Primary key", required = true)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @NotNull
     @Column(name = "name")
     private String name;
     @JsonIgnore
     @ToString.Exclude
+//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @ManyToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private List<User> user;
-
-    @Override
-    public String toString() {
-        return "Role{" +
-                "name='" + name + '\'' +
-                ", users=" + user +
-                '}';
-    }
-
 }

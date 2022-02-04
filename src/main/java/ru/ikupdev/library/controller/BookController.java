@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "Book controller", tags = {"1. Книги"})
 public class BookController {
 
-//    @ApiOperation(value = "получить отклонение", response = BookView.class)
+//    @ApiOperation(value = "получить отклонение", response = ItemView.class)
 //    @GetMapping(value = "/deviation/{id}")
-//    public ResponseEntity<BookView> getDeviationById(@ApiParam(value = "id книги", defaultValue = "1", required = true) @PathVariable(value = "id") Long id) {
-//        return ok().body(new BookView());
+//    public ResponseEntity<ItemView> getDeviationById(@ApiParam(value = "id книги", defaultValue = "1", required = true) @PathVariable(value = "id") Long id) {
+//        return ok().body(new ItemView());
 //    }
 
 }

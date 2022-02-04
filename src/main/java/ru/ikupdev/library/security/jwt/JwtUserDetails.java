@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 
@@ -16,13 +15,13 @@ import java.util.Date;
 @AllArgsConstructor
 public class JwtUserDetails implements UserDetails {
     private final Long id;
-    private final String username;
+    private final String login;
     private final String firstName;
     private final String lastName;
     private final String password;
     private final String email;
     private final boolean enabled;
-    private final LocalDate lastPasswordResetDate;
+    private final Date lastPasswordResetDate;
     private final Collection<? extends GrantedAuthority> authorities;
 
     @Override
@@ -55,7 +54,7 @@ public class JwtUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return login;
     }
 
     @JsonIgnore
@@ -82,7 +81,7 @@ public class JwtUserDetails implements UserDetails {
     }
 
     @JsonIgnore
-    public LocalDate getLastPasswordResetDate() {
+    public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;
     }
 }

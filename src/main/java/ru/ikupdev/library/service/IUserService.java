@@ -1,6 +1,8 @@
 package ru.ikupdev.library.service;
 
 import ru.ikupdev.library.model.User;
+import ru.ikupdev.library.model.UserView;
+import ru.ikupdev.library.model.to.UserTO;
 
 import java.util.List;
 
@@ -9,11 +11,15 @@ import java.util.List;
  * @version 30.01.2022
  */
 public interface IUserService {
-    User register(User user);
+    UserView save(User user);
+
+    UserView update(Long id, UserTO userTO);
 
     List<User> getAll();
 
-    User findByUsername(String name);
+    User findByLogin(String name);
+
+    User findByEmail(String email);
 
     User findById(Long id);
 
