@@ -11,15 +11,11 @@ import ru.ikupdev.library.exception.ResourceConflictException;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
 import ru.ikupdev.library.model.to.UserTO;
-import ru.ikupdev.library.repository.RoleRepository;
 import ru.ikupdev.library.repository.UserRepository;
 import ru.ikupdev.library.service.IUserService;
-import ru.ikupdev.library.util.JsonMapper;
-
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
+import java.util.ResourceBundle;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -29,14 +25,14 @@ import java.util.Map;
 @Slf4j
 @AllArgsConstructor
 public class UserService implements IUserService {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(UserService.class.getName());
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserView save(@Validated User user) {
         if (userRepository.findByLogin(user.getLogin()).isPresent())
-            throw new ResourceConflictException("SAVE operation: User with login " + user.getLogin() + " already exist!");
+            throw new ResourceConflictException(String.format(BUNDLE.getString("exist.login"), user.getLogin()));
         User savedUser = userRepository.save(user);
         return new UserView(savedUser.getId(), savedUser.getLogin());
     }
@@ -84,6 +80,6 @@ public class UserService implements IUserService {
 
     private User getUserOrElseThrow(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("User with id: " + id + " not found!"));
+                .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("not.found.id"), id)));
     }
 }

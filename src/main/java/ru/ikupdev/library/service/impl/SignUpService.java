@@ -11,6 +11,7 @@ import ru.ikupdev.library.model.UserView;
 import ru.ikupdev.library.service.ISignUpService;
 
 import java.util.Date;
+import java.util.ResourceBundle;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -20,12 +21,17 @@ import java.util.Date;
 @Slf4j
 @RequiredArgsConstructor
 public class SignUpService implements ISignUpService {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(SignUpService.class.getName());
     private final UserService userService;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserView signUp(UserRequestDto dto) {
+        if (userService.findByLogin(dto.getLogin()) != null)
+            throw new IllegalArgumentException(String.format(BUNDLE.getString("exist.login"), dto.getLogin()));
+        if (userService.findByEmail(dto.getEmail()) != null)
+            throw new IllegalArgumentException(String.format(BUNDLE.getString("exist.email"), dto.getEmail()));
         User user = User.builder()
                 .login(dto.getLogin())
                 .firstName(dto.getFirstName())
@@ -38,7 +44,7 @@ public class SignUpService implements ISignUpService {
         user.setUpdated(new Date());
         user.setStatus(Status.ACTIVE);
         UserView userView = userService.save(user);
-        log.info("User: {} successfully registered", userView);
+        log.info(BUNDLE.getString("log.saved"), userView);
         return new UserView(userView.getId(), userView.getLogin());
     }
 }

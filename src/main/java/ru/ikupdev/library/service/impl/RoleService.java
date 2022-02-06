@@ -3,15 +3,13 @@ package ru.ikupdev.library.service.impl;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 import ru.ikupdev.library.exception.NotFoundException;
 import ru.ikupdev.library.exception.ResourceConflictException;
 import ru.ikupdev.library.model.Role;
 import ru.ikupdev.library.repository.RoleRepository;
 import ru.ikupdev.library.service.IRoleService;
-
-import java.time.LocalDate;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -21,20 +19,21 @@ import java.util.List;
 @Slf4j
 @AllArgsConstructor
 public class RoleService implements IRoleService {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(RoleService.class.getName());
     private final RoleRepository roleRepository;
 
     @Override
     public Role findByRoleName(String roleName) {
         return roleRepository.findByName(roleName)
-                .orElseThrow(() -> new NotFoundException("Role with name " + roleName + " not found!"));
+                .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("not.found.name"), roleName)));
     }
 
     @Override
-    public Role saveRole(@Validated Role role) {
+    public Role saveRole(Role role) {
         if (roleRepository.findByName(role.getName()).isPresent())
-            throw new ResourceConflictException("Role with name " + role.getName() + "already exist!");
+            throw new ResourceConflictException(String.format(BUNDLE.getString("exist.name"), role.getName()));
         Role saved = roleRepository.save(role);
-        log.info("Role {} successfully registered", role);
+        log.info(BUNDLE.getString("log.saved"), role);
         return saved;
     }
 
@@ -46,7 +45,7 @@ public class RoleService implements IRoleService {
     @Override
     public Role findById(Long id) {
         return roleRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException("Role with id " + id + " not found!"));
+                .orElseThrow(()-> new NotFoundException(String.format(BUNDLE.getString("not.found.id"), id)));
     }
 
     @Override

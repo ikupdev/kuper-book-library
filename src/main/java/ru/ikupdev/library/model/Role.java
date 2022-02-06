@@ -17,7 +17,7 @@ import java.util.List;
 
 @EqualsAndHashCode
 @Data
-@ToString
+@ToString(of = {"id", "name"})
 @Entity
 @Table(name = "role")
 public class Role {
@@ -28,7 +28,6 @@ public class Role {
     @Column(name = "name")
     private String name;
     @JsonIgnore
-    @ToString.Exclude
 //    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
     @ManyToMany(mappedBy = "role", fetch = FetchType.EAGER)
     private List<User> user;

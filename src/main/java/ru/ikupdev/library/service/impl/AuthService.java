@@ -14,6 +14,8 @@ import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.security.jwt.JwtTokenProvider;
 import ru.ikupdev.library.service.IAuthService;
 
+import java.util.ResourceBundle;
+
 /**
  * @author Ilya V. Kupriyanov
  * @version 30.01.2022
@@ -22,22 +24,24 @@ import ru.ikupdev.library.service.IAuthService;
 @Slf4j
 @AllArgsConstructor
 public class AuthService implements IAuthService {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(AuthService.class.getName());
     private final AuthenticationManager authenticationManager;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserService userService;
 
     @Override
-    public JwtAuthDto login(AuthRequestDto authRequestDto) {
+    public JwtAuthDto login(AuthRequestDto dto) {
         try {
-            String login = authRequestDto.getLogin();
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, authRequestDto.getPassword()));
+            String login = dto.getLogin();
+            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, dto.getPassword()));
             User user = userService.findByLogin(login);
-            if (user == null) throw new UsernameNotFoundException("User with login " + login + "not found!");
+            if (user == null)
+                throw new UsernameNotFoundException(String.format(BUNDLE.getString("not.found.login"), dto.getLogin()));
             String token = jwtTokenProvider.createToken(login, user.getRole());
             return new JwtAuthDto(login, token);
         } catch (AuthenticationException e) {
-            log.info("Invalid username or password for username {}", authRequestDto.getLogin());
-            throw new BadCredentialsException("Invalid username or password");
+            log.info(BUNDLE.getString("log.invalid.login"), dto.getLogin());
+            throw new BadCredentialsException(BUNDLE.getString("invalid.login"));
         }
     }
 

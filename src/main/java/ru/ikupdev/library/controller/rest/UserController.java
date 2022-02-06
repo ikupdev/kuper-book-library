@@ -5,10 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.dto.UserRequestDto;
-import ru.ikupdev.library.exception.ResourceConflictException;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
 import ru.ikupdev.library.model.to.UserTO;
@@ -45,9 +45,7 @@ public class UserController {
 
     @ApiOperation(value = "Добавить пользователя")
     @PostMapping
-    public ResponseEntity<UserView> addUser(@RequestBody UserRequestDto dto) {
-        if (!(userService.findByLogin(dto.getLogin()) == null))
-            throw new ResourceConflictException("User with login " + dto.getLogin() + " exist!");
+    public ResponseEntity<UserView> addUser(@Validated @RequestBody UserRequestDto dto) {
         UserView userView = signUpService.signUp(dto);
         return ResponseEntity.ok(userView);
     }

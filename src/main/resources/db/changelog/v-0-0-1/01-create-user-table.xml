@@ -2,7 +2,6 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-
     <changeSet id="1.0.0" author="i.kupriyanov">
         <createSequence sequenceName="user_id_seq" minValue="1" maxValue="9223372036854775807" startValue="1" cacheSize="1"/>
     </changeSet>
