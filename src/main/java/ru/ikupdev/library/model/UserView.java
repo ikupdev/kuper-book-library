@@ -17,8 +17,8 @@ import lombok.ToString;
 @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserView {
-    @ApiModelProperty(notes = "Идентификатор", required = true)
+    @ApiModelProperty(notes = "Идентификатор", required = true, example = "1")
     Long id;
-    @ApiModelProperty(notes = "Название")
+    @ApiModelProperty(notes = "Название", example = "login")
     String login;
 }

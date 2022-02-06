@@ -23,7 +23,7 @@ public class RestResponseDto<T> {
     private T data;
     private Long totalRows;
     private Integer totalPages;
-    @ApiModelProperty(notes = "Сообщение об ошибке", hidden = true)
+    @ApiModelProperty(notes = "Сообщение об ошибке", hidden = true, example = "message")
     private String message;
     @ApiModelProperty(notes = "Ошибки валидации", hidden = true)
     private Set<String> validationErrors;

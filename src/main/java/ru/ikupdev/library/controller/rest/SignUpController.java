@@ -22,13 +22,13 @@ import static ru.ikupdev.library.config.AppConstants.API_V1_PATH;
  */
 @RestController
 @AllArgsConstructor
-@RequestMapping(API_V1_PATH)
+@RequestMapping(API_V1_PATH + "/sign-up")
 @Api(value = "Sign up controller", tags = {"1. Регистрация пользователя"})
 public class SignUpController {
     private final ISignUpService signUpService;
 
     @ApiOperation(value = "Регистрация пользователя", response = JwtAuthDto.class)
-    @PostMapping("/sign-up")
+    @PostMapping("/user")
     public ResponseEntity<UserView> signUp(@Validated @RequestBody UserRequestDto dto) {
         UserView userView = signUpService.signUp(dto);
         return ResponseEntity.ok(userView);

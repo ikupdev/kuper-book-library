@@ -21,9 +21,10 @@ import java.util.List;
 @Entity
 @Table(name = "role")
 public class Role {
-    @ApiModelProperty(notes = "Primary key", required = true)
+    @ApiModelProperty(notes = "Primary key", required = true, example = "1")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ApiModelProperty(notes = "name", required = true, example = "name")
     @NotNull
     @Column(name = "name")
     private String name;

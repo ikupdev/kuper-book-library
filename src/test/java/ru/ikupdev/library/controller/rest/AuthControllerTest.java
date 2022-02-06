@@ -1,36 +1,60 @@
 package ru.ikupdev.library.controller.rest;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.ikupdev.library.AbstractIntegrationTest;
-import ru.ikupdev.library.model.User;
-import ru.ikupdev.library.service.impl.UserService;
+import ru.ikupdev.library.service.impl.AuthService;
 
-import java.util.List;
+import java.util.ResourceBundle;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.ikupdev.library.config.AppConstants.API_V1_PATH;
 
 /**
  * @author Ilya V. Kupriyanov
  * @version 05.02.2022
  */
-
 public class AuthControllerTest extends AbstractIntegrationTest {
+    private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(AuthService.class.getName());
 
-    @Autowired
-    private UserService userService;
-
-    @BeforeEach
-    void setUp() {
-
+    @Test
+    void givenCorrectCreditionals_then200Ok() throws Exception {
+        mockMvc
+                .perform(MockMvcRequestBuilders.post(contextPath + API_V1_PATH + "/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(IOUtils.toByteArray(new ClassPathResource("files/auth.json").getInputStream()))
+                        .contextPath(contextPath))
+                .andExpect(status().is2xxSuccessful())
+                .andExpect(jsonPath("$.login", is("kuper")))
+                .andExpect(jsonPath("$.token", notNullValue()));
     }
 
     @Test
-    void testGetAllUsers() {
-        List<User> all = userService.getAll();
-        assertThat(all, hasSize(1));
+    void givenWrongLogin_whenGetUsernameNotFoundException_thenInternalServerError() throws Exception {
+        mockMvc
+                .perform(MockMvcRequestBuilders.post(contextPath + API_V1_PATH + "/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(IOUtils.toByteArray(new ClassPathResource("files/auth_wrong_login.json").getInputStream()))
+                        .contextPath(contextPath))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.message", is(BUNDLE.getString("invalid.login"))));
+    }
+
+    @Test
+    void givenWrongPassword_whenGetUsernameNotFoundException_thenInternalServerError() throws Exception {
+        mockMvc
+                .perform(MockMvcRequestBuilders.post(contextPath + API_V1_PATH + "/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(IOUtils.toByteArray(new ClassPathResource("files/auth_wrong_password.json").getInputStream()))
+                        .contextPath(contextPath))
+                .andExpect(status().is4xxClientError())
+                .andExpect(jsonPath("$.message", is(BUNDLE.getString("invalid.login"))));
     }
 
 }

@@ -18,23 +18,23 @@ import java.util.Date;
 @MappedSuperclass
 @Data
 public abstract class BaseEntity {
-    @ApiModelProperty(notes = "Primary key", required = true)
+    @ApiModelProperty(notes = "Primary key", required = true, example = "1")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
-    @ApiModelProperty(notes = "Дата создания", required = true)
+    @ApiModelProperty(notes = "Дата создания", required = true, example = "2022-01-01'T'10:00:00.000")
     @CreatedDate
     @Column(name = "created")
     private Date created;
     @NotNull
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
-    @ApiModelProperty(notes = "Дата обновления", required = true)
+    @ApiModelProperty(notes = "Дата обновления", required = true, example = "2022-01-01'T'10:00:00.000")
     @LastModifiedDate
     @Column(name = "updated")
     private Date updated;
     @NotNull
-    @ApiModelProperty(notes = "Статус", required = true)
+    @ApiModelProperty(notes = "Статус", required = true, example = "ACTIVE")
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
