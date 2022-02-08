@@ -17,7 +17,7 @@ public class BookController {
 
 //    @ApiOperation(value = "получить отклонение", response = ItemView.class)
 //    @GetMapping(value = "/deviation/{id}")
-//    public ResponseEntity<ItemView> getDeviationById(@ApiParam(value = "id книги", defaultValue = "1", required = true) @PathVariable(value = "id") Long id) {
+//    public ResponseEntity<ItemView> getDeviationById(@ApiParam(value = "id книги", example = "1", required = true) @PathVariable(value = "id") Long id) {
 //        return ok().body(new ItemView());
 //    }
 
