@@ -10,7 +10,7 @@ import ru.ikupdev.library.exception.NotFoundException;
 import ru.ikupdev.library.exception.ResourceConflictException;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
-import ru.ikupdev.library.model.to.UserTO;
+import ru.ikupdev.library.model.UserUpdateDto;
 import ru.ikupdev.library.repository.UserRepository;
 import ru.ikupdev.library.service.IUserService;
 import java.util.Date;
@@ -38,13 +38,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserView update(Long id, UserTO userTO) {
+    public UserView update(Long id, UserUpdateDto userUpdateDto) {
         User userForUpdate = getUserOrElseThrow(id);
-        if (userTO.getLogin() != null) userForUpdate.setLogin(userTO.getLogin());
-        if (userTO.getFirstName() != null) userForUpdate.setFirstName(userTO.getFirstName());
-        if (userTO.getLastName() != null) userForUpdate.setLastName(userTO.getLastName());
-        if (userTO.getEmail() != null) userForUpdate.setEmail(userTO.getEmail());
-        if (userTO.getPassword() != null) userForUpdate.setHashPassword(passwordEncoder.encode(userTO.getPassword()));
+        if (userUpdateDto.getLogin() != null) userForUpdate.setLogin(userUpdateDto.getLogin());
+        if (userUpdateDto.getFirstName() != null) userForUpdate.setFirstName(userUpdateDto.getFirstName());
+        if (userUpdateDto.getLastName() != null) userForUpdate.setLastName(userUpdateDto.getLastName());
+        if (userUpdateDto.getEmail() != null) userForUpdate.setEmail(userUpdateDto.getEmail());
+        if (userUpdateDto.getPassword() != null) userForUpdate.setHashPassword(passwordEncoder.encode(userUpdateDto.getPassword()));
         userForUpdate.setUpdated(new Date());
         User saved = userRepository.save(userForUpdate);
         return new UserView(id, saved.getLogin());

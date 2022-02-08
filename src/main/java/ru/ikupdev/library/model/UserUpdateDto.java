@@ -1,4 +1,4 @@
-package ru.ikupdev.library.model.to;
+package ru.ikupdev.library.model;
 
 import lombok.Data;
 import lombok.ToString;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Data
 @ToString(of = {"login", "firstName", "lastName", "email", "role", "status"})
-public class UserTO {
+public class UserUpdateDto {
     private String login;
     private String firstName;
     private String lastName;

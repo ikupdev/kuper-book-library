@@ -2,7 +2,7 @@ package ru.ikupdev.library.service;
 
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
-import ru.ikupdev.library.model.to.UserTO;
+import ru.ikupdev.library.model.UserUpdateDto;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public interface IUserService {
     UserView save(User user);
 
-    UserView update(Long id, UserTO userTO);
+    UserView update(Long id, UserUpdateDto userUpdateDto);
 
     List<User> getAll();
 

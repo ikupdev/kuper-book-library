@@ -11,7 +11,7 @@ import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.dto.UserRequestDto;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
-import ru.ikupdev.library.model.to.UserTO;
+import ru.ikupdev.library.model.UserUpdateDto;
 import ru.ikupdev.library.service.ISignUpService;
 import ru.ikupdev.library.service.IUserService;
 
@@ -53,8 +53,8 @@ public class UserController {
     @ApiOperation(value = "Обновить пользователя")
     @PatchMapping("/{user-id}")
     public ResponseEntity<UserView> updateUser(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
-                                               @ApiParam(value = "Данные пользователя", required = true) @RequestBody UserTO userTO) {
-        return ResponseEntity.ok(userService.update(userId, userTO));
+                                               @ApiParam(value = "Данные пользователя", required = true) @RequestBody UserUpdateDto userUpdateDto) {
+        return ResponseEntity.ok(userService.update(userId, userUpdateDto));
     }
 
     @ApiOperation(value = "Удалить пользователя")
