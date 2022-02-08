@@ -39,7 +39,7 @@ public class UserController {
 
     @ApiOperation(value = "Получить пользователя по id")
     @GetMapping("/{user-id}")
-    public User getUserById(@ApiParam(value = "id пользователя", required = true) @PathVariable("user-id") Long userId) {
+    public User getUserById(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId) {
         return userService.findById(userId);
     }
 
@@ -52,14 +52,14 @@ public class UserController {
 
     @ApiOperation(value = "Обновить пользователя")
     @PatchMapping("/{user-id}")
-    public ResponseEntity<UserView> updateUser(@ApiParam(value = "id пользователя", required = true) @PathVariable("user-id") Long userId,
+    public ResponseEntity<UserView> updateUser(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
                                                @ApiParam(value = "Данные пользователя", required = true) @RequestBody UserTO userTO) {
         return ResponseEntity.ok(userService.update(userId, userTO));
     }
 
     @ApiOperation(value = "Удалить пользователя")
     @DeleteMapping("/{user-id}")
-    public ResponseEntity<Object> deleteUser(@ApiParam(value = "id пользователя", required = true) @PathVariable("user-id") Long userId) {
+    public ResponseEntity<Object> deleteUser(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId) {
         userService.delete(userId);
         return ResponseEntity.ok().build();
     }

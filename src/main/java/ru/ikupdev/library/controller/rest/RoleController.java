@@ -34,7 +34,7 @@ public class RoleController {
 
     @ApiOperation(value = "Получить роль пользователя по id", response = Role.class)
     @GetMapping("/{id}")
-    public Role findRoleById(@ApiParam(value = "id роли", required = true) @PathVariable("id") Long id) {
+    public Role findRoleById(@ApiParam(value = "id роли", required = true, example = "1") @PathVariable("id") Long id) {
         return roleService.findById(id);
     }
 
@@ -46,7 +46,7 @@ public class RoleController {
 
     @ApiOperation(value = "Удалить роль")
     @DeleteMapping("/{id}")
-    public void deleteRole(@ApiParam(value = "id роли", required = true) @PathVariable("id") Long id) {
+    public void deleteRole(@ApiParam(value = "id роли", required = true, example = "1") @PathVariable("id") Long id) {
         roleService.delete(id);
     }
 
