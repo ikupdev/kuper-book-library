@@ -2,6 +2,7 @@ package ru.ikupdev.library.controller.rest;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,19 +34,19 @@ public class RoleController {
 
     @ApiOperation(value = "Получить роль пользователя по id", response = Role.class)
     @GetMapping("/{id}")
-    public Role findRoleById(@PathVariable("id") Long id) {
+    public Role findRoleById(@ApiParam(value = "id роли", required = true) @PathVariable("id") Long id) {
         return roleService.findById(id);
     }
 
     @ApiOperation(value = "Добавить роль", response = Role.class)
     @PostMapping
-    public Role addRole(@Validated @RequestBody Role role) {
+    public Role addRole(@ApiParam(value = "Данные роли", required = true) @Validated @RequestBody Role role) {
         return roleService.saveRole(role);
     }
 
     @ApiOperation(value = "Удалить роль")
     @DeleteMapping("/{id}")
-    public void deleteRole(@PathVariable("id") Long id) {
+    public void deleteRole(@ApiParam(value = "id роли", required = true) @PathVariable("id") Long id) {
         roleService.delete(id);
     }
 

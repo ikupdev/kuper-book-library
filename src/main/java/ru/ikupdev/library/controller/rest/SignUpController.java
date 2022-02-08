@@ -2,6 +2,7 @@ package ru.ikupdev.library.controller.rest;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -29,7 +30,7 @@ public class SignUpController {
 
     @ApiOperation(value = "Регистрация пользователя", response = JwtAuthDto.class)
     @PostMapping("/user")
-    public ResponseEntity<UserView> signUp(@Validated @RequestBody UserRequestDto dto) {
+    public ResponseEntity<UserView> signUp(@ApiParam(value = "Данные пользователя", required = true) @Validated @RequestBody UserRequestDto dto) {
         UserView userView = signUpService.signUp(dto);
         return ResponseEntity.ok(userView);
     }

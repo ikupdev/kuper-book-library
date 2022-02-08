@@ -13,7 +13,7 @@ import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
 import ru.ikupdev.library.model.to.UserTO;
 import ru.ikupdev.library.service.ISignUpService;
-import ru.ikupdev.library.service.impl.UserService;
+import ru.ikupdev.library.service.IUserService;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ import static ru.ikupdev.library.config.AppConstants.API_V1_PATH;
 @RequestMapping(API_V1_PATH + "/user")
 @Api(value = "User controller", tags = {"3. Api пользователей"})
 public class UserController {
-    private final UserService userService;
+    private final IUserService userService;
     private final ISignUpService signUpService;
 
     @ApiOperation(value = "Получить список пользователей")
@@ -45,21 +45,21 @@ public class UserController {
 
     @ApiOperation(value = "Добавить пользователя")
     @PostMapping
-    public ResponseEntity<UserView> addUser(@Validated @RequestBody UserRequestDto dto) {
+    public ResponseEntity<UserView> addUser(@ApiParam(value = "Данные пользователя", required = true) @Validated @RequestBody UserRequestDto dto) {
         UserView userView = signUpService.signUp(dto);
         return ResponseEntity.ok(userView);
     }
 
     @ApiOperation(value = "Обновить пользователя")
     @PatchMapping("/{user-id}")
-    public ResponseEntity<UserView> updateUser(@PathVariable("user-id") Long userId,
-                                             @RequestBody UserTO userTO) {
+    public ResponseEntity<UserView> updateUser(@ApiParam(value = "id пользователя", required = true) @PathVariable("user-id") Long userId,
+                                               @ApiParam(value = "Данные пользователя", required = true) @RequestBody UserTO userTO) {
         return ResponseEntity.ok(userService.update(userId, userTO));
     }
 
     @ApiOperation(value = "Удалить пользователя")
     @DeleteMapping("/{user-id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable("user-id") Long userId) {
+    public ResponseEntity<Object> deleteUser(@ApiParam(value = "id пользователя", required = true) @PathVariable("user-id") Long userId) {
         userService.delete(userId);
         return ResponseEntity.ok().build();
     }
