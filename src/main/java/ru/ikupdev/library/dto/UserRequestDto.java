@@ -3,7 +3,7 @@ package ru.ikupdev.library.dto;
 import lombok.Data;
 import lombok.ToString;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -12,14 +12,14 @@ import javax.validation.constraints.NotNull;
 @Data
 @ToString(of = {"login", "firstName", "lastName", "email"})
 public class UserRequestDto {
-    @NotNull
+    @NotBlank
     private String login;
-    @NotNull
+    @NotBlank
     private String firstName;
-    @NotNull
+    @NotBlank
     private String lastName;
-    @NotNull
+    @NotBlank
     private String email;
-    @NotNull
+    @NotBlank
     private String password;
 }

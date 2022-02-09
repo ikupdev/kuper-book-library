@@ -10,7 +10,7 @@ import ru.ikupdev.library.exception.NotFoundException;
 import ru.ikupdev.library.exception.ResourceConflictException;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
-import ru.ikupdev.library.model.UserUpdateDto;
+import ru.ikupdev.library.dto.UserUpdateDto;
 import ru.ikupdev.library.repository.UserRepository;
 import ru.ikupdev.library.service.IUserService;
 import java.util.Date;

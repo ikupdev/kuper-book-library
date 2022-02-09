@@ -8,7 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import ru.ikupdev.library.bean.type.Status;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 /**
@@ -21,19 +21,19 @@ public abstract class BaseEntity {
     @ApiModelProperty(notes = "Primary key", required = true, example = "1")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotNull
+    @NotBlank
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
     @ApiModelProperty(notes = "Дата создания", required = true, example = "2022-01-01'T'10:00:00.000")
     @CreatedDate
     @Column(name = "created")
     private Date created;
-    @NotNull
+    @NotBlank
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
     @ApiModelProperty(notes = "Дата обновления", required = true, example = "2022-01-01'T'10:00:00.000")
     @LastModifiedDate
     @Column(name = "updated")
     private Date updated;
-    @NotNull
+    @NotBlank
     @ApiModelProperty(notes = "Статус", required = true, example = "ACTIVE")
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")

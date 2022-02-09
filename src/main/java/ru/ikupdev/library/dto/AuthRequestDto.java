@@ -2,7 +2,7 @@ package ru.ikupdev.library.dto;
 
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -10,8 +10,8 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class AuthRequestDto {
-    @NotNull
+    @NotBlank
     private String login;
-    @NotNull
+    @NotBlank
     private String password;
 }

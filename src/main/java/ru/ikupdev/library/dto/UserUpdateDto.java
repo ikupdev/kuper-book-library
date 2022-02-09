@@ -1,4 +1,4 @@
-package ru.ikupdev.library.model;
+package ru.ikupdev.library.dto;
 
 import lombok.Data;
 import lombok.ToString;

@@ -11,7 +11,7 @@ import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.dto.UserRequestDto;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
-import ru.ikupdev.library.model.UserUpdateDto;
+import ru.ikupdev.library.dto.UserUpdateDto;
 import ru.ikupdev.library.service.ISignUpService;
 import ru.ikupdev.library.service.IUserService;
 

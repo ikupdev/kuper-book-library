@@ -2,7 +2,7 @@ package ru.ikupdev.library.service;
 
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
-import ru.ikupdev.library.model.UserUpdateDto;
+import ru.ikupdev.library.dto.UserUpdateDto;
 
 import java.util.List;
 

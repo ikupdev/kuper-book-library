@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 
@@ -21,20 +21,20 @@ import java.util.List;
 @Entity
 @Table(name = "user")
 public class User extends BaseEntity {
-    @NotNull
+    @NotBlank
     @Column(name = "login")
     private String login;
-    @NotNull
+    @NotBlank
     @Column(name = "first_name")
     private String firstName;
-    @NotNull
+    @NotBlank
     @Column(name = "last_name")
     private String lastName;
-    @NotNull
+    @NotBlank
     @Column(name = "email")
     private String email;
     @JsonIgnore
-    @NotNull
+    @NotBlank
     @Column(name = "hash_password")
     private String hashPassword;
     @Singular("role")
