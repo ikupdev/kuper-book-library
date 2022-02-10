@@ -1,0 +1,750 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 139,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "mF2GBwAAQBAJ",
+      "etag": "Hx2Y7DAnr10",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/mF2GBwAAQBAJ",
+      "volumeInfo": {
+        "title": "Very Good Lives",
+        "subtitle": "The Fringe Benefits of Failure and the Importance of Imagination",
+        "authors": [
+          "J.K. Rowling"
+        ],
+        "publisher": "Hachette UK",
+        "publishedDate": "2015-04-14",
+        "description": "In 2008, J.K. Rowling delivered a deeply affecting commencement speech at Harvard University. Now published for the first time in book form, Very Good Lives offers J.K. Rowling's words of wisdom for anyone at a turning point in life, asking the profound and provocative questions: How can we embrace failure? And how can we use our imagination to better both ourselves and others? Drawing from stories of her own post-graduate years, the world-famous author addresses some of life's most important issues with acuity and emotional force.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_13",
+            "identifier": "9780751562231"
+          },
+          {
+            "type": "ISBN_10",
+            "identifier": "0751562238"
+          }
+        ],
+        "readingModes": {
+          "text": true,
+          "image": true
+        },
+        "pageCount": 80,
+        "printType": "BOOK",
+        "categories": [
+          "Self-Help"
+        ],
+        "averageRating": 4,
+        "ratingsCount": 16,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": true,
+        "contentVersion": "1.5.5.0.preview.3",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=mF2GBwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=mF2GBwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=mF2GBwAAQBAJ&printsec=frontcover&dq=inauthor:rowling&hl=&cd=1&source=gbs_api",
+        "infoLink": "https://play.google.com/store/books/details?id=mF2GBwAAQBAJ&source=gbs_api",
+        "canonicalVolumeLink": "https://play.google.com/store/books/details?id=mF2GBwAAQBAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "FOR_SALE",
+        "isEbook": true,
+        "listPrice": {
+          "amount": 1207.17,
+          "currencyCode": "RUB"
+        },
+        "retailPrice": {
+          "amount": 1207.17,
+          "currencyCode": "RUB"
+        },
+        "buyLink": "https://play.google.com/store/books/details?id=mF2GBwAAQBAJ&rdid=book-mF2GBwAAQBAJ&rdot=1&source=gbs_api",
+        "offers": [
+          {
+            "finskyOfferType": 1,
+            "listPrice": {
+              "amountInMicros": 1207170000,
+              "currencyCode": "RUB"
+            },
+            "retailPrice": {
+              "amountInMicros": 1207170000,
+              "currencyCode": "RUB"
+            }
+          }
+        ]
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "PARTIAL",
+        "embeddable": true,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.ru/books/download/Very_Good_Lives-sample-epub.acsm?id=mF2GBwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "pdf": {
+          "isAvailable": true,
+          "acsTokenLink": "http://books.google.ru/books/download/Very_Good_Lives-sample-pdf.acsm?id=mF2GBwAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=mF2GBwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "SAMPLE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Now published for the first time in book form, Very Good Lives offers J.K. Rowling&#39;s words of wisdom for anyone at a turning point in life, asking the profound and provocative questions: How can we embrace failure?"
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "nmXTy4FPfcwC",
+      "etag": "Qz17OpNorjw",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/nmXTy4FPfcwC",
+      "volumeInfo": {
+        "title": "Harry Potter and the Chamber of Secrets",
+        "authors": [
+          "J. K. Rowling"
+        ],
+        "publisher": "Raincoast Books",
+        "publishedDate": "1999",
+        "description": "Witchcraft, wizardry - fiction.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "1551922444"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9781551922447"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 251,
+        "printType": "BOOK",
+        "categories": [
+          "Juvenile Fiction"
+        ],
+        "averageRating": 4.5,
+        "ratingsCount": 2268,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.0.2.0.preview.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=nmXTy4FPfcwC&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=nmXTy4FPfcwC&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=nmXTy4FPfcwC&dq=inauthor:rowling&hl=&cd=2&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=nmXTy4FPfcwC&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Harry_Potter_and_the_Chamber_of_Secrets.html?hl=&id=nmXTy4FPfcwC"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=nmXTy4FPfcwC&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Witchcraft, wizardry - fiction."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "j2ePuAAACAAJ",
+      "etag": "0LRyKSre+iU",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/j2ePuAAACAAJ",
+      "volumeInfo": {
+        "title": "Harry Potter and the Sorcerer's Stone",
+        "authors": [
+          "J. K. Rowling"
+        ],
+        "publishedDate": "2003",
+        "description": "Rescued from the outrageous neglect of his aunt and uncle, a young boy with a great destiny proves his worth while attending Hogwarts School for Witchcraft and Wizardry.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "1594130000"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9781594130007"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 422,
+        "printType": "BOOK",
+        "categories": [
+          "Juvenile Fiction"
+        ],
+        "averageRating": 5,
+        "ratingsCount": 1,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=j2ePuAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=j2ePuAAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=j2ePuAAACAAJ&dq=inauthor:rowling&hl=&cd=3&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=j2ePuAAACAAJ&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Harry_Potter_and_the_Sorcerer_s_Stone.html?hl=&id=j2ePuAAACAAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=j2ePuAAACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Rescued from the outrageous neglect of his aunt and uncle, a young boy with a great destiny proves his worth while attending Hogwarts School for Witchcraft and Wizardry."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "7zeyHAAACAAJ",
+      "etag": "ncvbCb2smQU",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/7zeyHAAACAAJ",
+      "volumeInfo": {
+        "title": "Harry Potter et la coupe de feu",
+        "authors": [
+          "J. K. Rowling",
+          "Jean-François Ménard"
+        ],
+        "publisher": "Gallimard-Jeunesse",
+        "publishedDate": "2001",
+        "description": "Harry Potter a quatorze ans et il entre en quatrième année au collège de Poudlard. Une grande nouvelle attend Harry, Ron et Hermione à leur arrivée : la tenue d'un tournoi de magie exceptionnel entre les plus célèbres écoles de sorcellerie. Déjà, les délégations étrangères font leur entrée. Harry se réjouit... Trop vite. Il va se trouver plongé au cœur des événements les plus dramatiques qu'il ait jamais eu à affronter. Fascinant, drôle, bouleversant, ce quatrième tome est le pilier central des aventures de Harry Potter.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "207054351X"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9782070543519"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 768,
+        "printType": "BOOK",
+        "categories": [
+          "Juvenile Fiction"
+        ],
+        "averageRating": 4.5,
+        "ratingsCount": 12,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=7zeyHAAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=7zeyHAAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "fr",
+        "previewLink": "http://books.google.ru/books?id=7zeyHAAACAAJ&dq=inauthor:rowling&hl=&cd=4&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=7zeyHAAACAAJ&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Harry_Potter_et_la_coupe_de_feu.html?hl=&id=7zeyHAAACAAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=7zeyHAAACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Harry Potter a quatorze ans et il entre en quatrième année au collège de Poudlard."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "IY2uzQEACAAJ",
+      "etag": "LIfQwsEx638",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/IY2uzQEACAAJ",
+      "volumeInfo": {
+        "title": "The Ickabog",
+        "authors": [
+          "J. K. Rowling"
+        ],
+        "publishedDate": "2020-11-10",
+        "description": "As the legend of the fearsome Ickabog spreads terror in the peaceful kingdom of Cornucopia, best friends Bert and Daisy set out to discover the truth and bring happiness back to the kingdom.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "1338732870"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9781338732870"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 304,
+        "printType": "BOOK",
+        "categories": [
+          "Juvenile Fiction"
+        ],
+        "averageRating": 4,
+        "ratingsCount": 4,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=IY2uzQEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=IY2uzQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=IY2uzQEACAAJ&dq=inauthor:rowling&hl=&cd=5&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=IY2uzQEACAAJ&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Ickabog.html?hl=&id=IY2uzQEACAAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=IY2uzQEACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "As the legend of the fearsome Ickabog spreads terror in the peaceful kingdom of Cornucopia, best friends Bert and Daisy set out to discover the truth and bring happiness back to the kingdom."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "9lLrAAAACAAJ",
+      "etag": "YnQyNeupkXA",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/9lLrAAAACAAJ",
+      "volumeInfo": {
+        "title": "Conversations with J. K. Rowling",
+        "authors": [
+          "J. K. Rowling"
+        ],
+        "publishedDate": "2002-01-01",
+        "description": "The author of the Harry Potter books discusses her childhood, her writing career, and the publishing phenomenon she has created.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "0758756631"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9780758756633"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "printType": "BOOK",
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=9lLrAAAACAAJ&dq=inauthor:rowling&hl=&cd=6&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=9lLrAAAACAAJ&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Conversations_with_J_K_Rowling.html?hl=&id=9lLrAAAACAAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=9lLrAAAACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "The author of the Harry Potter books discusses her childhood, her writing career, and the publishing phenomenon she has created."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "8loxvgAACAAJ",
+      "etag": "EtY1PdAdzgM",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/8loxvgAACAAJ",
+      "volumeInfo": {
+        "title": "The Casual Vacancy",
+        "authors": [
+          "J. K. Rowling"
+        ],
+        "publisher": "Back Bay Books",
+        "publishedDate": "2013-07-23",
+        "description": "A big novel about a small town... When Barry Fairbrother dies in his early forties, the town of Pagford is left in shock. Pagford is, seemingly, an English idyll, with a cobbled market square and an ancient abbey, but what lies behind the pretty façade is a town at war. Rich at war with poor, teenagers at war with their parents, wives at war with their husbands, teachers at war with their pupils...Pagford is not what it first seems. And the empty seat left by Barry on the parish council soon becomes the catalyst for the biggest war the town has yet seen. Who will triumph in an election fraught with passion, duplicity, and unexpected revelations? A big novel about a small town, The Casual Vacancy is J.K. Rowling's first novel for adults. It is the work of a storyteller like no other.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "0316228583"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9780316228589"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 512,
+        "printType": "BOOK",
+        "categories": [
+          "Fiction"
+        ],
+        "averageRating": 3,
+        "ratingsCount": 317,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=8loxvgAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=8loxvgAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=8loxvgAACAAJ&dq=inauthor:rowling&hl=&cd=7&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=8loxvgAACAAJ&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Casual_Vacancy.html?hl=&id=8loxvgAACAAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=8loxvgAACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Who will triumph in an election fraught with passion, duplicity, and unexpected revelations? A big novel about a small town, The Casual Vacancy is J.K. Rowling&#39;s first novel for adults. It is the work of a storyteller like no other."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "JHEkAQAAMAAJ",
+      "etag": "aOdvw0qtS50",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/JHEkAQAAMAAJ",
+      "volumeInfo": {
+        "title": "Harry Potter and the Deathly Hallows",
+        "authors": [
+          "J. K. Rowling"
+        ],
+        "publisher": "Arthur a Levine",
+        "publishedDate": "2007",
+        "description": "The seventh and final book of the blockbuster Harry Potter series follows the wizard's last year at Hogwarts School of Witchcraft and Wizardry. 12,000,000 first printing.",
+        "industryIdentifiers": [
+          {
+            "type": "OTHER",
+            "identifier": "UOM:39076002651854"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 759,
+        "printType": "BOOK",
+        "categories": [
+          "Juvenile Fiction"
+        ],
+        "averageRating": 4.5,
+        "ratingsCount": 3446,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "0.0.1.0.preview.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=JHEkAQAAMAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=JHEkAQAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=JHEkAQAAMAAJ&dq=inauthor:rowling&hl=&cd=8&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=JHEkAQAAMAAJ&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Harry_Potter_and_the_Deathly_Hallows.html?hl=&id=JHEkAQAAMAAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=JHEkAQAAMAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "The seventh and final book of the blockbuster Harry Potter series follows the wizard&#39;s last year at Hogwarts School of Witchcraft and Wizardry. 12,000,000 first printing."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "XrtHzQEACAAJ",
+      "etag": "vOi0Csa6seg",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/XrtHzQEACAAJ",
+      "volumeInfo": {
+        "title": "Quidditch Through the Ages: The Illustrated Edition",
+        "authors": [
+          "J. K. Rowling"
+        ],
+        "publisher": "Scholastic Incorporated",
+        "publishedDate": "2020-10-06",
+        "description": "The definitive guide to the most popular sport in J.K. Rowling's Harry Potter series, now fully illustrated by award-winning artist Emily Gravett If you have ever asked yourself where the Golden Snitch came from, how the Bludgers came into existence, or why the Wigtown Wanderers have pictures of meat cleavers on their robes, you need Quidditch Through the Ages. This invaluable volume is consulted by young Quidditch fans on an almost daily basis. Proceeds from the sale of this book will go to Comic Relief and Lumos, who will use your money to continue improving and changing lives -- work that is even more important and astonishing than the three and a half second capture of the Golden Snitch by Roderick Plumpton in 1921. Now fully illustrated in brilliant color by award-winning artist Emily Gravett, this special new edition is a beautiful gift for Harry Potter fans and Quidditch enthusiasts alike.",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "1338340565"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9781338340563"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 160,
+        "printType": "BOOK",
+        "categories": [
+          "Juvenile Fiction"
+        ],
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=XrtHzQEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=XrtHzQEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=XrtHzQEACAAJ&dq=inauthor:rowling&hl=&cd=9&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=XrtHzQEACAAJ&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/Quidditch_Through_the_Ages_The_Illustrat.html?hl=&id=XrtHzQEACAAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=XrtHzQEACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "Kennilworthy Whisp is a fictitious author created by J.K. Rowling."
+      }
+    },
+    {
+      "kind": "books#volume",
+      "id": "nuJmzgEACAAJ",
+      "etag": "yfsmtDO27BU",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/nuJmzgEACAAJ",
+      "volumeInfo": {
+        "title": "The Christmas Pig",
+        "authors": [
+          "J. K. Rowling"
+        ],
+        "publishedDate": "2021-10-12",
+        "description": "A heartwarming, page-turning adventure about one child's love for his most treasured thing, and how far he will go to find it. A tale for the whole family to fall in love with, from one of the world's greatest storytellers. One boy and his toy are about to change everything... Jack loves his childhood toy, Dur Pig. DP has always been there for him, through good and bad. Until one Christmas Eve something terrible happens -- DP is lost. But Christmas Eve is a night for miracles and lost causes, a night when all things can come to life... even toys. And Jack's newest toy -- the Christmas Pig (DP's replacement) -- has a daring plan: Together they'll embark on a magical journey to seek something lost, and to save the best friend Jack has ever known...",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "1338790234"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9781338790238"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 288,
+        "printType": "BOOK",
+        "categories": [
+          "Juvenile Fiction"
+        ],
+        "averageRating": 4,
+        "ratingsCount": 4,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "panelizationSummary": {
+          "containsEpubBubbles": false,
+          "containsImageBubbles": false
+        },
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=nuJmzgEACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=nuJmzgEACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.ru/books?id=nuJmzgEACAAJ&dq=inauthor:rowling&hl=&cd=10&source=gbs_api",
+        "infoLink": "http://books.google.ru/books?id=nuJmzgEACAAJ&dq=inauthor:rowling&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Christmas_Pig.html?hl=&id=nuJmzgEACAAJ"
+      },
+      "saleInfo": {
+        "country": "RU",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "RU",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=nuJmzgEACAAJ&hl=&printsec=frontcover&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "And Jack&#39;s newest toy -- the Christmas Pig (DP&#39;s replacement) -- has a daring plan: Together they&#39;ll embark on a magical journey to seek something lost, and to save the best friend Jack has ever known."
+      }
+    }
+  ]
+}

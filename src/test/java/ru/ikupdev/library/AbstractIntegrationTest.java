@@ -20,7 +20,8 @@ import javax.transaction.Transactional;
 @ActiveProfiles("test")
 @SpringBootTest
 @ContextConfiguration(initializers = {
-        PostgresInitializer.Initializer.class
+        PostgresInitializer.Initializer.class,
+        RandomPortInitializer.class
 })
 @AutoConfigureMockMvc
 @Transactional

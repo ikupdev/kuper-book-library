@@ -8,7 +8,7 @@ import ru.ikupdev.library.model.gbook.GBookResponseDto;
 
 /**
  * @author Ilya V. Kupriyanov
- * @version 27.10.2021
+ * @version 08.02.2022
  */
 @FeignClient(name = "gBookClient", url = "${google.api.books.url}")
 public interface GoogleBooksApiClient {

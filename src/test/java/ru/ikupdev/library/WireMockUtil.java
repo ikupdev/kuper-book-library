@@ -41,7 +41,11 @@ public class WireMockUtil {
     }
 
     public static void stubs() {
-
+            AbstractIntegrationTest.wireMock.stubFor(
+                    get(urlEqualTo("/volumes?q=inauthor%3ARowling&key=AIzaSyDIo47O3Sy9s4zOfyXvL_zSRxpMf2XeD3s"))
+                    .willReturn(aResponse()
+                            .withHeader("Content-Type", "application/json")
+                            .withBodyFile("gbook_volumes_by_inauthor_rowling.json")));
     }
 
 }
