@@ -10,7 +10,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -22,13 +22,13 @@ import java.util.Date;
 @Setter
 @ToString(callSuper = true)
 public class DatedEntity extends BaseEntity {
-        @NotBlank
+        @NotNull
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
         @ApiModelProperty(notes = "Дата создания", required = true, example = "2022-01-01'T'10:00:00.000")
         @CreatedDate
         @Column(name = "created")
         private Date created;
-        @NotBlank
+        @NotNull
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
         @ApiModelProperty(notes = "Дата обновления", required = true, example = "2022-01-01'T'10:00:00.000")
         @LastModifiedDate

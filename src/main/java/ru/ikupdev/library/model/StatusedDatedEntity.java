@@ -10,7 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -21,7 +21,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @ToString(callSuper = true)
 public class StatusedDatedEntity extends DatedEntity {
-        @NotBlank
+        @NotNull
         @ApiModelProperty(notes = "Статус", required = true, example = "ACTIVE")
         @Enumerated(value = EnumType.STRING)
         @Column(name = "status")
