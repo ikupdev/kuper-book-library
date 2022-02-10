@@ -20,7 +20,7 @@ import java.util.List;
 @ToString(of = {"login", "firstName", "lastName", "email", "role"})
 @Entity
 @Table(name = "user")
-public class User extends BaseEntity {
+public class User extends StatusedDatedEntity {
     @NotBlank
     @Column(name = "login")
     private String login;
