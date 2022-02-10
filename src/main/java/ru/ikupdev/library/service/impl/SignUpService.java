@@ -29,9 +29,9 @@ public class SignUpService implements ISignUpService {
     @Override
     public UserView signUp(UserRequestDto dto) {
         if (userService.findByLogin(dto.getLogin()) != null)
-            throw new IllegalArgumentException(String.format(BUNDLE.getString("exist.login"), dto.getLogin()));
+            throw new IllegalArgumentException(String.format(BUNDLE.getString("signup.exist.login"), dto.getLogin()));
         if (userService.findByEmail(dto.getEmail()) != null)
-            throw new IllegalArgumentException(String.format(BUNDLE.getString("exist.email"), dto.getEmail()));
+            throw new IllegalArgumentException(String.format(BUNDLE.getString("signup.exist.email"), dto.getEmail()));
         User user = User.builder()
                 .login(dto.getLogin())
                 .firstName(dto.getFirstName())
@@ -44,7 +44,7 @@ public class SignUpService implements ISignUpService {
         user.setUpdated(new Date());
         user.setStatus(Status.ACTIVE);
         UserView userView = userService.save(user);
-        log.info(BUNDLE.getString("log.saved"), userView);
+        log.info(BUNDLE.getString("signup.log.saved"), userView);
         return new UserView(userView.getId(), userView.getLogin());
     }
 }

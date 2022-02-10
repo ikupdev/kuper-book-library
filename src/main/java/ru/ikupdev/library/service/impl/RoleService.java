@@ -25,15 +25,15 @@ public class RoleService implements IRoleService {
     @Override
     public Role findByRoleName(String roleName) {
         return roleRepository.findByName(roleName)
-                .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("not.found.name"), roleName)));
+                .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("role.not.found.name"), roleName)));
     }
 
     @Override
     public Role saveRole(Role role) {
         if (roleRepository.findByName(role.getName()).isPresent())
-            throw new ResourceConflictException(String.format(BUNDLE.getString("exist.name"), role.getName()));
+            throw new ResourceConflictException(String.format(BUNDLE.getString("role.exist.name"), role.getName()));
         Role saved = roleRepository.save(role);
-        log.info(BUNDLE.getString("log.saved"), role);
+        log.info(BUNDLE.getString("role.log.saved"), role);
         return saved;
     }
 
@@ -45,7 +45,7 @@ public class RoleService implements IRoleService {
     @Override
     public Role findById(Long id) {
         return roleRepository.findById(id)
-                .orElseThrow(()-> new NotFoundException(String.format(BUNDLE.getString("not.found.id"), id)));
+                .orElseThrow(()-> new NotFoundException(String.format(BUNDLE.getString("role.not.found.id"), id)));
     }
 
     @Override

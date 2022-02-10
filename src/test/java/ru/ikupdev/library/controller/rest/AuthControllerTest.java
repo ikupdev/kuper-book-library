@@ -43,7 +43,7 @@ public class AuthControllerTest extends AbstractIntegrationTest {
                         .content(IOUtils.toByteArray(new ClassPathResource("files/auth_wrong_login.json").getInputStream()))
                         .contextPath(components.getContextPath()))
                 .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.message", is(BUNDLE.getString("invalid.login"))));
+                .andExpect(jsonPath("$.message", is(BUNDLE.getString("auth.invalid.login"))));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class AuthControllerTest extends AbstractIntegrationTest {
                         .content(IOUtils.toByteArray(new ClassPathResource("files/auth_wrong_password.json").getInputStream()))
                         .contextPath(components.getContextPath()))
                 .andExpect(status().is4xxClientError())
-                .andExpect(jsonPath("$.message", is(BUNDLE.getString("invalid.login"))));
+                .andExpect(jsonPath("$.message", is(BUNDLE.getString("auth.invalid.login"))));
     }
 
 }
