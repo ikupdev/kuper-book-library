@@ -2,13 +2,11 @@ package ru.ikupdev.library.controller.rest;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.ikupdev.library.AbstractIntegrationTest;
 import ru.ikupdev.library.model.User;
-import ru.ikupdev.library.service.impl.UserService;
 
 
 import static org.hamcrest.CoreMatchers.is;
@@ -24,21 +22,19 @@ import static ru.ikupdev.library.config.AppConstants.API_V1_PATH;
  * @version 06.02.2022
  */
 public class SignUpControllerTest extends AbstractIntegrationTest {
-    @Autowired
-    private UserService userService;
 
     @Test
     void givenCorrectRegistrationData_then200Ok() throws Exception {
-        mockMvc
-                .perform(MockMvcRequestBuilders.post(contextPath + API_V1_PATH + "/sign-up/user")
+        components.getMockMvc()
+                .perform(MockMvcRequestBuilders.post(components.getContextPath() + API_V1_PATH + "/sign-up/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(IOUtils.toByteArray(new ClassPathResource("files/sign_up.json").getInputStream()))
-                        .contextPath(contextPath))
+                        .contextPath(components.getContextPath()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.id", is(2)))
                 .andExpect(jsonPath("$.login", is("geronimo")))
                 .andReturn();
-        User user = userService.findByLogin("geronimo");
+        User user = components.getUserService().findByLogin("geronimo");
         assertEquals("geronimo", user.getLogin());
         assertEquals("Dr", user.getFirstName());
         assertEquals("Who", user.getLastName());
@@ -48,11 +44,11 @@ public class SignUpControllerTest extends AbstractIntegrationTest {
 
     @Test
     void givenIncorrectRegistrationData_whenGetMethodArgumentNotValidException_then400ClientError() throws Exception {
-        mockMvc
-                .perform(MockMvcRequestBuilders.post(contextPath + API_V1_PATH + "/sign-up/user")
+        components.getMockMvc()
+                .perform(MockMvcRequestBuilders.post(components.getContextPath() + API_V1_PATH + "/sign-up/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(IOUtils.toByteArray(new ClassPathResource("files/sign_up_incorrect.json").getInputStream()))
-                        .contextPath(contextPath))
+                        .contextPath(components.getContextPath()))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.validationErrors", notNullValue()));
     }

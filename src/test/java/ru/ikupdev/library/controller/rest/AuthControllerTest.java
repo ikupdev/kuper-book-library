@@ -25,11 +25,11 @@ public class AuthControllerTest extends AbstractIntegrationTest {
 
     @Test
     void givenCorrectCreditionals_then200Ok() throws Exception {
-        mockMvc
-                .perform(MockMvcRequestBuilders.post(contextPath + API_V1_PATH + "/auth/login")
+        components.getMockMvc()
+                .perform(MockMvcRequestBuilders.post(components.getContextPath() + API_V1_PATH + "/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(IOUtils.toByteArray(new ClassPathResource("files/auth.json").getInputStream()))
-                        .contextPath(contextPath))
+                        .contextPath(components.getContextPath()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.login", is("kuper")))
                 .andExpect(jsonPath("$.token", notNullValue()));
@@ -37,22 +37,22 @@ public class AuthControllerTest extends AbstractIntegrationTest {
 
     @Test
     void givenWrongLogin_whenGetUsernameNotFoundException_thenInternalServerError() throws Exception {
-        mockMvc
-                .perform(MockMvcRequestBuilders.post(contextPath + API_V1_PATH + "/auth/login")
+        components.getMockMvc()
+                .perform(MockMvcRequestBuilders.post(components.getContextPath() + API_V1_PATH + "/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(IOUtils.toByteArray(new ClassPathResource("files/auth_wrong_login.json").getInputStream()))
-                        .contextPath(contextPath))
+                        .contextPath(components.getContextPath()))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.message", is(BUNDLE.getString("invalid.login"))));
     }
 
     @Test
     void givenWrongPassword_whenGetUsernameNotFoundException_thenInternalServerError() throws Exception {
-        mockMvc
-                .perform(MockMvcRequestBuilders.post(contextPath + API_V1_PATH + "/auth/login")
+        components.getMockMvc()
+                .perform(MockMvcRequestBuilders.post(components.getContextPath() + API_V1_PATH + "/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(IOUtils.toByteArray(new ClassPathResource("files/auth_wrong_password.json").getInputStream()))
-                        .contextPath(contextPath))
+                        .contextPath(components.getContextPath()))
                 .andExpect(status().is4xxClientError())
                 .andExpect(jsonPath("$.message", is(BUNDLE.getString("invalid.login"))));
     }

@@ -22,10 +22,10 @@ public class UserControllerTest extends AbstractIntegrationTest {
 
     @Test
     void testGetAllUsers() throws Exception {
-        mockMvc
-                .perform(MockMvcRequestBuilders.get(contextPath + API_V1_PATH + "/user/list")
+        components.getMockMvc()
+                .perform(MockMvcRequestBuilders.get(components.getContextPath() + API_V1_PATH + "/user/list")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .contextPath(contextPath))
+                        .contextPath(components.getContextPath()))
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.*", isA(ArrayList.class)))
                 .andExpect(jsonPath("$.*", hasSize(1)))
