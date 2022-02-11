@@ -2,7 +2,6 @@ package ru.ikupdev.library.controller.rest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.ikupdev.library.AbstractIntegrationTest;
 
@@ -23,7 +22,7 @@ class GBookControllerTest extends AbstractIntegrationTest {
 
     @Test
     void testGetBooks() throws Exception {
-        MvcResult mvcResult = components.getMockMvc()
+        components.getMockMvc()
                 .perform(MockMvcRequestBuilders.get(components.getContextPath() + API_V1_PATH + "/gbook/list")
                         .param("keyword", "inauthor")
                         .param("key_query", "Rowling")
@@ -33,7 +32,6 @@ class GBookControllerTest extends AbstractIntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.totalItems", is(139)))
                 .andExpect(jsonPath("$.items.*", isA(ArrayList.class)))
-                .andExpect(jsonPath("$.items.*", hasSize(10)))
-                .andReturn();
+                .andExpect(jsonPath("$.items.*", hasSize(10)));
     }
 }

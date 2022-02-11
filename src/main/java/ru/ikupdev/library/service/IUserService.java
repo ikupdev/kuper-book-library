@@ -1,5 +1,8 @@
 package ru.ikupdev.library.service;
 
+import org.springframework.data.domain.Pageable;
+import org.springframework.util.MultiValueMap;
+import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.model.UserView;
 import ru.ikupdev.library.dto.UserUpdateDto;
@@ -15,7 +18,7 @@ public interface IUserService {
 
     UserView update(Long id, UserUpdateDto userUpdateDto);
 
-    List<User> getAll();
+    RestResponseDto<List<User>> getUsers(MultiValueMap<String, String> parameters, Pageable pageable);
 
     User findByLogin(String name);
 

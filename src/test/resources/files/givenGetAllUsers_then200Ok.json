@@ -1,0 +1,90 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "created": "2022-02-10T20:05:35.119+0000",
+      "updated": "2022-02-10T20:05:35.119+0000",
+      "status": "ACTIVE",
+      "login": "petr_petrov",
+      "firstName": "Петр",
+      "lastName": "Петров",
+      "email": "petrov@yandex.ru",
+      "role": [
+        {
+          "id": 1,
+          "name": "ROLE_USER"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "created": "2022-02-10T20:05:35.119+0000",
+      "updated": "2022-02-10T20:05:35.119+0000",
+      "status": "ACTIVE",
+      "login": "ivan_ivanov",
+      "firstName": "Иван",
+      "lastName": "Иванов",
+      "email": "ivanov1@yandex.ru",
+      "role": [
+        {
+          "id": 1,
+          "name": "ROLE_USER"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "created": "2022-02-10T20:05:35.119+0000",
+      "updated": "2022-02-10T20:05:35.119+0000",
+      "status": "ACTIVE",
+      "login": "vasily_vasiliev",
+      "firstName": "Василий",
+      "lastName": "Васильев",
+      "email": "vasiliyev@yandex.ru",
+      "role": [
+        {
+          "id": 1,
+          "name": "ROLE_USER"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "created": "2022-02-10T20:05:35.119+0000",
+      "updated": "2022-02-10T20:05:35.119+0000",
+      "status": "ACTIVE",
+      "login": "egor_ivanov",
+      "firstName": "Егор",
+      "lastName": "Иванов",
+      "email": "ivanov2@yandex.ru",
+      "role": [
+        {
+          "id": 1,
+          "name": "ROLE_USER"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "created": "2022-02-10T20:05:35.119+0000",
+      "updated": "2022-02-10T20:05:35.119+0000",
+      "status": "NOT_ACTIVE",
+      "login": "vasily_ivanov",
+      "firstName": "Василий",
+      "lastName": "Иванов",
+      "email": "ivanov3@yandex.ru",
+      "role": [
+        {
+          "id": 1,
+          "name": "ROLE_USER"
+        },
+        {
+          "id": 2,
+          "name": "ROLE_ADMIN"
+        }
+      ]
+    }
+  ],
+  "totalRows": 5,
+  "totalPages": 1
+}

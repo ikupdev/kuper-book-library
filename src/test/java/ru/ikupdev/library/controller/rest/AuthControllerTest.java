@@ -31,7 +31,7 @@ public class AuthControllerTest extends AbstractIntegrationTest {
                         .content(IOUtils.toByteArray(new ClassPathResource("files/auth.json").getInputStream()))
                         .contextPath(components.getContextPath()))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.login", is("kuper")))
+                .andExpect(jsonPath("$.login", is("petr_petrov")))
                 .andExpect(jsonPath("$.token", notNullValue()));
     }
 

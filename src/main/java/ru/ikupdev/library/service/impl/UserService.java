@@ -1,11 +1,19 @@
 package ru.ikupdev.library.service.impl;
 
+import com.querydsl.core.types.Predicate;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.querydsl.QPageRequest;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
 import ru.ikupdev.library.bean.type.Status;
+import ru.ikupdev.library.dto.RestResponseDto;
+import ru.ikupdev.library.dto.filter.UserFilter;
 import ru.ikupdev.library.exception.NotFoundException;
 import ru.ikupdev.library.exception.ResourceConflictException;
 import ru.ikupdev.library.model.User;
@@ -13,9 +21,12 @@ import ru.ikupdev.library.model.UserView;
 import ru.ikupdev.library.dto.UserUpdateDto;
 import ru.ikupdev.library.repository.UserRepository;
 import ru.ikupdev.library.service.IUserService;
+import ru.ikupdev.library.util.OrderUtil;
+import ru.ikupdev.library.util.QPredicates;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import static ru.ikupdev.library.model.QUser.user;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -51,8 +62,20 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public List<User> getAll() {
-        return userRepository.findAll();
+    public RestResponseDto<List<User>> getUsers(MultiValueMap<String, String> parameters, @PageableDefault Pageable pageable) {
+        UserFilter filter = UserFilter.builder()
+                .firstName(parameters.getFirst("firstName"))
+                .lastName(parameters.getFirst("lastName"))
+                .status((parameters.getFirst("status") == null ? null : Status.valueOf(parameters.getFirst("status"))))
+                .build();
+        Predicate predicate = QPredicates.builder()
+                .add(filter.getFirstName(), user.firstName::containsIgnoreCase)
+                .add(filter.getLastName(), user.lastName::containsIgnoreCase)
+                .add(filter.getStatus(), user.status::eq)
+                .buildAnd();
+        QPageRequest qPageRequest = OrderUtil.usersOrder(pageable);
+        Page<User> page = predicate == null ? userRepository.findAll(qPageRequest) : userRepository.findAll(predicate, qPageRequest);
+        return RestResponseDto.fromPage(page);
     }
 
     @Override
