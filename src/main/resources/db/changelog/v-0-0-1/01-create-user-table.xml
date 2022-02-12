@@ -3,9 +3,19 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
     <changeSet id="1.0.0" author="i.kupriyanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="user_id_seq"/>
+            </not>
+        </preConditions>
         <createSequence sequenceName="user_id_seq" minValue="1" maxValue="9223372036854775807" startValue="1" cacheSize="1"/>
     </changeSet>
     <changeSet id="1.0.1" author="i.kupriyanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user"/>
+            </not>
+        </preConditions>
         <createTable tableName="user">
             <column name="id" type="BIGSERIAL" defaultValueComputed="nextval('com.user_id_seq')">
                 <constraints primaryKey="true" primaryKeyName="user_pk" nullable="false"/>
@@ -35,5 +45,28 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+    <changeSet id="1.0.2" author="i.kupriyanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_user_login"/>
+            </not>
+        </preConditions>
+        <createIndex tableName="user"
+                     unique="true"
+                     indexName="idx_user_login">
+            <column name="login"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1.0.3" author="i.kupriyanov">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_user_last_name"/>
+            </not>
+        </preConditions>
+        <createIndex tableName="user"
+                     indexName="idx_user_last_name">
+            <column name="last_name"/>
+        </createIndex>
     </changeSet>
 </databaseChangeLog>
