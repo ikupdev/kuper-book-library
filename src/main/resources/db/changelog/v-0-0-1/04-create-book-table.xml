@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="1.0.8" author="i.kupriyanov" context="default">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="book_id_seq"/>
+            </not>
+        </preConditions>
+        <createSequence sequenceName="book_id_seq" minValue="1" maxValue="9223372036854775807" startValue="1" cacheSize="1"/>
+    </changeSet>
+    <changeSet id="1.0.9" author="i.kupriyanov" context="default">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="book"/>
+            </not>
+        </preConditions>
+        <createTable tableName="book">
+            <column name="id" type="BIGSERIAL" defaultValueComputed="nextval('com.book_id_seq')">
+                <constraints primaryKey="true" primaryKeyName="book_pk" nullable="false"/>
+            </column>
+            <column name="volume_id" type="VARCHAR(64)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="title" type="VARCHAR(1024)">
+                <constraints nullable="false" unique="false"/>
+            </column>
+            <column name="subtitle" type="VARCHAR(1024)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="authors" type="VARCHAR(1024)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="description" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="page_count" type="INT">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="language" type="VARCHAR(64)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="search_info" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="image_link" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="preview_link" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="info_link" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="canonical_volume_link" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="epub_download_link" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="pdf_download_link" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="web_reader_link" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="buy_link" type="VARCHAR(4096)">
+                <constraints nullable="true" unique="false"/>
+            </column>
+            <column name="created" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1.0.10" author="i.kupriyanov" context="default">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_book_volume_id"/>
+            </not>
+        </preConditions>
+        <createIndex tableName="book"
+                     unique="true"
+                     indexName="idx_book_volume_id">
+            <column name="volume_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1.0.11" author="i.kupriyanov" context="default">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_book_title"/>
+            </not>
+        </preConditions>
+        <createIndex tableName="book"
+                     unique="false"
+                     indexName="idx_book_title">
+            <column name="title"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="1.0.12" author="i.kupriyanov" context="default">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <indexExists indexName="idx_book_authors"/>
+            </not>
+        </preConditions>
+        <createIndex tableName="book"
+                     unique="false"
+                     indexName="idx_book_authors">
+            <column name="authors"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

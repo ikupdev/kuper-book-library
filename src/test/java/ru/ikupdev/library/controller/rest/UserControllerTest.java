@@ -12,7 +12,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isA;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static ru.ikupdev.library.config.AppConstants.API_V1_PATH;
+import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 
 /**
  * @author Ilya V. Kupriyanov

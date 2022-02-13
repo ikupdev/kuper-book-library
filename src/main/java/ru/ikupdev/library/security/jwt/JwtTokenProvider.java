@@ -26,9 +26,9 @@ public class JwtTokenProvider {
     private static final String AUTHORIZATION_HEADER_NAME = "Authorization";
     private static final String BEARER = "Bearer ";
 
-    @Value("${jwt.token.secret}")
+    @Value("${library.jwt.token.secret}")
     private String secret;
-    @Value("${jwt.token.expired}")
+    @Value("${library.jwt.token.expired}")
     private String validityInMilliseconds;
 
     private final UserDetailsService userDetailsService;

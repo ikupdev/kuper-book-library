@@ -2,9 +2,11 @@ package ru.ikupdev.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import ru.ikupdev.library.bean.type.Status;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 
@@ -20,7 +22,7 @@ import java.util.List;
 @ToString(of = {"login", "firstName", "lastName", "email", "role"})
 @Entity
 @Table(name = "user")
-public class User extends StatusedDatedEntity {
+public class User extends DatedEntity {
     @NotBlank
     @Column(name = "login")
     private String login;
@@ -44,4 +46,8 @@ public class User extends StatusedDatedEntity {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private List<Role> role;
+    @NotNull
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "status")
+    private Status status;
 }

@@ -1,8 +1,6 @@
 package ru.ikupdev.library.model.gbook;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -15,4 +13,5 @@ public class GBookItem {
     private GVolumeInfo volumeInfo;
     private GSaleInfo saleInfo;
     private GSearchInfo searchInfo;
+    private GAccessInfo accessInfo;
 }

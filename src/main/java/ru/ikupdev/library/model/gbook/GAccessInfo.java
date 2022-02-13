@@ -5,13 +5,13 @@ import lombok.Data;
 
 /**
  * @author Ilya V. Kupriyanov
- * @version 07.02.2022
+ * @version 12.02.2022
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class GSaleInfo {
+public class GAccessInfo {
     private String country;
-    private String saleability;
-    private Boolean isEbook;
-    private String buyLink;
+    private String webReaderLink;
+    private GEpub epub;
+    private GPdf pdf;
 }

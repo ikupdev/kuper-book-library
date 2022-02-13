@@ -15,7 +15,7 @@ import ru.ikupdev.library.dto.UserRequestDto;
 import ru.ikupdev.library.model.UserView;
 import ru.ikupdev.library.service.ISignUpService;
 
-import static ru.ikupdev.library.config.AppConstants.API_V1_PATH;
+import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 
 /**
  * @author Ilya V. Kupriyanov

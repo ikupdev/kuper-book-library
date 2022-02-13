@@ -15,7 +15,7 @@ import org.springframework.web.client.RestTemplate;
  */
 @Configuration
 @RequiredArgsConstructor
-public class AppConfig {
+public class LibraryConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

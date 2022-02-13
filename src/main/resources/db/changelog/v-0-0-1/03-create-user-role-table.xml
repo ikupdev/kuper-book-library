@@ -3,7 +3,7 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet id="1.0.6" author="i.kupriyanov">
+    <changeSet id="1.0.6" author="i.kupriyanov" context="default">
         <preConditions onFail="MARK_RAN">
             <not>
                 <tableExists tableName="user_role"/>
@@ -14,7 +14,7 @@
             <column name="role_id" type="BIGSERIAL"/>
         </createTable>
     </changeSet>
-    <changeSet id="1.0.7" author="i.kupriyanov">
+    <changeSet id="1.0.7" author="i.kupriyanov" context="default">
         <preConditions onFail="MARK_RAN">
             <not>
                 <foreignKeyConstraintExists foreignKeyName="fk_user_role_user" foreignKeyTableName="user_role"/>

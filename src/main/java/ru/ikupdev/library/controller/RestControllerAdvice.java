@@ -3,7 +3,9 @@ package ru.ikupdev.library.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.MessageSourceAccessor;
+import org.springframework.core.convert.ConversionFailedException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.expression.AccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -30,16 +32,15 @@ public class RestControllerAdvice {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(RestResponseDto.createMessage(ex.getMessage()));
     }
 
-//    @ExceptionHandler(value = {ConflictEntityException.class})
-//    public ResponseEntity handleException(ConflictEntityException ex) {
-//        return ResponseEntity.status(HttpStatus.CONFLICT).body(RestResponseDto.createMessage(ex.getMessage()));
-//    }
-//
-//    @ExceptionHandler(value = {AccessException.class})
-//    public ResponseEntity handleAccessException(AccessException ex) {
-//        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(RestResponseDto.createMessage(ex.getMessage()));
-//    }
+    @ExceptionHandler(value = {ConversionFailedException.class})
+    public ResponseEntity<String> handleConversionFailedException(RuntimeException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 
+    @ExceptionHandler(value = {AccessException.class})
+    public ResponseEntity handleAccessException(AccessException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(RestResponseDto.createMessage(ex.getMessage()));
+    }
     // обработка ошибки: could not execute statement; SQL [n/a]; constraint [external_division_name_key]
     @ExceptionHandler(value = {DataIntegrityViolationException.class})
     public ResponseEntity handleAccessException(DataIntegrityViolationException ex) {
@@ -80,4 +81,8 @@ public class RestControllerAdvice {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(RestResponseDto.createMessage(ex.getMessage()));
     }
 
+//    @ExceptionHandler(value = {ConflictEntityException.class})
+//    public ResponseEntity handleException(ConflictEntityException ex) {
+//        return ResponseEntity.status(HttpStatus.CONFLICT).body(RestResponseDto.createMessage(ex.getMessage()));
+//    }
 }

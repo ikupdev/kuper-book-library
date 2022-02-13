@@ -1,6 +1,6 @@
 package ru.ikupdev.library.service;
 
-import ru.ikupdev.library.bean.type.GBookKeywords;
+import org.springframework.util.MultiValueMap;
 import ru.ikupdev.library.model.gbook.GBookResponseDto;
 
 /**
@@ -8,5 +8,5 @@ import ru.ikupdev.library.model.gbook.GBookResponseDto;
  * @version 07.02.2022
  */
 public interface IGBookService {
-    GBookResponseDto getBookVolumes(GBookKeywords keyword, String keyQuery);
+    GBookResponseDto getRawBookVolumes(MultiValueMap<String, String> parameters);
 }

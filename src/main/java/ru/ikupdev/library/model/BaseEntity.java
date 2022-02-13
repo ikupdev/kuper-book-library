@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @ToString
-public class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
     @ApiModelProperty(notes = "Primary key", required = true, example = "1")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

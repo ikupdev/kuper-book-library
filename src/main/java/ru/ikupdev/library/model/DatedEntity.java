@@ -21,7 +21,7 @@ import java.util.Date;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class DatedEntity extends BaseEntity {
+public abstract class DatedEntity extends BaseEntity {
         @NotNull
         @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
         @ApiModelProperty(notes = "Дата создания", required = true, example = "2022-01-01'T'10:00:00.000")

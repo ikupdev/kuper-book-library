@@ -15,6 +15,6 @@ public class RandomPortInitializer implements ApplicationContextInitializer<Conf
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
         TestPropertySourceUtils.addInlinedPropertiesToEnvironment(applicationContext,
-                "google.api.books.url=http://localhost:" + REST_API_PORT + "/");
+                "google.api.url=http://localhost:" + REST_API_PORT + "/");
     }
 }

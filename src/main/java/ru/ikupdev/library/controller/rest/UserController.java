@@ -19,7 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
-import static ru.ikupdev.library.config.AppConstants.API_V1_PATH;
+import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 
 /**
  * @author Ilya V. Kupriyanov
