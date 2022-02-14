@@ -10,9 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.ikupdev.library.bean.type.gbook.BookSaleType;
 import ru.ikupdev.library.bean.type.gbook.BookSortType;
 import ru.ikupdev.library.bean.type.gbook.KeywordType;
+import ru.ikupdev.library.dto.RestResponseDto;
+import ru.ikupdev.library.model.Book;
 import ru.ikupdev.library.model.gbook.GBookResponseDto;
 import ru.ikupdev.library.service.IGBookService;
 import springfox.documentation.annotations.ApiIgnore;
+
+import java.util.List;
 
 import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 
@@ -27,7 +31,7 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 public class GBookController {
     private final IGBookService gBookService;
 
-    @ApiOperation(value = "Получить список книг по ключевым словам", response = GBookResponseDto.class)
+    @ApiOperation(value = "Получить данные книг по ключевым словам", response = GBookResponseDto.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "keyword", value = "Фильтр поиска", dataTypeClass = KeywordType.class, defaultValue = "intitle", paramType = "query", required = true),
             @ApiImplicitParam(name = "keyQuery", value = "Ключевые слова", dataTypeClass = String.class, defaultValue = "Potter", paramType = "query", required = true),
@@ -36,9 +40,22 @@ public class GBookController {
             @ApiImplicitParam(name = "maxResults", value = "Кол-во элементов в выдаче", dataTypeClass = String.class, defaultValue = "10", paramType = "query"),
             @ApiImplicitParam(name = "startIndex", value = "Начальный элемент в выдаче", dataTypeClass = String.class, defaultValue = "0", paramType = "query")
     })
-    @ApiImplicitParam(name = "keyword", value = "INTITLE", dataTypeClass = KeywordType.class, paramType = "query", example = "intitle")
+    @GetMapping("/list")
+    public RestResponseDto<List<Book>> getBooks(@ApiIgnore @RequestParam MultiValueMap<String, String> parameters) {
+        return gBookService.getBookVolumes(parameters);
+    }
+
+    @ApiOperation(value = "Получить данные книг по ключевым словам (в сыром виде)", response = GBookResponseDto.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "keyword", value = "Фильтр поиска", dataTypeClass = KeywordType.class, defaultValue = "intitle", paramType = "query", required = true),
+            @ApiImplicitParam(name = "keyQuery", value = "Ключевые слова", dataTypeClass = String.class, defaultValue = "Potter", paramType = "query", required = true),
+            @ApiImplicitParam(name = "saleType", value = "Тип книг", dataTypeClass = BookSaleType.class, defaultValue = "free_ebooks", paramType = "query"),
+            @ApiImplicitParam(name = "sortType", value = "Тип сортировки", dataTypeClass = BookSortType.class, defaultValue = "newest", paramType = "query"),
+            @ApiImplicitParam(name = "maxResults", value = "Кол-во элементов в выдаче", dataTypeClass = String.class, defaultValue = "10", paramType = "query"),
+            @ApiImplicitParam(name = "startIndex", value = "Начальный элемент в выдаче", dataTypeClass = String.class, defaultValue = "0", paramType = "query")
+    })
     @GetMapping("/raw/list")
-    public GBookResponseDto getBooks(@ApiIgnore @RequestParam MultiValueMap<String, String> parameters) {
+    public GBookResponseDto getRawBooks(@ApiIgnore @RequestParam MultiValueMap<String, String> parameters) {
         return gBookService.getRawBookVolumes(parameters);
     }
 

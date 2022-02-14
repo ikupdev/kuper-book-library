@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ImageLinks {
+public class GImageLinks {
     private String smallThumbnail;
     private String thumbnail;
 }

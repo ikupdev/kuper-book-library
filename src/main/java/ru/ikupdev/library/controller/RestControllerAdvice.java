@@ -17,6 +17,8 @@ import ru.ikupdev.library.exception.ClientDataException;
 import ru.ikupdev.library.exception.NotFoundException;
 import ru.ikupdev.library.exception.ResourceConflictException;
 
+import java.util.NoSuchElementException;
+
 /**
  * @author Ilya V. Kupriyanov
  * @version 15.12.2021
@@ -41,7 +43,7 @@ public class RestControllerAdvice {
     public ResponseEntity handleAccessException(AccessException ex) {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(RestResponseDto.createMessage(ex.getMessage()));
     }
-    // обработка ошибки: could not execute statement; SQL [n/a]; constraint [external_division_name_key]
+
     @ExceptionHandler(value = {DataIntegrityViolationException.class})
     public ResponseEntity handleAccessException(DataIntegrityViolationException ex) {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(RestResponseDto.createMessage("Запись с таким уникальным значением уже существует: " + ex.getMessage()));
@@ -69,6 +71,12 @@ public class RestControllerAdvice {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(RestResponseDto.createMessage(ex.getMessage()));
     }
 
+    @ExceptionHandler(value = {NoSuchElementException.class})
+    public ResponseEntity handleException(NoSuchElementException ex) {
+        log.error(ex.getMessage(), ex);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(RestResponseDto.createMessage(ex.getMessage()));
+    }
+
     @ExceptionHandler(value = {BadCredentialsException.class})
     public ResponseEntity handleException(BadCredentialsException ex) {
         log.error(ex.getMessage(), ex);
@@ -81,8 +89,4 @@ public class RestControllerAdvice {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(RestResponseDto.createMessage(ex.getMessage()));
     }
 
-//    @ExceptionHandler(value = {ConflictEntityException.class})
-//    public ResponseEntity handleException(ConflictEntityException ex) {
-//        return ResponseEntity.status(HttpStatus.CONFLICT).body(RestResponseDto.createMessage(ex.getMessage()));
-//    }
 }

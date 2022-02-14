@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class IndustryIdentifier {
+public class GIndustryIdentifier {
     private String type;
     private String identifier;
 }

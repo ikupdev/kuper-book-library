@@ -1,5 +1,6 @@
 package ru.ikupdev.library.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.Table;
  * @author Ilya V. Kupriyanov
  * @version 11.12.2021
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Builder
@@ -42,7 +44,7 @@ public class Book extends DatedEntity {
     @Column(name = "authors")
     private String authors;
     @Column(name = "search_info")
-    private String searchInfos;
+    private String searchInfo;
     @Column(name = "epub_download_link")
     private String epubDownloadLink;
     @Column(name = "pdf_download_link")
