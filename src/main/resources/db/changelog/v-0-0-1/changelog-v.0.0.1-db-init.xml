@@ -9,5 +9,6 @@
     <include file="04-create-book-table.xml" relativeToChangelogFile="true"/>
     <include file="05-create-bookshelf-table.xml" relativeToChangelogFile="true"/>
     <!--    <include file="06-create-user_book-table.xml" relativeToChangelogFile="true"/>-->
+    <include file="07-insert-base-data.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

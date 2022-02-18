@@ -21,13 +21,12 @@ import java.util.List;
 @Entity
 @Table(name = "role")
 public class Role extends BaseEntity {
-    @ApiModelProperty(notes = "name", required = true, example = "name")
+    @ApiModelProperty(notes = "Наименование", required = true, example = "name")
     @NotBlank
     @Column(name = "name")
     private String name;
     @ToString.Exclude
     @JsonIgnore
-//    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.PERSIST}, fetch = FetchType.EAGER)
-    @ManyToMany(mappedBy = "role", fetch = FetchType.EAGER)
-    private List<User> user;
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private List<User> users;
 }

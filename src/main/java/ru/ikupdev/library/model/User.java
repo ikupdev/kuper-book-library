@@ -2,6 +2,7 @@ package ru.ikupdev.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import ru.ikupdev.library.bean.type.Status;
 
 import javax.persistence.*;
@@ -9,7 +10,9 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 /**
@@ -18,10 +21,10 @@ import java.util.List;
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = {"login", "firstName", "lastName", "email", "role"})
+@ToString(of = {"login", "firstName", "lastName", "email", "roles"})
 @Entity
 @Table(name = "user")
 public class User extends DatedEntity {
@@ -42,7 +45,6 @@ public class User extends DatedEntity {
     @NotBlank
     @Column(name = "hash_password")
     private String hashPassword;
-    @Singular("role")
     @ManyToMany(fetch = FetchType.EAGER, cascade = {
             CascadeType.PERSIST,
             CascadeType.MERGE
@@ -51,7 +53,7 @@ public class User extends DatedEntity {
             {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
-    private List<Role> role;
+    private Set<Role> roles = new HashSet<>();
     @NotNull
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
@@ -59,6 +61,16 @@ public class User extends DatedEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bookshelf> bookshelves = new ArrayList<>();
+
+    public void addRole(Role role) {
+        this.roles.add(role);
+        role.getUsers().add(this);
+    }
+
+    public void removeRole(Role role) {
+        this.roles.remove(role);
+        role.getUsers().remove(this);
+    }
 
     public void addBookshelf(Bookshelf bookshelf) {
         bookshelves.add(bookshelf);

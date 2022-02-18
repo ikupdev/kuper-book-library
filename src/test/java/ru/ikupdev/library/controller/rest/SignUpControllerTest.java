@@ -31,8 +31,7 @@ public class SignUpControllerTest extends AbstractIntegrationTest {
                         .content(IOUtils.toByteArray(new ClassPathResource("files/sign_up.json").getInputStream()))
                         .contextPath(components.getContextPath()))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.login", is("geronimo")))
-                .andReturn();
+                .andExpect(jsonPath("$.login", is("geronimo")));
         User user = components.getUserService().findByLoginOrElseNull("geronimo");
         assertEquals("geronimo", user.getLogin());
         assertEquals("Dr", user.getFirstName());

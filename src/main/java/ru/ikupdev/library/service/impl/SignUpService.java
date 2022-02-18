@@ -11,6 +11,7 @@ import ru.ikupdev.library.model.UserView;
 import ru.ikupdev.library.service.ISignUpService;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.ResourceBundle;
 
 /**
@@ -37,12 +38,13 @@ public class SignUpService implements ISignUpService {
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
                 .email(dto.getEmail())
-                .role(roleService.findByRoleName("ROLE_USER"))
                 .hashPassword(passwordEncoder.encode(dto.getPassword()))
+                .roles(new HashSet<>())
+                .created(new Date())
+                .updated(new Date())
+                .status(Status.ACTIVE)
                 .build();
-        user.setCreated(new Date());
-        user.setUpdated(new Date());
-        user.setStatus(Status.ACTIVE);
+        user.addRole(roleService.findByRoleName("ROLE_USER"));
         UserView userView = userService.saveNew(user);
         log.info(BUNDLE.getString("signup.log.saved"), userView);
         return new UserView(userView.getId(), userView.getLogin());

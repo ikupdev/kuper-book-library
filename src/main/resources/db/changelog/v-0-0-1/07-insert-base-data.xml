@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet id="1.0.16" author="i.kupriyanov" context="default">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="role"/>
+        </preConditions>
+            <insert  tableName="role">
+                <column  name="name"  value="ROLE_USER"/>
+            </insert>
+            <insert  tableName="role">
+                <column  name="name"  value="ROLE_ADMIN"/>
+            </insert>
+    </changeSet>
+    <changeSet id="1.0.17" author="i.kupriyanov" context="default">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="user"/>
+        </preConditions>
+            <insert tableName="user">
+                <column  name="login"  value="Admin"/>
+                <column  name="email"  value="admin-email@google.com"/>
+                <column  name="first_name"  value="Admin"/>
+                <column  name="last_name"  value="AdminAdmin"/>
+                <column name = "hash_password" value="$2a$10$FqxNE.yXiRKHcD4j2KjfouL8ipxgLUPwIHK67ofME7loTp1w6N/Xu"/> <!-- abcd1234 -->
+                <column name="created" value="now()"/>
+                <column name="updated" value="now()"/>
+                <column name="status" value="ACTIVE"/>
+            </insert>
+    </changeSet>
+    <changeSet id="1.0.18" author="i.kupriyanov" context="default">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="user"/>
+        </preConditions>
+            <insert tableName="user_role">
+                <column  name="user_id"  value="1"/>
+                <column name="role_id" value="1"/>
+            </insert>
+            <insert tableName="user_role">
+                <column  name="user_id"  value="1"/>
+                <column name="role_id" value="2"/>
+            </insert>
+    </changeSet>
+
+</databaseChangeLog>

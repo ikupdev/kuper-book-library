@@ -26,14 +26,14 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 public class RoleController {
     private final IRoleService roleService;
 
-    @ApiOperation(value = "Получить все роли пользователей", response = RestResponseDto.class)
+    @ApiOperation(value = "Получить все роли", response = RestResponseDto.class)
     @GetMapping("/list")
     public RestResponseDto<List<Role>> findAllRoles() {
         List<Role> allRoles = roleService.findAll();
         return new RestResponseDto<>(allRoles);
     }
 
-    @ApiOperation(value = "Получить роль пользователя по id", response = Role.class)
+    @ApiOperation(value = "Получить роль по id", response = Role.class)
     @GetMapping("/{id}")
     public Role findRoleById(@ApiParam(value = "id роли", required = true, example = "1") @PathVariable("id") Long id) {
         return roleService.findById(id);
