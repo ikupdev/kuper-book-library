@@ -2,8 +2,10 @@ package ru.ikupdev.library.model;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -13,6 +15,8 @@ import java.io.Serializable;
  * @version 18.01.2022
  */
 @MappedSuperclass
+@SuperBuilder
+@NoArgsConstructor
 @Getter
 @Setter
 @ToString

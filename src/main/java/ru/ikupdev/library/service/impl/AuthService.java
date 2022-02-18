@@ -34,7 +34,7 @@ public class AuthService implements IAuthService {
         try {
             String login = dto.getLogin();
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login, dto.getPassword()));
-            User user = userService.findByLogin(login);
+            User user = userService.findByLoginOrElseNull(login);
             if (user == null)
                 throw new UsernameNotFoundException(String.format(BUNDLE.getString("auth.not.found.login"), dto.getLogin()));
             String token = jwtTokenProvider.createToken(login, user.getRole());

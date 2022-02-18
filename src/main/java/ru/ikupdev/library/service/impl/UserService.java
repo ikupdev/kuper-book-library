@@ -41,11 +41,16 @@ public class UserService implements IUserService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserView save(@Validated User user) {
+    public UserView saveNew(@Validated User user) {
         if (userRepository.findByLogin(user.getLogin()).isPresent())
-            throw new ResourceConflictException(String.format(BUNDLE.getString("signup.exist.login"), user.getLogin()));
+            throw new ResourceConflictException(String.format(BUNDLE.getString("exist.login"), user.getLogin()));
         User savedUser = userRepository.save(user);
         return new UserView(savedUser.getId(), savedUser.getLogin());
+    }
+
+    @Override
+    public void save(@Validated User user) {
+        userRepository.save(user);
     }
 
     @Override
@@ -79,12 +84,12 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User findByLogin(String name) {
+    public User findByLoginOrElseNull(String name) {
         return userRepository.findByLogin(name).orElse(null);
     }
 
     @Override
-    public User findByEmail(String email) {
+    public User findByEmailOrElseNull(String email) {
         return userRepository.findByEmail(email).orElse(null);
     }
 
@@ -103,6 +108,6 @@ public class UserService implements IUserService {
 
     private User getUserOrElseThrow(Long id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("role.not.found.id"), id)));
+                .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("user.not.found.by.id"), id)));
     }
 }

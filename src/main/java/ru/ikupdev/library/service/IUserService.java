@@ -14,15 +14,17 @@ import java.util.List;
  * @version 30.01.2022
  */
 public interface IUserService {
-    UserView save(User user);
+    UserView saveNew(User user);
+
+    void save(User user);
 
     UserView update(Long id, UserUpdateDto userUpdateDto);
 
     RestResponseDto<List<User>> getUsers(MultiValueMap<String, String> parameters, Pageable pageable);
 
-    User findByLogin(String name);
+    User findByLoginOrElseNull(String name);
 
-    User findByEmail(String email);
+    User findByEmailOrElseNull(String email);
 
     User findById(Long id);
 

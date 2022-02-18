@@ -26,7 +26,7 @@
             <column name="title" type="VARCHAR(1024)">
                 <constraints nullable="false" unique="false"/>
             </column>
-            <column name="subtitle" type="VARCHAR(1024)">
+            <column name="subtitle" type="VARCHAR(2048)">
                 <constraints nullable="true" unique="false"/>
             </column>
             <column name="authors" type="VARCHAR(1024)">

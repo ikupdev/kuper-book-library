@@ -33,7 +33,7 @@ public class SignUpControllerTest extends AbstractIntegrationTest {
                 .andExpect(status().is2xxSuccessful())
                 .andExpect(jsonPath("$.login", is("geronimo")))
                 .andReturn();
-        User user = components.getUserService().findByLogin("geronimo");
+        User user = components.getUserService().findByLoginOrElseNull("geronimo");
         assertEquals("geronimo", user.getLogin());
         assertEquals("Dr", user.getFirstName());
         assertEquals("Who", user.getLastName());

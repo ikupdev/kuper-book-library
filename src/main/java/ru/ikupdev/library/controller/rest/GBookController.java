@@ -3,10 +3,7 @@ package ru.ikupdev.library.controller.rest;
 import io.swagger.annotations.*;
 import lombok.AllArgsConstructor;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.ikupdev.library.bean.type.gbook.BookSaleType;
 import ru.ikupdev.library.bean.type.gbook.BookSortType;
 import ru.ikupdev.library.bean.type.gbook.KeywordType;
@@ -27,11 +24,11 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 @RestController
 @AllArgsConstructor
 @RequestMapping(API_V1_PATH + "/gbook")
-@Api(value = "Login controller", tags = {"5. Api google по книгам"})
+@Api(value = "Login controller", tags = {"5. Api по книгам google"})
 public class GBookController {
     private final IGBookService gBookService;
 
-    @ApiOperation(value = "Получить данные книг по ключевым словам", response = GBookResponseDto.class)
+    @ApiOperation(value = "Получить данные книг по ключевым словам", response = RestResponseDto.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "keyword", value = "Фильтр поиска", dataTypeClass = KeywordType.class, defaultValue = "intitle", paramType = "query", required = true),
             @ApiImplicitParam(name = "keyQuery", value = "Ключевые слова", dataTypeClass = String.class, defaultValue = "Potter", paramType = "query", required = true),

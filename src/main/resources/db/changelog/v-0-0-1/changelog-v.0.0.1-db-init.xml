@@ -7,5 +7,7 @@
     <include file="02-create-role-table.xml" relativeToChangelogFile="true"/>
     <include file="03-create-user-role-table.xml" relativeToChangelogFile="true"/>
     <include file="04-create-book-table.xml" relativeToChangelogFile="true"/>
+    <include file="05-create-bookshelf-table.xml" relativeToChangelogFile="true"/>
+    <!--    <include file="06-create-user_book-table.xml" relativeToChangelogFile="true"/>-->
 
 </databaseChangeLog>

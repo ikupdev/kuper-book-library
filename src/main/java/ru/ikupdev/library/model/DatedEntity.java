@@ -3,8 +3,10 @@ package ru.ikupdev.library.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -18,8 +20,10 @@ import java.util.Date;
  * @version 09.02.2022
  */
 @MappedSuperclass
+@SuperBuilder
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString(callSuper = true)
 public abstract class DatedEntity extends BaseEntity {
         @NotNull
