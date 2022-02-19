@@ -9,22 +9,18 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 
 /**
  * @author Ilya V. Kupriyanov
  * @version 18.01.2022
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(of = {"login", "firstName", "lastName", "email", "roles"})
+@ToString(of = {"login", "firstName", "lastName", "email"})
 @Entity
 @Table(name = "user")
 public class User extends DatedEntity {
@@ -82,4 +78,21 @@ public class User extends DatedEntity {
         bookshelf.setUser(null);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return login.equals(user.login) &&
+                Objects.equals(firstName, user.firstName) &&
+                Objects.equals(lastName, user.lastName) &&
+                email.equals(user.email) &&
+                Objects.equals(hashPassword, user.hashPassword) &&
+                status == user.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(login, firstName, lastName, email, status);
+    }
 }

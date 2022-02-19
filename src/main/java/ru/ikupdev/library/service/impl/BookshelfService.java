@@ -8,13 +8,17 @@ import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
+import ru.ikupdev.library.dto.BookshelfRequestDto;
 import ru.ikupdev.library.dto.BookshelfUpdateDto;
 import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.dto.filter.BookshelfFilter;
 import ru.ikupdev.library.exception.NotFoundException;
+import ru.ikupdev.library.exception.ResourceConflictException;
 import ru.ikupdev.library.model.Bookshelf;
+import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.repository.BookshelfRepository;
 import ru.ikupdev.library.service.IBookshelfService;
+import ru.ikupdev.library.service.IUserService;
 import ru.ikupdev.library.util.OrderUtil;
 import ru.ikupdev.library.util.QPredicates;
 
@@ -33,7 +37,25 @@ import static ru.ikupdev.library.model.QBookshelf.bookshelf;
 @RequiredArgsConstructor
 public class BookshelfService implements IBookshelfService {
     private final BookshelfRepository bookshelfRepository;
+    private final IUserService userService;
     private final ResourceBundle BUNDLE = ResourceBundle.getBundle(BookshelfService.class.getName());
+
+    @Override
+    public RestResponseDto<Bookshelf> addNewBookshelf(Long userId, BookshelfRequestDto dto) {
+        if (getBookshelfByBookshelfNameOrElseNull(dto.getBookshelfName()) != null)
+            throw new ResourceConflictException(String.format(BUNDLE.getString("bookshelf.exist.name"), dto.getBookshelfName()));
+        User user = userService.findById(userId);
+        Bookshelf bookshelf = Bookshelf.builder()
+                .bookshelfName(dto.getBookshelfName())
+                .description(dto.getDescription())
+                .created(new Date())
+                .updated(new Date())
+                .build();
+        user.addBookshelf(bookshelf);
+        userService.save(user);
+        Bookshelf savedBookshelf= findByBookshelfName(bookshelf.getBookshelfName());
+        return new RestResponseDto<>(savedBookshelf);
+    }
 
     @Override
     public Bookshelf findByBookshelfName(String bookshelfName) {
@@ -41,12 +63,9 @@ public class BookshelfService implements IBookshelfService {
     }
 
     @Override
-    public Bookshelf saveBookshelf(Bookshelf bookshelf) {
-        return bookshelfRepository.save(bookshelf);
-    }
-
-    @Override
-    public RestResponseDto<List<Bookshelf>> findBookshelfs(MultiValueMap<String, String> parameters, @PageableDefault Pageable pageable) {
+    public RestResponseDto<List<Bookshelf>> getBookshelfList(Long userId, MultiValueMap<String, String> parameters, @PageableDefault Pageable pageable) {
+        userService.findById(userId);
+        parameters.add("userId", userId.toString());
         BookshelfFilter filter = BookshelfFilter.builder()
                 .bookshelfName(parameters.getFirst("bookshelfName"))
                 .description((parameters.getFirst("description")))
@@ -63,18 +82,25 @@ public class BookshelfService implements IBookshelfService {
     }
 
     @Override
-    public Bookshelf findById(Long id) {
-        return getBookshelfByIdOrElseThrow(id);
+    public RestResponseDto<Bookshelf> getBookshelf(Long bookshelfId) {
+        return new RestResponseDto<>(findById(bookshelfId));
     }
 
     @Override
-    public void delete(Long id) {
-        findById(id);
-        bookshelfRepository.deleteById(id);
+    public Bookshelf findById(Long bookshelfId) {
+        return getBookshelfByIdOrElseThrow(bookshelfId);
     }
 
     @Override
-    public Bookshelf update(Long bookshelfId, BookshelfUpdateDto dto) {
+    public void deleteBookshelf(Long userId, Long bookshelfId) {
+        User user = userService.findById(userId);
+        Bookshelf bookshelf = findById(bookshelfId);
+        user.removeBookshelf(bookshelf);
+        userService.save(user);
+    }
+
+    @Override
+    public Bookshelf updateBookshelf(Long bookshelfId, BookshelfUpdateDto dto) {
         Bookshelf bookshelf = getBookshelfByIdOrElseThrow(bookshelfId);
         if (dto.getBookshelfName() != null) bookshelf.setBookshelfName(dto.getBookshelfName());
         bookshelf.setDescription((dto.getDescription()));

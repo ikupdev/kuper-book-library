@@ -1,7 +1,9 @@
 package ru.ikupdev.library.service;
 
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.util.MultiValueMap;
+import ru.ikupdev.library.dto.BookshelfRequestDto;
 import ru.ikupdev.library.dto.BookshelfUpdateDto;
 import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.model.Bookshelf;
@@ -13,17 +15,19 @@ import java.util.List;
  * @version 16.02.2022
  */
 public interface IBookshelfService {
+    RestResponseDto<Bookshelf> addNewBookshelf(Long userId, BookshelfRequestDto dto);
+
     Bookshelf findByBookshelfName(String bookshelfName);
 
-    Bookshelf saveBookshelf(Bookshelf bookshelf);
+    RestResponseDto<List<Bookshelf>> getBookshelfList(Long userId, MultiValueMap<String, String> parameters, @PageableDefault Pageable pageable);
 
-    RestResponseDto<List<Bookshelf>> findBookshelfs(MultiValueMap<String, String> parameters, Pageable pageable);
+    RestResponseDto<Bookshelf> getBookshelf(Long bookshelfId);
 
     Bookshelf findById(Long id);
 
-    void delete(Long id);
+    void deleteBookshelf(Long userId, Long bookshelfId);
 
-    Bookshelf update(Long bookId, BookshelfUpdateDto bookshelfUpdateDto);
+    Bookshelf updateBookshelf(Long bookId, BookshelfUpdateDto bookshelfUpdateDto);
 
     Bookshelf getBookshelfByBookshelfNameOrElseNull(String bookshelfName);
 }

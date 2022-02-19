@@ -8,6 +8,8 @@ import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -16,6 +18,7 @@ import javax.validation.constraints.Size;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
+@ToString(of = {"bookshelfName", "description"})
 @NoArgsConstructor
 @Entity
 @Table(name = "bookshelf")
@@ -32,17 +35,25 @@ public class Bookshelf extends DatedEntity {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "bookshelf_book",
+            joinColumns = {@JoinColumn(name = "bookshelf_id", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")}
+    )
+    private Set<Book> books = new HashSet<>();
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "user_book",
-//            joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "book_id")
-//    )
-//    private List<Book> books;
-//
-//    public void addBook(Book book) {
-//        this.getBooks().add(book);
-//    }
-//
+    public void addBook(Book book) {
+        this.books.add(book);
+        book.getBookshelfs().add(this);
+    }
+
+    public void removeBook(Book book) {
+        this.books.remove(book);
+        book.getBookshelfs().remove(this);
+    }
+
 }

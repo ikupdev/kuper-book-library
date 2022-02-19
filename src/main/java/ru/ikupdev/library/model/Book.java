@@ -7,6 +7,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -85,6 +87,6 @@ public class Book extends DatedEntity {
     @Size(max = 4096)
     @Column(name = "buy_link")
     private String buyLink;
-//    @ManyToMany(mappedBy = "books")
-//    private List<User> users;
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
+    private Set<Bookshelf> bookshelfs = new HashSet<>();
 }

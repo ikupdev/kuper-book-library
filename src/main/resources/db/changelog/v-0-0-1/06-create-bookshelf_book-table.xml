@@ -5,29 +5,29 @@
     <changeSet id="1.0.13" author="i.kupriyanov" context="default">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="user_book"/>
+                <tableExists tableName="bookshelf_book"/>
             </not>
         </preConditions>
-        <createTable tableName="user_book">
-            <column name="user_id" type="BIGSERIAL">
-                <constraints nullable="false" unique="true"/>
+        <createTable tableName="bookshelf_book">
+            <column name="bookshelf_id" type="BIGSERIAL">
+                <constraints nullable="false" unique="false"/>
             </column>
             <column name="book_id" type="BIGSERIAL">
-                <constraints nullable="false" unique="true"/>
+                <constraints nullable="false" unique="false"/>
             </column>
         </createTable>
     </changeSet>
     <changeSet id="1.0.14" author="i.kupriyanov" context="default">
-        <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="user_book"
-                                 constraintName="fk_user_book_user_id"
+        <addForeignKeyConstraint baseColumnNames="bookshelf_id"
+                                 baseTableName="bookshelf_book"
+                                 constraintName="fk_bookshelf_book_bookshelf_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="user"/>
+                                 referencedTableName="bookshelf"/>
     </changeSet>
     <changeSet id="1.0.15" author="i.kupriyanov" context="default">
         <addForeignKeyConstraint baseColumnNames="book_id"
-                                 baseTableName="user_book"
-                                 constraintName="fk_user_book_book_id"
+                                 baseTableName="bookshelf_book"
+                                 constraintName="fk_bookshelf_book_book_id"
                                  referencedColumnNames="id"
                                  referencedTableName="book"/>
     </changeSet>

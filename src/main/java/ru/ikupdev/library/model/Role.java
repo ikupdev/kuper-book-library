@@ -8,7 +8,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -17,7 +18,7 @@ import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-@ToString(callSuper = true)
+@ToString(of = "name")
 @Entity
 @Table(name = "role")
 public class Role extends BaseEntity {
@@ -25,8 +26,7 @@ public class Role extends BaseEntity {
     @NotBlank
     @Column(name = "name")
     private String name;
-    @ToString.Exclude
     @JsonIgnore
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    private List<User> users;
+    private Set<User> users = new HashSet<>();
 }

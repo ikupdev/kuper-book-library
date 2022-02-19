@@ -14,6 +14,7 @@ import org.springframework.data.mapping.PropertyReferenceException;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.data.util.ClassTypeInformation;
 import ru.ikupdev.library.model.Book;
+import ru.ikupdev.library.model.Bookshelf;
 import ru.ikupdev.library.model.User;
 
 import java.util.Iterator;
@@ -57,7 +58,7 @@ public class OrderUtil {
     }
 
     public static QPageRequest bookshelfOrder(Pageable pageable) {
-        ClassTypeInformation<User> typeInfo = ClassTypeInformation.from(User.class);
+        ClassTypeInformation<Bookshelf> typeInfo = ClassTypeInformation.from(Bookshelf.class);
         Iterator<Sort.Order> iterator = pageable.getSort().iterator();
         List<Sort.Order> orders = new LinkedList<>();
         while (iterator.hasNext()) {
