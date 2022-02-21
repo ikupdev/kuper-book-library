@@ -18,7 +18,7 @@ public interface IBookshelfService {
 
     void saveBookshelf(Bookshelf bookshelf);
 
-    Bookshelf findByBookshelfName(String bookshelfName);
+    Bookshelf findByName(String name);
 
     RestResponseDto<List<Bookshelf>> getBookshelfList(Long userId, MultiValueMap<String, String> parameters, Pageable pageable);
 
@@ -30,5 +30,5 @@ public interface IBookshelfService {
 
     Bookshelf updateBookshelf(Long bookId, BookshelfUpdateDto bookshelfUpdateDto);
 
-    Bookshelf getBookshelfByBookshelfNameOrElseNull(String bookshelfName);
+    Bookshelf getBookshelfByNameOrElseNull(String name);
 }

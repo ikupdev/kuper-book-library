@@ -13,5 +13,5 @@ import java.util.Optional;
  */
 @Repository
 public interface BookshelfRepository extends PagingAndSortingRepository<Bookshelf, Long>, QuerydslPredicateExecutor<Bookshelf> {
-    Optional<Bookshelf> findByBookshelfName(String volumeId);
+    Optional<Bookshelf> findByName(String name);
 }

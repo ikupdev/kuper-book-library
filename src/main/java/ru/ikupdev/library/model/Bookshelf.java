@@ -18,7 +18,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @SuperBuilder
-@ToString(of = {"bookshelfName", "description"})
+@ToString(of = {"name", "description"})
 @NoArgsConstructor
 @Entity
 @Table(name = "bookshelf")
@@ -26,8 +26,8 @@ public class Bookshelf extends DatedEntity {
     @ApiModelProperty(notes = "Наименование книжной полки", required = true)
     @NotNull
     @Size(max = 512)
-    @Column(name = "bookshelf_name")
-    private String bookshelfName;
+    @Column(name = "name")
+    private String name;
     @ApiModelProperty(notes = "Описание книжной полки")
     @Size(max = 2048)
     @Column(name = "description")

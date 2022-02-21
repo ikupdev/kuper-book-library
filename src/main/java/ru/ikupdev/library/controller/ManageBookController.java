@@ -1,4 +1,4 @@
-package ru.ikupdev.library.controller.rest;
+package ru.ikupdev.library.controller;
 
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
@@ -31,7 +31,7 @@ public class ManageBookController {
     private final IBookshelfBookService bookshelfBookService;
 
     @ApiOperation(value = "Добавить книгу по volumeId")
-    @GetMapping("/book/{volume-id}/new")
+    @PostMapping(value = "/book/{volume-id}/new")
     public RestResponseDto<Book> addBookByVolumeId(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
                                                    @ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
                                                    @ApiParam(value = "volume id книги", required = true, example = "mF2GBwAAQBAJ") @PathVariable("volume-id") String volumeId) {

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class BookshelfFilter {
-    private String bookshelfName;
+    private String name;
     private String description;
     private Long userId;
 }

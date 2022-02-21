@@ -1,4 +1,4 @@
-package ru.ikupdev.library.controller.rest;
+package ru.ikupdev.library.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

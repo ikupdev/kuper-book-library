@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isA;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static ru.ikupdev.library.config.LibraryConst.ADMIN_PATH;
 import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 
 /**
@@ -23,7 +24,7 @@ public class UserControllerTest extends AbstractIntegrationTest {
     @Test
     void givenGetAllUsers_then200Ok() throws Exception {
         components.getMockMvc()
-                .perform(MockMvcRequestBuilders.get(components.getContextPath() + API_V1_PATH + "/user/list")
+                .perform(MockMvcRequestBuilders.get(components.getContextPath() + API_V1_PATH + ADMIN_PATH + "/user/list")
                         .contentType(MediaType.APPLICATION_JSON)
                         .contextPath(components.getContextPath()))
                 .andExpect(status().is2xxSuccessful())
@@ -35,7 +36,7 @@ public class UserControllerTest extends AbstractIntegrationTest {
     void givenGetUsersPageWithSpecifiedParameters_then200Ok() throws Exception {
         String params = "?lastName=Иванов&page=0&size=10&sort=firstName,ASC&status=ACTIVE";
         components.getMockMvc()
-                .perform(MockMvcRequestBuilders.get(components.getContextPath() + API_V1_PATH + "/user/list" + params)
+                .perform(MockMvcRequestBuilders.get(components.getContextPath() + API_V1_PATH + ADMIN_PATH + "/user/list" + params)
                         .contentType(MediaType.APPLICATION_JSON)
                         .contextPath(components.getContextPath()))
                 .andExpect(status().is2xxSuccessful())

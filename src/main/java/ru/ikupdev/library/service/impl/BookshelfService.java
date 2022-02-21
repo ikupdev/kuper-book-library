@@ -43,18 +43,18 @@ public class BookshelfService implements IBookshelfService {
 
     @Override
     public RestResponseDto<Bookshelf> addNewBookshelf(Long userId, BookshelfRequestDto dto) {
-        if (getBookshelfByBookshelfNameOrElseNull(dto.getBookshelfName()) != null)
-            throw new ResourceConflictException(String.format(BUNDLE.getString("bookshelf.exist.name"), dto.getBookshelfName()));
+        if (getBookshelfByNameOrElseNull(dto.getName()) != null)
+            throw new ResourceConflictException(String.format(BUNDLE.getString("bookshelf.exist.name"), dto.getName()));
         User user = userService.findById(userId);
         Bookshelf bookshelf = Bookshelf.builder()
-                .bookshelfName(dto.getBookshelfName())
+                .name(dto.getName())
                 .description(dto.getDescription())
                 .created(new Date())
                 .updated(new Date())
                 .build();
         user.addBookshelf(bookshelf);
         userService.save(user);
-        Bookshelf savedBookshelf= findByBookshelfName(bookshelf.getBookshelfName());
+        Bookshelf savedBookshelf= findByName(bookshelf.getName());
         return new RestResponseDto<>(savedBookshelf);
     }
 
@@ -64,8 +64,8 @@ public class BookshelfService implements IBookshelfService {
     }
 
     @Override
-    public Bookshelf findByBookshelfName(String bookshelfName) {
-        return getBookshelfByBookshelfNameOrElseThrow(bookshelfName);
+    public Bookshelf findByName(String name) {
+        return getBookshelfByNameOrElseThrow(name);
     }
 
     @Override
@@ -73,12 +73,12 @@ public class BookshelfService implements IBookshelfService {
         userService.findById(userId);
         parameters.add("userId", userId.toString());
         BookshelfFilter filter = BookshelfFilter.builder()
-                .bookshelfName(parameters.getFirst("bookshelfName"))
+                .name(parameters.getFirst("name"))
                 .description((parameters.getFirst("description")))
                 .userId(parameters.getFirst("userId") == null ? null : Long.valueOf(Objects.requireNonNull(parameters.getFirst("userId"))))
                 .build();
         Predicate predicate = QPredicates.builder()
-                .add(filter.getBookshelfName(), bookshelf.bookshelfName::containsIgnoreCase)
+                .add(filter.getName(), bookshelf.name::containsIgnoreCase)
                 .add(filter.getDescription(), bookshelf.description::containsIgnoreCase)
                 .add(filter.getUserId(), bookshelf.user.id::eq)
                 .buildAnd();
@@ -108,14 +108,14 @@ public class BookshelfService implements IBookshelfService {
     @Override
     public Bookshelf updateBookshelf(Long bookshelfId, BookshelfUpdateDto dto) {
         Bookshelf bookshelf = getBookshelfByIdOrElseThrow(bookshelfId);
-        if (dto.getBookshelfName() != null) bookshelf.setBookshelfName(dto.getBookshelfName());
+        if (dto.getName() != null) bookshelf.setName(dto.getName());
         bookshelf.setDescription((dto.getDescription()));
         bookshelf.setUpdated(new Date());
         return bookshelfRepository.save(bookshelf);
     }
 
-    public Bookshelf getBookshelfByBookshelfNameOrElseNull(String bookshelfName) {
-        return bookshelfRepository.findByBookshelfName(bookshelfName).orElse(null);
+    public Bookshelf getBookshelfByNameOrElseNull(String name) {
+        return bookshelfRepository.findByName(name).orElse(null);
     }
 
     private Bookshelf getBookshelfByIdOrElseThrow(Long id) {
@@ -123,9 +123,9 @@ public class BookshelfService implements IBookshelfService {
                 .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("bookshelf.by.id.not.found"), id)));
     }
 
-    private Bookshelf getBookshelfByBookshelfNameOrElseThrow(String bookshelfName) {
-        return bookshelfRepository.findByBookshelfName(bookshelfName).orElseThrow(() ->
-                new NotFoundException(String.format(BUNDLE.getString("bookshelf.by.name.not.found"), bookshelfName)));
+    private Bookshelf getBookshelfByNameOrElseThrow(String name) {
+        return bookshelfRepository.findByName(name).orElseThrow(() ->
+                new NotFoundException(String.format(BUNDLE.getString("bookshelf.by.name.not.found"), name)));
     }
 
 }

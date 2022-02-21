@@ -1,4 +1,4 @@
-package ru.ikupdev.library.controller.rest;
+package ru.ikupdev.library.controller;
 
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
@@ -34,10 +34,10 @@ public class BookshelfController {
     @ApiOperation(value = "Получить список книжных полок пользователя")
     @GetMapping("/bookshelf/list")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "bookshelfName", value = "Название книжной полки", dataTypeClass = String.class, paramType = "query", defaultValue = "Название"),
+            @ApiImplicitParam(name = "name", value = "Название книжной полки", dataTypeClass = String.class, paramType = "query", defaultValue = "Название"),
             @ApiImplicitParam(name = "description", value = "Описание книжной полки", dataTypeClass = Status.class, paramType = "query", defaultValue = "Описание"),
             @ApiImplicitParam(name = "size", value = "Количество записей на странице", dataTypeClass = String.class, paramType = "query", defaultValue = "10"),
-            @ApiImplicitParam(name = "sort", value = "Сортировка", dataTypeClass = String.class, paramType = "query", defaultValue = "bookshelfName,ASC")
+            @ApiImplicitParam(name = "sort", value = "Сортировка", dataTypeClass = String.class, paramType = "query", defaultValue = "name,ASC")
     })
     public RestResponseDto<List<Bookshelf>> getBookshelfList(
             @ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,

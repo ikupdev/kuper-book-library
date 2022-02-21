@@ -1,4 +1,4 @@
-package ru.ikupdev.library.controller.rest;
+package ru.ikupdev.library.controller;
 
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +19,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
+import static ru.ikupdev.library.config.LibraryConst.ADMIN_PATH;
 import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 
 /**
@@ -27,7 +28,7 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(API_V1_PATH + "/user")
+@RequestMapping(API_V1_PATH + ADMIN_PATH + "/user")
 @Api(value = "User controller", tags = {"3. Api пользователей"})
 public class UserController {
     private final IUserService userService;

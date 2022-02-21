@@ -20,7 +20,7 @@
             <column name="id" type="BIGSERIAL" defaultValueComputed="nextval('com.bookshelf_id_seq')">
                 <constraints primaryKey="true" primaryKeyName="bookshelf_pk" nullable="false"/>
             </column>
-            <column name="bookshelf_name" type="VARCHAR(512)">
+            <column name="name" type="VARCHAR(512)">
                 <constraints nullable="false" unique="true"/>
             </column>
             <column name="description" type="VARCHAR(2048)">
@@ -40,13 +40,13 @@
     <changeSet id="1.0.18" author="i.kupriyanov" context="default">
         <preConditions onFail="MARK_RAN">
             <not>
-                <indexExists indexName="idx_bookshelf_bookshelf_name"/>
+                <indexExists indexName="idx_bookshelf_name"/>
             </not>
         </preConditions>
         <createIndex tableName="bookshelf"
                      unique="true"
-                     indexName="idx_bookshelf_bookshelf_name">
-            <column name="bookshelf_name"/>
+                     indexName="idx_bookshelf_name">
+            <column name="name"/>
         </createIndex>
     </changeSet>
 </databaseChangeLog>

@@ -64,11 +64,11 @@ public class OrderUtil {
         while (iterator.hasNext()) {
             orders.add(iterator.next());
         }
-        if (orders.stream().anyMatch(order -> "bookshelfName".equals(order.getProperty()))) {
-            Sort.Order fistNameOrder = orders.stream().filter(order -> "bookshelfName".equals(order.getProperty())).findFirst().get();
-            orders.removeIf(order -> "bookshelfName".equals(order.getProperty()));
+        if (orders.stream().anyMatch(order -> "name".equals(order.getProperty()))) {
+            Sort.Order fistNameOrder = orders.stream().filter(order -> "name".equals(order.getProperty())).findFirst().get();
+            orders.removeIf(order -> "name".equals(order.getProperty()));
             orders.add(new Sort.Order(fistNameOrder.getDirection(), "created"));
-            orders.add(new Sort.Order(fistNameOrder.getDirection(), "bookshelfName"));
+            orders.add(new Sort.Order(fistNameOrder.getDirection(), "name"));
         } else {
             orders.add(new Sort.Order(Sort.Direction.DESC, "created"));
         }

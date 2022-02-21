@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 public class BookshelfUpdateDto {
     @ApiModelProperty(notes = "Наименование книжной полки")
     @Size(max = 512)
-    private String bookshelfName;
+    private String name;
     @ApiModelProperty(notes = "Описание книжной полки")
     @Size(max = 2048)
     private String description;
