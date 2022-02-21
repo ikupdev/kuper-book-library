@@ -115,6 +115,13 @@ public class BookService implements IBookService {
         return bookRepository.save(bookForUpdate);
     }
 
+    @Override
+    public List<Long> deleteOrphanBooks() {
+        List<Long> orphanBookIds = bookRepository.findOrphanBookIds();
+        orphanBookIds.forEach(bookRepository::deleteById);
+        return orphanBookIds;
+    }
+
     private Book getBookOrElseThrow(Long id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("book.by.id.not.found"), id)));

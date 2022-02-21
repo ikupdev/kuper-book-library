@@ -26,4 +26,6 @@ public interface IBookService {
     void delete(Long id);
 
     Book update(Long bookId, BookUpdateDto bookUpdate);
+
+    List<Long> deleteOrphanBooks();
 }
