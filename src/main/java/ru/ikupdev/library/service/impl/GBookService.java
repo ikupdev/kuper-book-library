@@ -8,16 +8,16 @@ import ru.ikupdev.library.bean.type.gbook.BookSaleType;
 import ru.ikupdev.library.bean.type.gbook.KeywordType;
 import ru.ikupdev.library.converter.GBookToBookConverter;
 import ru.ikupdev.library.dto.RestResponseDto;
+import ru.ikupdev.library.exception.NotFoundException;
 import ru.ikupdev.library.feign.GoogleBooksApiClient;
 import ru.ikupdev.library.model.Book;
 import ru.ikupdev.library.model.gbook.GBookItem;
 import ru.ikupdev.library.model.gbook.GBookParams;
 import ru.ikupdev.library.model.gbook.GBookResponseDto;
 import ru.ikupdev.library.service.IGBookService;
+import ru.ikupdev.library.util.FeignUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * @author Ilya V. Kupriyanov
@@ -38,13 +38,17 @@ public class GBookService implements IGBookService {
     public RestResponseDto<List<Book>> getBookVolumes(MultiValueMap<String, String> parameters) {
         GBookResponseDto rawBookVolumes = getGBookVolumes(parameters);
         List<Book> books = new ArrayList<>();
-        rawBookVolumes.getItems().forEach(gBookItem -> {books.add(converter.convertGBookItemToBookEntity(gBookItem));});
+        rawBookVolumes.getItems().forEach(gBookItem -> {
+            books.add(converter.convertGBookItemToBookEntity(gBookItem));
+        });
         return new RestResponseDto<>(books);
     }
 
     @Override
     public RestResponseDto<Book> getBookByVolumeId(String volumeId) {
-        GBookItem volume = booksApiClient.getBookVolumeById(volumeId);
+        GBookItem volume = FeignUtil.feignLog(() -> booksApiClient.getBookByVolumeId(volumeId));
+        if (volume.getError() != null) throw new NotFoundException(
+                String.format(BUNDLE.getString("not.found.by.volume.id"), volumeId));
         Book book = converter.convertGBookItemToBookEntity(volume);
         return new RestResponseDto<>(book);
     }
@@ -64,7 +68,7 @@ public class GBookService implements IGBookService {
                 .maxResults(parameters.getFirst("maxResults"))
                 .startIndex(parameters.getFirst("startIndex"))
                 .build();
-        return booksApiClient.getBookVolumes(params);
+        return FeignUtil.feignLog(() -> booksApiClient.getBookVolumes(params));
     }
 
 }

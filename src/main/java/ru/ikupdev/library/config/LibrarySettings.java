@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -22,6 +23,9 @@ public class LibrarySettings {
     @NotNull
     @Valid
     private JwtSettings jwt;
+    @NotNull
+    @Valid
+    private TaskSettings task;
 
     public static class JwtSettings {
         @NotNull
@@ -62,6 +66,71 @@ public class LibrarySettings {
         }
     }
 
+    public static class TaskSettings {
+        @NotNull
+        @Valid
+        private CronSetting removeOrphanBooks;
+        @NotNull
+        @Valid
+        private LibrarySettings.SyncSettings syncGoogleBookAPI;
+
+        public CronSetting getRemoveOrphanBooks() {
+            return removeOrphanBooks;
+        }
+
+        public void setRemoveOrphanBooks(CronSetting removeOrphanBooks) {
+            this.removeOrphanBooks = removeOrphanBooks;
+        }
+
+        public SyncSettings getSyncGoogleBookAPI() {
+            return syncGoogleBookAPI;
+        }
+
+        public void setSyncGoogleBookAPI(SyncSettings syncGoogleBookAPI) {
+            this.syncGoogleBookAPI = syncGoogleBookAPI;
+        }
+    }
+
+
+    public static class CronSetting {
+
+        private String cron;
+
+        public String getCron() {
+            return cron;
+        }
+
+        public void setCron(String cron) {
+            this.cron = cron;
+        }
+    }
+
+
+    public static class SyncSettings {
+
+        private String cron;
+        @NotBlank
+        @DecimalMin(value = "1")
+        @Valid
+        private String batchSize;
+
+        public String getCron() {
+            return cron;
+        }
+
+        public void setCron(String cron) {
+            this.cron = cron;
+        }
+
+        public String getBatchSize() {
+            return batchSize;
+        }
+
+        public void setBatchSize(String batchSize) {
+            this.batchSize = batchSize;
+        }
+    }
+
     public String getSchemaName() {
         return schemaName;
     }
@@ -78,4 +147,11 @@ public class LibrarySettings {
         this.jwt = jwt;
     }
 
+    public TaskSettings getTask() {
+        return task;
+    }
+
+    public void setTask(TaskSettings task) {
+        this.task = task;
+    }
 }

@@ -19,10 +19,7 @@ import ru.ikupdev.library.service.IBookshelfService;
 import ru.ikupdev.library.util.OrderUtil;
 import ru.ikupdev.library.util.QPredicates;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 import static ru.ikupdev.library.model.QBook.book;
 
@@ -35,7 +32,6 @@ import static ru.ikupdev.library.model.QBook.book;
 public class BookService implements IBookService {
     private final ResourceBundle BUNDLE = ResourceBundle.getBundle(BookService.class.getName());
     private final BookRepository bookRepository;
-    private final IBookshelfService bookshelfService;
 
     @Override
     public Book findByVolumeIdOrElseNull(String volumeId) {
@@ -82,7 +78,7 @@ public class BookService implements IBookService {
 
     @Override
     public Book findById(Long id) {
-        return getBookOrElseThrow(id);
+        return getBookByIdOrElseThrow(id);
     }
 
     @Override
@@ -94,7 +90,7 @@ public class BookService implements IBookService {
 
     @Override
     public Book update(Long bookId, BookUpdateDto dto) {
-        Book bookForUpdate = getBookOrElseThrow(bookId);
+        Book bookForUpdate = getBookByIdOrElseThrow(bookId);
         if (dto.getVolumeId() != null) bookForUpdate.setVolumeId(dto.getVolumeId());
         if (dto.getTitle() != null) bookForUpdate.setTitle(dto.getTitle());
         if (dto.getSubtitle() != null) bookForUpdate.setSubtitle(dto.getSubtitle());
@@ -122,7 +118,7 @@ public class BookService implements IBookService {
         return orphanBookIds;
     }
 
-    private Book getBookOrElseThrow(Long id) {
+    private Book getBookByIdOrElseThrow(Long id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("book.by.id.not.found"), id)));
     }

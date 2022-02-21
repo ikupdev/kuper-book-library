@@ -14,4 +14,5 @@ public class GBookItem {
     private GSaleInfo saleInfo;
     private GSearchInfo searchInfo;
     private GAccessInfo accessInfo;
+    private GError error;
 }

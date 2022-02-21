@@ -16,6 +16,7 @@ import ru.ikupdev.library.model.gbook.GBookResponseDto;
 public interface GoogleBooksApiClient {
     @GetMapping("/volumes")
     GBookResponseDto getBookVolumes(@SpringQueryMap GBookParams params);
+
     @GetMapping("/volumes/{volumeId}")
-    GBookItem getBookVolumeById(@PathVariable(value = "volumeId") String volumeId);
+    GBookItem getBookByVolumeId(@PathVariable(value = "volumeId") String volumeId);
 }

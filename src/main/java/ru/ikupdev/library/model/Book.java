@@ -104,7 +104,6 @@ public class Book extends DatedEntity {
                 Objects.equals(description, book.description) &&
                 Objects.equals(pageCount, book.pageCount) &&
                 Objects.equals(language, book.language) &&
-                Objects.equals(imageLink, book.imageLink) &&
                 Objects.equals(previewLink, book.previewLink) &&
                 Objects.equals(infoLink, book.infoLink) &&
                 Objects.equals(canonicalVolumeLink, book.canonicalVolumeLink) &&
