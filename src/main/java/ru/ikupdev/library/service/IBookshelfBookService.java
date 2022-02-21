@@ -12,18 +12,15 @@ import java.util.List;
  * @author Ilya V. Kupriyanov
  * @version 15.02.2022
  */
-public interface IBookService {
-    Book findByVolumeIdOrElseNull(String volumeId);
+public interface IBookshelfBookService {
+    RestResponseDto<Book> addBookToBookshelf(Long userId, Long bookshelfId, String volumeId);
 
-    Book findByVolumeIdOrElseThrow(String volumeId);
+    RestResponseDto<Book> getBookById(Long bookId);
 
-    Book saveBook(Book book);
+    RestResponseDto<List<Book>> findBooks(MultiValueMap<String, String> parameters,
+                                          Pageable pageable);
 
-    RestResponseDto<List<Book>> findBooks(MultiValueMap<String, String> parameters, Pageable pageable);
-
-    Book findById(Long id);
-
-    void delete(Long id);
+    void delete(Long bookshelfId, Long id);
 
     Book update(Long bookId, BookUpdateDto bookUpdate);
 }

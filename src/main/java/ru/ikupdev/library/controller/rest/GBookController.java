@@ -42,18 +42,10 @@ public class GBookController {
         return gBookService.getBookVolumes(parameters);
     }
 
-    @ApiOperation(value = "Получить данные книг по ключевым словам (в сыром виде)", response = GBookResponseDto.class)
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "keyword", value = "Фильтр поиска", dataTypeClass = KeywordType.class, defaultValue = "intitle", paramType = "query", required = true),
-            @ApiImplicitParam(name = "keyQuery", value = "Ключевые слова", dataTypeClass = String.class, defaultValue = "Potter", paramType = "query", required = true),
-            @ApiImplicitParam(name = "saleType", value = "Тип книг", dataTypeClass = BookSaleType.class, defaultValue = "free_ebooks", paramType = "query"),
-            @ApiImplicitParam(name = "sortType", value = "Тип сортировки", dataTypeClass = BookSortType.class, defaultValue = "newest", paramType = "query"),
-            @ApiImplicitParam(name = "maxResults", value = "Кол-во элементов в выдаче", dataTypeClass = String.class, defaultValue = "10", paramType = "query"),
-            @ApiImplicitParam(name = "startIndex", value = "Начальный элемент в выдаче", dataTypeClass = String.class, defaultValue = "0", paramType = "query")
-    })
-    @GetMapping("/raw/list")
-    public GBookResponseDto getRawBooks(@ApiIgnore @RequestParam MultiValueMap<String, String> parameters) {
-        return gBookService.getRawBookVolumes(parameters);
+    @GetMapping("/volumeId/{volume-id}")
+    @ApiOperation(value = "Получить данные книги по volumeId", response = RestResponseDto.class)
+    public RestResponseDto<Book> getBookByVolumeId(@ApiParam(value = "volume id книги в Google Book API", required = true, example = "mF2GBwAAQBAJ") @PathVariable("volume-id") String volumeId) {
+        return gBookService.getBookByVolumeId(volumeId);
     }
 
 }

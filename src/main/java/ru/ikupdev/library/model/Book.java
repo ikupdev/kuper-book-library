@@ -1,5 +1,6 @@
 package ru.ikupdev.library.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -15,7 +17,6 @@ import java.util.Set;
  * @version 11.12.2021
  */
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -87,6 +88,36 @@ public class Book extends DatedEntity {
     @Size(max = 4096)
     @Column(name = "buy_link")
     private String buyLink;
+    @JsonIgnore
+    @ToString.Exclude
     @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
     private Set<Bookshelf> bookshelfs = new HashSet<>();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return volumeId.equals(book.volumeId) &&
+                Objects.equals(title, book.title) &&
+                Objects.equals(subtitle, book.subtitle) &&
+                Objects.equals(description, book.description) &&
+                Objects.equals(pageCount, book.pageCount) &&
+                Objects.equals(language, book.language) &&
+                Objects.equals(imageLink, book.imageLink) &&
+                Objects.equals(previewLink, book.previewLink) &&
+                Objects.equals(infoLink, book.infoLink) &&
+                Objects.equals(canonicalVolumeLink, book.canonicalVolumeLink) &&
+                Objects.equals(authors, book.authors) &&
+                Objects.equals(searchInfo, book.searchInfo) &&
+                Objects.equals(epubDownloadLink, book.epubDownloadLink) &&
+                Objects.equals(pdfDownloadLink, book.pdfDownloadLink) &&
+                Objects.equals(webReaderLink, book.webReaderLink) &&
+                Objects.equals(buyLink, book.buyLink);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(volumeId, title, subtitle, description, pageCount, language, imageLink, previewLink, infoLink, canonicalVolumeLink, authors, searchInfo, epubDownloadLink, pdfDownloadLink, webReaderLink, buyLink);
+    }
 }

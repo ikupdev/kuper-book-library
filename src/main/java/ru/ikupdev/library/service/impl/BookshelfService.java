@@ -8,6 +8,7 @@ import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
+import org.springframework.validation.annotation.Validated;
 import ru.ikupdev.library.dto.BookshelfRequestDto;
 import ru.ikupdev.library.dto.BookshelfUpdateDto;
 import ru.ikupdev.library.dto.RestResponseDto;
@@ -55,6 +56,11 @@ public class BookshelfService implements IBookshelfService {
         userService.save(user);
         Bookshelf savedBookshelf= findByBookshelfName(bookshelf.getBookshelfName());
         return new RestResponseDto<>(savedBookshelf);
+    }
+
+    @Override
+    public void saveBookshelf(@Validated Bookshelf bookshelf) {
+        bookshelfRepository.save(bookshelf);
     }
 
     @Override

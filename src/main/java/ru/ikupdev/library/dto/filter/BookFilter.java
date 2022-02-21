@@ -19,4 +19,6 @@ public class BookFilter {
     private String description;
     private String language;
     private String authors;
+    private Long userId;
+    private Long bookshelfId;
 }

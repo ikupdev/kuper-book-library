@@ -10,6 +10,7 @@ import ru.ikupdev.library.converter.GBookToBookConverter;
 import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.feign.GoogleBooksApiClient;
 import ru.ikupdev.library.model.Book;
+import ru.ikupdev.library.model.gbook.GBookItem;
 import ru.ikupdev.library.model.gbook.GBookParams;
 import ru.ikupdev.library.model.gbook.GBookResponseDto;
 import ru.ikupdev.library.service.IGBookService;
@@ -34,7 +35,21 @@ public class GBookService implements IGBookService {
     private final GBookToBookConverter converter;
 
     @Override
-    public GBookResponseDto getRawBookVolumes(MultiValueMap<String, String> parameters) {
+    public RestResponseDto<List<Book>> getBookVolumes(MultiValueMap<String, String> parameters) {
+        GBookResponseDto rawBookVolumes = getGBookVolumes(parameters);
+        List<Book> books = new ArrayList<>();
+        rawBookVolumes.getItems().forEach(gBookItem -> {books.add(converter.convertGBookItemToBookEntity(gBookItem));});
+        return new RestResponseDto<>(books);
+    }
+
+    @Override
+    public RestResponseDto<Book> getBookByVolumeId(String volumeId) {
+        GBookItem volume = booksApiClient.getBookVolumeById(volumeId);
+        Book book = converter.convertGBookItemToBookEntity(volume);
+        return new RestResponseDto<>(book);
+    }
+
+    private GBookResponseDto getGBookVolumes(MultiValueMap<String, String> parameters) {
         String keyword = parameters.getFirst("keyword") == null ?
                 null : KeywordType.getParamName(KeywordType.valueOf(parameters.getFirst("keyword").toUpperCase()));
         String keyQuery = parameters.getFirst("keyQuery");
@@ -50,14 +65,6 @@ public class GBookService implements IGBookService {
                 .startIndex(parameters.getFirst("startIndex"))
                 .build();
         return booksApiClient.getBookVolumes(params);
-    }
-
-    @Override
-    public RestResponseDto<List<Book>> getBookVolumes(MultiValueMap<String, String> parameters) {
-        GBookResponseDto rawBookVolumes = getRawBookVolumes(parameters);
-        List<Book> books = new ArrayList<>();
-        rawBookVolumes.getItems().forEach(gBookItem -> {books.add(converter.convertGBookItemToBookEntity(gBookItem));});
-        return new RestResponseDto<>(books);
     }
 
 }

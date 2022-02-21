@@ -15,11 +15,13 @@ import ru.ikupdev.library.exception.NotFoundException;
 import ru.ikupdev.library.model.Book;
 import ru.ikupdev.library.repository.BookRepository;
 import ru.ikupdev.library.service.IBookService;
+import ru.ikupdev.library.service.IBookshelfService;
 import ru.ikupdev.library.util.OrderUtil;
 import ru.ikupdev.library.util.QPredicates;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static ru.ikupdev.library.model.QBook.book;
@@ -31,11 +33,17 @@ import static ru.ikupdev.library.model.QBook.book;
 @Service
 @RequiredArgsConstructor
 public class BookService implements IBookService {
-    private final BookRepository bookRepository;
     private final ResourceBundle BUNDLE = ResourceBundle.getBundle(BookService.class.getName());
+    private final BookRepository bookRepository;
+    private final IBookshelfService bookshelfService;
 
     @Override
-    public Book findByVolumeId(String volumeId) {
+    public Book findByVolumeIdOrElseNull(String volumeId) {
+        return bookRepository.findByVolumeId(volumeId).orElse(null);
+    }
+
+    @Override
+    public Book findByVolumeIdOrElseThrow(String volumeId) {
         return bookRepository.findByVolumeId(volumeId).orElseThrow(() ->
                 new NotFoundException(String.format(BUNDLE.getString("book.not.found"), volumeId)));
     }
@@ -53,6 +61,10 @@ public class BookService implements IBookService {
                 .description((parameters.getFirst("description")))
                 .language(parameters.getFirst("language"))
                 .authors(parameters.getFirst("authors"))
+                .userId(parameters.getFirst("userId") == null ? null :
+                        Long.valueOf(Objects.requireNonNull(parameters.getFirst("userId"))))
+                .bookshelfId(parameters.getFirst("bookshelfId") == null ? null :
+                        Long.valueOf(Objects.requireNonNull(parameters.getFirst("bookshelfId"))))
                 .build();
         Predicate predicate = QPredicates.builder()
                 .add(filter.getTitle(), book.title::containsIgnoreCase)
@@ -60,6 +72,8 @@ public class BookService implements IBookService {
                 .add(filter.getDescription(), book.description::containsIgnoreCase)
                 .add(filter.getLanguage(), book.language::containsIgnoreCase)
                 .add(filter.getAuthors(), book.authors::containsIgnoreCase)
+                .add(filter.getBookshelfId(), book.bookshelfs.any().id::eq)
+                .add(filter.getUserId(), book.bookshelfs.any().user.id::eq)
                 .buildAnd();
         QPageRequest qPageRequest = OrderUtil.booksOrder(pageable);
         Page<Book> page = predicate == null ? bookRepository.findAll(qPageRequest) : bookRepository.findAll(predicate, qPageRequest);
@@ -68,18 +82,19 @@ public class BookService implements IBookService {
 
     @Override
     public Book findById(Long id) {
-        return getUserOrElseThrow(id);
+        return getBookOrElseThrow(id);
     }
 
     @Override
     public void delete(Long id) {
-        findById(id);
-        bookRepository.deleteById(id);
+        if (bookRepository.existsById(id)) {
+            bookRepository.deleteById(id);
+        } else throw new NotFoundException(String.format(BUNDLE.getString("book.by.id.not.found"), id));
     }
 
     @Override
     public Book update(Long bookId, BookUpdateDto dto) {
-        Book bookForUpdate = getUserOrElseThrow(bookId);
+        Book bookForUpdate = getBookOrElseThrow(bookId);
         if (dto.getVolumeId() != null) bookForUpdate.setVolumeId(dto.getVolumeId());
         if (dto.getTitle() != null) bookForUpdate.setTitle(dto.getTitle());
         if (dto.getSubtitle() != null) bookForUpdate.setSubtitle(dto.getSubtitle());
@@ -100,7 +115,7 @@ public class BookService implements IBookService {
         return bookRepository.save(bookForUpdate);
     }
 
-    private Book getUserOrElseThrow(Long id) {
+    private Book getBookOrElseThrow(Long id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format(BUNDLE.getString("book.by.id.not.found"), id)));
     }

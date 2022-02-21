@@ -3,6 +3,7 @@ package ru.ikupdev.library.controller.rest;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 import org.springframework.validation.annotation.Validated;
@@ -26,7 +27,7 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(API_V1_PATH + "/manage/user/{user-id}")
-@Api(value = "Bookshelf controller", tags = {"7. Api управления книжными полками"})
+@Api(value = "Bookshelf controller", tags = {"6. Api управления книжными полками"})
 public class BookshelfController {
     private final IBookshelfService bookshelfService;
 
@@ -41,7 +42,7 @@ public class BookshelfController {
     public RestResponseDto<List<Bookshelf>> getBookshelfList(
             @ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
             @ApiIgnore @RequestParam MultiValueMap<String, String> parameters,
-            @ApiIgnore Pageable pageable) {
+            @ApiIgnore @PageableDefault Pageable pageable) {
         return bookshelfService.getBookshelfList(userId, parameters, pageable);
     }
 

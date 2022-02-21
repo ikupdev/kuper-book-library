@@ -23,15 +23,14 @@ class GBookControllerTest extends AbstractIntegrationTest {
     @Test
     void testGetBooks() throws Exception {
         components.getMockMvc()
-                .perform(MockMvcRequestBuilders.get(components.getContextPath() + API_V1_PATH + "/gbook/raw/list")
+                .perform(MockMvcRequestBuilders.get(components.getContextPath() + API_V1_PATH + "/gbook/list")
                         .param("keyword", "inauthor")
                         .param("keyQuery", "Rowling")
                         .param("key", "AIzaSyDIo47O3Sy9s4zOfyXvL_zSRxpMf2XeD3s")
                         .contentType(MediaType.APPLICATION_JSON)
                         .contextPath(components.getContextPath()))
                 .andExpect(status().is2xxSuccessful())
-                .andExpect(jsonPath("$.totalItems", is(139)))
-                .andExpect(jsonPath("$.items.*", isA(ArrayList.class)))
-                .andExpect(jsonPath("$.items.*", hasSize(10)));
+                .andExpect(jsonPath("$.data.*", isA(ArrayList.class)))
+                .andExpect(jsonPath("$.data.*", hasSize(10)));
     }
 }
