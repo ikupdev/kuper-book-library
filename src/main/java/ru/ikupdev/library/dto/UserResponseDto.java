@@ -24,7 +24,7 @@ public class UserResponseDto {
     private String lastName;
     private String email;
 
-    private Set<RoleResponseDto> roles = new HashSet<>();
+    private Set<RoleViewDto> roles = new HashSet<>();
     private Status status;
     @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ", timezone = "UTC")
     private Date created;

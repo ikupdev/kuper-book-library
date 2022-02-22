@@ -3,9 +3,7 @@ package ru.ikupdev.library.util;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
-import ru.ikupdev.library.dto.RoleResponseDto;
-import ru.ikupdev.library.dto.UserResponseDto;
-import ru.ikupdev.library.dto.UserViewDto;
+import ru.ikupdev.library.dto.*;
 import ru.ikupdev.library.model.Role;
 import ru.ikupdev.library.model.User;
 
@@ -37,12 +35,20 @@ public class MapperUtil {
 
     public UserResponseDto convertUserToUserResponseDto(User user) {
         UserResponseDto userResponseDto = modelMapper.map(user, UserResponseDto.class);
-        userResponseDto.setRoles(convertSet(user.getRoles(), this::convertRoleToRoleResponseDto));
+        userResponseDto.setRoles(convertSet(user.getRoles(), this::convertRoleToRoleViewDto));
         return userResponseDto;
+    }
+
+    public RoleViewDto convertRoleToRoleViewDto(Role role) {
+        return modelMapper.map(role, RoleViewDto.class);
     }
 
     public RoleResponseDto convertRoleToRoleResponseDto(Role role) {
         return modelMapper.map(role, RoleResponseDto.class);
+    }
+
+    public Role convertRoleRequestDtoToRole(RoleRequestDto roleRequestDto) {
+        return modelMapper.map(roleRequestDto, Role.class);
     }
 
 }

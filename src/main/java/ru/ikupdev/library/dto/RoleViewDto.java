@@ -1,5 +1,6 @@
 package ru.ikupdev.library.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class RoleResponseDto {
-    private Long id;
+@AllArgsConstructor
+public class RoleViewDto {
     private String name;
 }

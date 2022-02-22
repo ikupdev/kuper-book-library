@@ -1,5 +1,7 @@
 package ru.ikupdev.library.service;
 
+import ru.ikupdev.library.dto.RoleRequestDto;
+import ru.ikupdev.library.dto.RoleResponseDto;
 import ru.ikupdev.library.model.Role;
 
 import java.util.List;
@@ -13,9 +15,15 @@ public interface IRoleService {
 
     Role saveRole(Role role);
 
-    List<Role> findAll();
+    RoleResponseDto saveRoleDto(RoleRequestDto role);
 
-    Role findById(Long id);
+    List<Role> getAll();
+
+    List<RoleResponseDto> getAllRoleResponseDto();
+
+    Role getById(Long id);
+
+    RoleResponseDto getByIdRoleResponseDto(Long id);
 
     void delete(Long id);
 

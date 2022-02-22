@@ -7,7 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.ikupdev.library.dto.RestResponseDto;
-import ru.ikupdev.library.model.Role;
+import ru.ikupdev.library.dto.RoleRequestDto;
+import ru.ikupdev.library.dto.RoleResponseDto;
 import ru.ikupdev.library.service.IRoleService;
 
 import java.util.List;
@@ -28,21 +29,21 @@ public class RoleController {
 
     @ApiOperation(value = "Получить все роли", response = RestResponseDto.class)
     @GetMapping("/list")
-    public RestResponseDto<List<Role>> findAllRoles() {
-        List<Role> allRoles = roleService.findAll();
+    public RestResponseDto<List<RoleResponseDto>> findAllRoles() {
+        List<RoleResponseDto> allRoles = roleService.getAllRoleResponseDto();
         return new RestResponseDto<>(allRoles);
     }
 
-    @ApiOperation(value = "Получить роль по id", response = Role.class)
+    @ApiOperation(value = "Получить роль по id", response = RestResponseDto.class)
     @GetMapping("/{id}")
-    public Role findRoleById(@ApiParam(value = "id роли", required = true, example = "1") @PathVariable("id") Long id) {
-        return roleService.findById(id);
+    public RestResponseDto<RoleResponseDto> findRoleById(@ApiParam(value = "id роли", required = true, example = "1") @PathVariable("id") Long id) {
+        return new RestResponseDto<>(roleService.getByIdRoleResponseDto(id));
     }
 
-    @ApiOperation(value = "Добавить роль", response = Role.class)
+    @ApiOperation(value = "Добавить роль", response = RestResponseDto.class)
     @PostMapping
-    public Role addRole(@ApiParam(value = "Данные роли", required = true) @Validated @RequestBody Role role) {
-        return roleService.saveRole(role);
+    public RestResponseDto<RoleResponseDto> addRole(@ApiParam(value = "Данные роли", required = true) @Validated @RequestBody RoleRequestDto roleRequestDto) {
+        return new RestResponseDto<>(roleService.saveRoleDto(roleRequestDto));
     }
 
     @ApiOperation(value = "Удалить роль")
