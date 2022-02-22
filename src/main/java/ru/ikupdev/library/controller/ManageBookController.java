@@ -74,7 +74,7 @@ public class ManageBookController {
 
     @ApiOperation(value = "Удалить книгу из полки")
     @DeleteMapping("/book/{book-id}/delete")
-    public ResponseEntity<Object> deleteBook(@ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
+    public ResponseEntity deleteBook(@ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
                                              @ApiParam(value = "id книги", required = true, example = "1") @PathVariable("book-id") Long bookId) {
         bookshelfBookService.deleteFromBookshelf(bookshelfId, bookId);
         return ResponseEntity.ok().build();

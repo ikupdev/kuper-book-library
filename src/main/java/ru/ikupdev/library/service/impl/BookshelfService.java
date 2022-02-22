@@ -45,7 +45,7 @@ public class BookshelfService implements IBookshelfService {
     public RestResponseDto<Bookshelf> addNewBookshelf(Long userId, BookshelfRequestDto dto) {
         if (getBookshelfByNameOrElseNull(dto.getName()) != null)
             throw new ResourceConflictException(String.format(BUNDLE.getString("bookshelf.exist.name"), dto.getName()));
-        User user = userService.findById(userId);
+        User user = userService.getUserById(userId);
         Bookshelf bookshelf = Bookshelf.builder()
                 .name(dto.getName())
                 .description(dto.getDescription())
@@ -70,7 +70,7 @@ public class BookshelfService implements IBookshelfService {
 
     @Override
     public RestResponseDto<List<Bookshelf>> getBookshelfList(Long userId, MultiValueMap<String, String> parameters, @PageableDefault Pageable pageable) {
-        userService.findById(userId);
+        userService.getUserById(userId);
         parameters.add("userId", userId.toString());
         BookshelfFilter filter = BookshelfFilter.builder()
                 .name(parameters.getFirst("name"))
@@ -99,7 +99,7 @@ public class BookshelfService implements IBookshelfService {
 
     @Override
     public void deleteBookshelf(Long userId, Long bookshelfId) {
-        User user = userService.findById(userId);
+        User user = userService.getUserById(userId);
         Bookshelf bookshelf = findById(bookshelfId);
         user.removeBookshelf(bookshelf);
         userService.save(user);

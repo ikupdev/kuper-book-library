@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.ikupdev.library.dto.UserUpdateDto;
-import ru.ikupdev.library.model.UserView;
+import ru.ikupdev.library.dto.UserViewDto;
 import ru.ikupdev.library.service.IUserService;
 
 import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
@@ -23,8 +23,8 @@ public class UserController {
 
     @ApiOperation(value = "Обновить пользователя")
     @PatchMapping("/{user-id}")
-    public ResponseEntity<UserView> updateUser(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
-                                               @ApiParam(value = "Данные пользователя", required = true) @RequestBody UserUpdateDto userUpdateDto) {
+    public ResponseEntity<UserViewDto> updateUser(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
+                                                  @ApiParam(value = "Данные пользователя", required = true) @RequestBody UserUpdateDto userUpdateDto) {
         return ResponseEntity.ok(userService.update(userId, userUpdateDto));
     }
 

@@ -1,6 +1,5 @@
 package ru.ikupdev.library.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import ru.ikupdev.library.bean.type.Status;
@@ -37,7 +36,6 @@ public class User extends DatedEntity {
     @Email
     @Column(name = "email")
     private String email;
-    @JsonIgnore
     @NotBlank
     @Column(name = "hash_password")
     private String hashPassword;
@@ -54,7 +52,6 @@ public class User extends DatedEntity {
     @Enumerated(value = EnumType.STRING)
     @Column(name = "status")
     private Status status;
-    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Bookshelf> bookshelves = new ArrayList<>();
 

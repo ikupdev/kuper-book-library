@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.ikupdev.library.dto.JwtAuthDto;
 import ru.ikupdev.library.dto.UserRequestDto;
-import ru.ikupdev.library.model.UserView;
+import ru.ikupdev.library.dto.UserViewDto;
 import ru.ikupdev.library.service.ISignUpService;
 
 import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
@@ -30,9 +30,9 @@ public class SignUpController {
 
     @ApiOperation(value = "Регистрация пользователя", response = JwtAuthDto.class)
     @PostMapping("/user")
-    public ResponseEntity<UserView> signUp(@ApiParam(value = "Данные пользователя", required = true) @Validated @RequestBody UserRequestDto dto) {
-        UserView userView = signUpService.signUp(dto);
-        return ResponseEntity.ok(userView);
+    public ResponseEntity<UserViewDto> signUp(@ApiParam(value = "Данные пользователя", required = true) @Validated @RequestBody UserRequestDto dto) {
+        UserViewDto userViewDto = signUpService.signUp(dto);
+        return ResponseEntity.ok(userViewDto);
     }
 
 }

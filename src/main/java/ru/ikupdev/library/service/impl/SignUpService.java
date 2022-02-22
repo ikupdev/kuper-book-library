@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import ru.ikupdev.library.bean.type.Status;
 import ru.ikupdev.library.dto.UserRequestDto;
 import ru.ikupdev.library.model.User;
-import ru.ikupdev.library.model.UserView;
+import ru.ikupdev.library.dto.UserViewDto;
 import ru.ikupdev.library.service.ISignUpService;
 
 import java.util.Date;
@@ -28,7 +28,7 @@ public class SignUpService implements ISignUpService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public UserView signUp(UserRequestDto dto) {
+    public UserViewDto signUp(UserRequestDto dto) {
         if (userService.findByLoginOrElseNull(dto.getLogin()) != null)
             throw new IllegalArgumentException(String.format(BUNDLE.getString("signup.exist.login"), dto.getLogin()));
         if (userService.findByEmailOrElseNull(dto.getEmail()) != null)
@@ -45,8 +45,8 @@ public class SignUpService implements ISignUpService {
                 .status(Status.ACTIVE)
                 .build();
         user.addRole(roleService.findByRoleName("ROLE_USER"));
-        UserView userView = userService.saveNew(user);
-        log.info(BUNDLE.getString("signup.log.saved"), userView);
-        return new UserView(userView.getId(), userView.getLogin());
+        UserViewDto userViewDto = userService.saveNew(user);
+        log.info(BUNDLE.getString("signup.log.saved"), userViewDto);
+        return new UserViewDto(userViewDto.getId(), userViewDto.getLogin());
     }
 }
