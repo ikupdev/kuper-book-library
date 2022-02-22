@@ -27,7 +27,7 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(API_V1_PATH + "/manage/user/{user-id}")
-@Api(value = "Bookshelf controller", tags = {"6. Api управления книжными полками"})
+@Api(value = "Bookshelf controller", tags = {"7. Api управления книжными полками"})
 public class BookshelfController {
     private final IBookshelfService bookshelfService;
 
@@ -46,6 +46,13 @@ public class BookshelfController {
         return bookshelfService.getBookshelfList(userId, parameters, pageable);
     }
 
+    @ApiOperation(value = "Добавить новую книжную полку")
+    @PostMapping("/bookshelf/new")
+    public RestResponseDto<Bookshelf> addNewBookshelf(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
+                                                      @Validated @RequestBody BookshelfRequestDto bookshelfRequestDto) {
+        return bookshelfService.addNewBookshelf(userId, bookshelfRequestDto);
+    }
+
     @ApiOperation(value = "Получить книжную полку")
     @GetMapping("/bookshelf/{bookshelf-id}")
     public RestResponseDto<Bookshelf> getBookshelf(
@@ -53,11 +60,12 @@ public class BookshelfController {
         return bookshelfService.getBookshelf(bookshelfId);
     }
 
-    @ApiOperation(value = "Добавить новую книжную полку")
-    @PostMapping("/bookshelf/new")
-    public RestResponseDto<Bookshelf> addNewBookshelf(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
-                                                      @Validated @RequestBody BookshelfRequestDto bookshelfRequestDto) {
-        return bookshelfService.addNewBookshelf(userId, bookshelfRequestDto);
+    @ApiOperation(value = "Обновить книжную полку")
+    @PatchMapping("/bookshelf/{bookshelf-id}/update")
+    public RestResponseDto<Bookshelf> updateBookshelf(@ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
+                                                      @Validated @RequestBody BookshelfUpdateDto bookshelfUpdateDto) {
+        Bookshelf bookshelf = bookshelfService.updateBookshelf(bookshelfId, bookshelfUpdateDto);
+        return new RestResponseDto<>(bookshelf);
     }
 
     @ApiOperation(value = "Удалить книжную полку")
@@ -66,14 +74,6 @@ public class BookshelfController {
                                           @ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId) {
         bookshelfService.deleteBookshelf(userId, bookshelfId);
         return ResponseEntity.ok().build();
-    }
-
-    @ApiOperation(value = "Обновить книжную полку")
-    @PatchMapping("/bookshelf/{bookshelf-id}/update")
-    public RestResponseDto<Bookshelf> updateBookshelf(@ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
-                                          @Validated @RequestBody BookshelfUpdateDto bookshelfUpdateDto) {
-        Bookshelf bookshelf = bookshelfService.updateBookshelf(bookshelfId, bookshelfUpdateDto);
-        return new RestResponseDto<>(bookshelf);
     }
 
 }

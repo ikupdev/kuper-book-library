@@ -24,7 +24,7 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 @RestController
 @AllArgsConstructor
 @RequestMapping(API_V1_PATH + "/gbook")
-@Api(value = "Login controller", tags = {"5. Api по книгам google"})
+@Api(value = "Login controller", tags = {"6. Api по книгам google"})
 public class GBookController {
     private final IGBookService gBookService;
 

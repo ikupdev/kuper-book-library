@@ -1,4 +1,4 @@
-package ru.ikupdev.library.controller.rest;
+package ru.ikupdev.library.controller;
 
 import org.apache.commons.io.IOUtils;
 import org.junit.jupiter.api.Test;

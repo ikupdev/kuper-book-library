@@ -1,4 +1,4 @@
-package ru.ikupdev.library.controller.rest;
+package ru.ikupdev.library.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -7,7 +7,6 @@ import ru.ikupdev.library.AbstractIntegrationTest;
 
 import java.util.ArrayList;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.isA;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;

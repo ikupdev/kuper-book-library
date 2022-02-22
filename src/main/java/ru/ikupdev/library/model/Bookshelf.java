@@ -44,6 +44,7 @@ public class Bookshelf extends DatedEntity {
             joinColumns = {@JoinColumn(name = "bookshelf_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")}
     )
+    @JsonIgnore
     private Set<Book> books = new HashSet<>();
 
     public void addBook(Book book) {

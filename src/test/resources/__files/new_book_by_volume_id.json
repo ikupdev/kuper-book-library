@@ -1,0 +1,123 @@
+{
+  "kind": "books#volume",
+  "id": "DDDDDDDDDDDD",
+  "etag": "XQ3OKZTjDE0",
+  "selfLink": "https://www.googleapis.com/books/v1/volumes/mF2GBwAAQBAJ",
+  "volumeInfo": {
+    "title": "Very Good Lives",
+    "subtitle": "The Fringe Benefits of Failure and the Importance of Imagination",
+    "authors": [
+      "J.K. Rowling"
+    ],
+    "publisher": "Hachette UK",
+    "publishedDate": "2015-04-14",
+    "description": "<p>In 2008, J.K. Rowling delivered a deeply affecting commencement speech at Harvard University. Now published for the first time in book form, <i>Very Good Lives</i> offers J.K. Rowling's words of wisdom for anyone at a turning point in life, asking the profound and provocative questions: How can we embrace failure? And how can we use our imagination to better both ourselves and others?<br><br><b>Drawing from stories of her own post-graduate years, the world-famous author addresses some of life's most important issues with acuity and emotional force.</b></p>",
+    "industryIdentifiers": [
+      {
+        "type": "ISBN_10",
+        "identifier": "0751562238"
+      },
+      {
+        "type": "ISBN_13",
+        "identifier": "9780751562231"
+      }
+    ],
+    "readingModes": {
+      "text": true,
+      "image": true
+    },
+    "pageCount": 80,
+    "printedPageCount": 81,
+    "printType": "BOOK",
+    "categories": [
+      "Self-Help / Motivational & Inspirational",
+      "Self-Help / Creativity",
+      "Literary Collections / Speeches",
+      "Self-Help / Personal Growth / Success",
+      "Literary Collections / Women Authors",
+      "Biography & Autobiography / Rich & Famous",
+      "Education / Counseling / Career Development",
+      "Self-Help / Affirmations",
+      "Biography & Autobiography / Literary Figures",
+      "Self-Help / Personal Growth / Self-Esteem",
+      "Self-Help / Personal Growth / Happiness",
+      "Literary Collections / Essays",
+      "Biography & Autobiography / Personal Memoirs",
+      "Self-Help / General"
+    ],
+    "averageRating": 4,
+    "ratingsCount": 16,
+    "maturityRating": "NOT_MATURE",
+    "allowAnonLogging": true,
+    "contentVersion": "1.5.5.0.preview.3",
+    "panelizationSummary": {
+      "containsEpubBubbles": false,
+      "containsImageBubbles": false
+    },
+    "imageLinks": {
+      "smallThumbnail": "http://books.google.com/books/publisher/content?id=mF2GBwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&imgtk=AFLRE72hFEiL40ymhun2_bdNNiZdoDjs6VEGHPWbuZkIkDMBU4p7N5evVGVWXx8RPYSoBoEOU0uYsw2uJ7xISSgcTQJZqfvRzkFrwtRmnEmlIu47z5FQPDbXkk6NJk4ED3V-QU4ROVww&source=gbs_api",
+      "thumbnail": "http://books.google.com/books/publisher/content?id=mF2GBwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&imgtk=AFLRE73MhWOZo4Fpnkiabv5QysJgC9AsV5irsvBYgTntcOoa9tdNHf9uiVOpAouLDLpJ08Qn2TRVemykX20OlNLa2fQhRDe8gYtSFwFDcLWbcqvmuC_1f__lz7GNjqXzNLxJvErymJl7&source=gbs_api",
+      "small": "http://books.google.com/books/publisher/content?id=mF2GBwAAQBAJ&printsec=frontcover&img=1&zoom=2&edge=curl&imgtk=AFLRE71MRgwQ8lZ2tWH_FJYhQ9rXRk1DKU3kGL7Uw8edPpVzKLxpXpaFqvtjGnhWl9EVDrG2vclJh4vncKx8EwyXmur5_ZHDXxW4yB0joxcBCmCM6bZHsC2Qpb4rtCtSAf6pki_6qMmZ&source=gbs_api",
+      "medium": "http://books.google.com/books/publisher/content?id=mF2GBwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&imgtk=AFLRE71Rswo8K6I-WqRRHVWYYUvCs_9xdR4aUu96mgdOw448_xI5atwv2TiTm5I0hs0twuIw-GIbZq4G2cGqGknLIXF6SbI2aZgu93XJj8mwXQt0ACkb7RaFrJoffUgeqs1WhYlgkUGR&source=gbs_api",
+      "large": "http://books.google.com/books/publisher/content?id=mF2GBwAAQBAJ&printsec=frontcover&img=1&zoom=4&edge=curl&imgtk=AFLRE70M3vlBP7sgtRQGOhGec-zqK4JP13rkQ6bG7a_El3F-Oggafcq6opfd-Rvfs46sFt__m0UNfx99t98uAKKrX6q_3TJz6oeGG9NcQ_KPZamZyO4XObSu9iocYvOm0gJIger_SIOO&source=gbs_api",
+      "extraLarge": "http://books.google.com/books/publisher/content?id=mF2GBwAAQBAJ&printsec=frontcover&img=1&zoom=6&edge=curl&imgtk=AFLRE72Byr3tM2N9urY62mq80B3Z7asLzp5onYZiBHjZVHZO-TTzoOgxZYRkX5CAOYHqk6898hV_DT1CZyUEIZHjixmK9rxeyb2RgG0jt4ZuOqqNOrQ6oao67E_n4051D5QOjH7ousKz&source=gbs_api"
+    },
+    "language": "en",
+    "previewLink": "http://books.google.ru/books?id=mF2GBwAAQBAJ&hl=&source=gbs_api",
+    "infoLink": "https://play.google.com/store/books/details?id=mF2GBwAAQBAJ&source=gbs_api",
+    "canonicalVolumeLink": "https://play.google.com/store/books/details?id=mF2GBwAAQBAJ"
+  },
+  "layerInfo": {
+    "layers": [
+      {
+        "layerId": "geo",
+        "volumeAnnotationsVersion": "5"
+      }
+    ]
+  },
+  "saleInfo": {
+    "country": "RU",
+    "saleability": "FOR_SALE",
+    "isEbook": true,
+    "listPrice": {
+      "amount": 1207.17,
+      "currencyCode": "RUB"
+    },
+    "retailPrice": {
+      "amount": 1207.17,
+      "currencyCode": "RUB"
+    },
+    "buyLink": "https://play.google.com/store/books/details?id=mF2GBwAAQBAJ&rdid=book-mF2GBwAAQBAJ&rdot=1&source=gbs_api",
+    "offers": [
+      {
+        "finskyOfferType": 1,
+        "listPrice": {
+          "amountInMicros": 1207170000,
+          "currencyCode": "RUB"
+        },
+        "retailPrice": {
+          "amountInMicros": 1207170000,
+          "currencyCode": "RUB"
+        }
+      }
+    ]
+  },
+  "accessInfo": {
+    "country": "RU",
+    "viewability": "PARTIAL",
+    "embeddable": true,
+    "publicDomain": false,
+    "textToSpeechPermission": "ALLOWED",
+    "epub": {
+      "isAvailable": true,
+      "acsTokenLink": "http://books.google.ru/books/download/Very_Good_Lives-sample-epub.acsm?id=mF2GBwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+    },
+    "pdf": {
+      "isAvailable": true,
+      "acsTokenLink": "http://books.google.ru/books/download/Very_Good_Lives-sample-pdf.acsm?id=mF2GBwAAQBAJ&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+    },
+    "webReaderLink": "http://play.google.com/books/reader?id=mF2GBwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+    "accessViewStatus": "SAMPLE",
+    "quoteSharingAllowed": false
+  }
+}

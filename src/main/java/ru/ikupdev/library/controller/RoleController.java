@@ -22,7 +22,7 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 @RestController
 @AllArgsConstructor
 @RequestMapping(API_V1_PATH + ADMIN_PATH + "/role")
-@Api(value = "Role controller", tags = {"4. Api ролей пользователей"})
+@Api(value = "Role controller", tags = {"5. Api ролей пользователей"})
 public class RoleController {
     private final IRoleService roleService;
 

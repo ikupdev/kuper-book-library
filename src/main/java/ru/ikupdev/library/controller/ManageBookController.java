@@ -26,17 +26,9 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(API_V1_PATH + "/manage/user/{user-id}/bookshelf/{bookshelf-id}")
-@Api(value = "Bookshelf-book controller", tags = {"7. Api по книгам в рамках книжной полки"})
+@Api(value = "Bookshelf-book controller", tags = {"8. Api управления книгами"})
 public class ManageBookController {
     private final IBookshelfBookService bookshelfBookService;
-
-    @ApiOperation(value = "Добавить книгу по volumeId")
-    @PostMapping(value = "/book/{volume-id}/new")
-    public RestResponseDto<Book> addBookByVolumeId(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
-                                                   @ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
-                                                   @ApiParam(value = "volume id книги", required = true, example = "mF2GBwAAQBAJ") @PathVariable("volume-id") String volumeId) {
-        return bookshelfBookService.addBookToBookshelf(userId, bookshelfId, volumeId);
-    }
 
     @ApiOperation(value = "Получить список книг")
     @GetMapping(value = "/book/list")
@@ -49,7 +41,7 @@ public class ManageBookController {
             @ApiImplicitParam(name = "size", value = "Количество записей на странице", dataTypeClass = String.class, paramType = "query", defaultValue = "10"),
             @ApiImplicitParam(name = "sort", value = "Сортировка", dataTypeClass = String.class, paramType = "query", defaultValue = "title,ASC")
     })
-    public RestResponseDto<List<Book>> getBooks(
+    public RestResponseDto<List<Book>> getBookList(
             @ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
             @ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
             @ApiIgnore @RequestParam MultiValueMap<String, String> parameters,
@@ -59,24 +51,32 @@ public class ManageBookController {
         return bookshelfBookService.findBooks(parameters, pageable);
     }
 
+    @ApiOperation(value = "Добавить книгу по volumeId")
+    @PostMapping(value = "/book/{volume-id}/new", consumes = "*/*")
+    public RestResponseDto<Book> addBookByVolumeId(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
+                                                   @ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
+                                                   @ApiParam(value = "volume id книги", required = true, example = "mF2GBwAAQBAJ") @PathVariable("volume-id") String volumeId) {
+        return bookshelfBookService.addBookToBookshelf(userId, bookshelfId, volumeId);
+    }
+
     @ApiOperation(value = "Получить книгу по id")
     @GetMapping("/book/{book-id}")
-    public RestResponseDto<Book> getBookById(@ApiParam(value = "id книги", required = true, example = "1") @PathVariable("book-id") Long bookId) {
+    public RestResponseDto<Book> getBook(@ApiParam(value = "id книги", required = true, example = "1") @PathVariable("book-id") Long bookId) {
         return bookshelfBookService.getBookById(bookId);
     }
 
     @ApiOperation(value = "Обновить книгу")
     @PatchMapping("/book/{book-id}/update")
-    public ResponseEntity<Book> updateBook(@ApiParam(value = "id книги", required = true, example = "1") @PathVariable("book-id") Long bookId,
+    public RestResponseDto<Book> updateBook(@ApiParam(value = "id книги", required = true, example = "1") @PathVariable("book-id") Long bookId,
                                            @ApiParam(value = "Данные книги", required = true) @Validated @RequestBody BookUpdateDto bookUpdateDto) {
-        return ResponseEntity.ok(bookshelfBookService.update(bookId, bookUpdateDto));
+        return bookshelfBookService.update(bookId, bookUpdateDto);
     }
 
     @ApiOperation(value = "Удалить книгу из полки")
     @DeleteMapping("/book/{book-id}/delete")
     public ResponseEntity<Object> deleteBook(@ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
                                              @ApiParam(value = "id книги", required = true, example = "1") @PathVariable("book-id") Long bookId) {
-        bookshelfBookService.delete(bookshelfId, bookId);
+        bookshelfBookService.deleteFromBookshelf(bookshelfId, bookId);
         return ResponseEntity.ok().build();
     }
 

@@ -51,15 +51,15 @@ public class BookshelfBookService implements IBookshelfBookService {
     }
 
     @Override
-    public void delete(Long bookshelfId, Long id) {
-        Book book = bookService.findById(id);
+    public void deleteFromBookshelf(Long bookshelfId, Long bookId) {
+        Book book = bookService.findById(bookId);
         Bookshelf bookshelf = bookshelfService.getBookshelf(bookshelfId).getData();
-        bookshelf.getBooks().remove(book);
+        bookshelf.removeBook(book);
         bookshelfService.saveBookshelf(bookshelf);
     }
 
     @Override
-    public Book update(Long bookId, BookUpdateDto dto) {
+    public RestResponseDto<Book> update(Long bookId, BookUpdateDto dto) {
         Book bookForUpdate = getBookOrElseThrow(bookId);
         if (dto.getVolumeId() != null) bookForUpdate.setVolumeId(dto.getVolumeId());
         if (dto.getTitle() != null) bookForUpdate.setTitle(dto.getTitle());
@@ -78,7 +78,7 @@ public class BookshelfBookService implements IBookshelfBookService {
         if (dto.getWebReaderLink() != null) bookForUpdate.setWebReaderLink(dto.getWebReaderLink());
         if (dto.getBuyLink() != null) bookForUpdate.setBuyLink(dto.getBuyLink());
         bookForUpdate.setUpdated(new Date());
-        return bookService.saveBook(bookForUpdate);
+        return new RestResponseDto<>(bookService.saveBook(bookForUpdate));
     }
 
     private Book getBookOrElseThrow(Long id) {

@@ -20,7 +20,7 @@ public interface IBookshelfBookService {
     RestResponseDto<List<Book>> findBooks(MultiValueMap<String, String> parameters,
                                           Pageable pageable);
 
-    void delete(Long bookshelfId, Long id);
+    void deleteFromBookshelf(Long bookshelfId, Long id);
 
-    Book update(Long bookId, BookUpdateDto bookUpdate);
+    RestResponseDto<Book>  update(Long bookId, BookUpdateDto bookUpdate);
 }

@@ -46,6 +46,12 @@ public class WireMockUtil {
                     .willReturn(aResponse()
                             .withHeader("Content-Type", "application/json")
                             .withBodyFile("gbook_volumes_by_inauthor_rowling.json")));
+
+            AbstractIntegrationTest.wireMock.stubFor(
+                    get(urlEqualTo("/volumes/DDDDDDDDDDDD"))
+                    .willReturn(aResponse()
+                            .withHeader("Content-Type", "application/json")
+                            .withBodyFile("new_book_by_volume_id.json")));
     }
 
 }
