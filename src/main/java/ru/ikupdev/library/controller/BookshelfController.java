@@ -10,9 +10,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ru.ikupdev.library.bean.type.Status;
 import ru.ikupdev.library.dto.BookshelfRequestDto;
+import ru.ikupdev.library.dto.BookshelfResponseDto;
 import ru.ikupdev.library.dto.BookshelfUpdateDto;
 import ru.ikupdev.library.dto.RestResponseDto;
-import ru.ikupdev.library.model.Bookshelf;
 import ru.ikupdev.library.service.IBookshelfService;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -31,7 +31,7 @@ import static ru.ikupdev.library.config.LibraryConst.API_V1_PATH;
 public class BookshelfController {
     private final IBookshelfService bookshelfService;
 
-    @ApiOperation(value = "Получить список книжных полок пользователя")
+    @ApiOperation(value = "Получить список книжных полок пользователя", response = RestResponseDto.class)
     @GetMapping("/bookshelf/list")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "name", value = "Название книжной полки", dataTypeClass = String.class, paramType = "query", defaultValue = "Название"),
@@ -39,33 +39,32 @@ public class BookshelfController {
             @ApiImplicitParam(name = "size", value = "Количество записей на странице", dataTypeClass = String.class, paramType = "query", defaultValue = "10"),
             @ApiImplicitParam(name = "sort", value = "Сортировка", dataTypeClass = String.class, paramType = "query", defaultValue = "name,ASC")
     })
-    public RestResponseDto<List<Bookshelf>> getBookshelfList(
+    public RestResponseDto<List<BookshelfResponseDto>> getBookshelfList(
             @ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
             @ApiIgnore @RequestParam MultiValueMap<String, String> parameters,
             @ApiIgnore @PageableDefault Pageable pageable) {
         return bookshelfService.getBookshelfList(userId, parameters, pageable);
     }
 
-    @ApiOperation(value = "Добавить новую книжную полку")
+    @ApiOperation(value = "Добавить новую книжную полку", response = RestResponseDto.class)
     @PostMapping("/bookshelf/new")
-    public RestResponseDto<Bookshelf> addNewBookshelf(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
+    public RestResponseDto<BookshelfResponseDto> addNewBookshelf(@ApiParam(value = "id пользователя", required = true, example = "1") @PathVariable("user-id") Long userId,
                                                       @Validated @RequestBody BookshelfRequestDto bookshelfRequestDto) {
         return bookshelfService.addNewBookshelf(userId, bookshelfRequestDto);
     }
 
-    @ApiOperation(value = "Получить книжную полку")
+    @ApiOperation(value = "Получить книжную полку", response = RestResponseDto.class)
     @GetMapping("/bookshelf/{bookshelf-id}")
-    public RestResponseDto<Bookshelf> getBookshelf(
+    public RestResponseDto<BookshelfResponseDto> getBookshelf(
             @ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId) {
-        return bookshelfService.getBookshelf(bookshelfId);
+        return bookshelfService.getByIdBookshelfResponseDto(bookshelfId);
     }
 
-    @ApiOperation(value = "Обновить книжную полку")
+    @ApiOperation(value = "Обновить книжную полку", response = RestResponseDto.class)
     @PatchMapping("/bookshelf/{bookshelf-id}/update")
-    public RestResponseDto<Bookshelf> updateBookshelf(@ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
+    public RestResponseDto<BookshelfResponseDto> updateBookshelf(@ApiParam(value = "id книжной полки", required = true, example = "1") @PathVariable("bookshelf-id") Long bookshelfId,
                                                       @Validated @RequestBody BookshelfUpdateDto bookshelfUpdateDto) {
-        Bookshelf bookshelf = bookshelfService.updateBookshelf(bookshelfId, bookshelfUpdateDto);
-        return new RestResponseDto<>(bookshelf);
+        return bookshelfService.updateBookshelf(bookshelfId, bookshelfUpdateDto);
     }
 
     @ApiOperation(value = "Удалить книжную полку")

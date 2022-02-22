@@ -2,6 +2,7 @@ package ru.ikupdev.library.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Size;
  */
 @Data
 @ToString
+@NoArgsConstructor
 public class BookshelfRequestDto {
     @ApiModelProperty(notes = "Наименование книжной полки", required = true)
     @NotBlank

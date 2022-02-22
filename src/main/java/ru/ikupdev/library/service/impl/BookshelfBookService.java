@@ -29,7 +29,7 @@ public class BookshelfBookService implements IBookshelfBookService {
 
     @Override
     public RestResponseDto<Book> addBookToBookshelf(Long userId, Long bookshelfId, String volumeId) {
-        Bookshelf bookshelf = bookshelfService.getBookshelf(bookshelfId).getData();
+        Bookshelf bookshelf = bookshelfService.getById(bookshelfId);
         Book existBook = bookService.findByVolumeIdOrElseNull(volumeId);
         Book book = existBook != null ? existBook : gBookService.getBookByVolumeId(volumeId).getData();
         if (!bookshelf.getBooks().contains(book)) {
@@ -53,7 +53,7 @@ public class BookshelfBookService implements IBookshelfBookService {
     @Override
     public void deleteFromBookshelf(Long bookshelfId, Long bookId) {
         Book book = bookService.findById(bookId);
-        Bookshelf bookshelf = bookshelfService.getBookshelf(bookshelfId).getData();
+        Bookshelf bookshelf = bookshelfService.getById(bookshelfId);
         bookshelf.removeBook(book);
         bookshelfService.saveBookshelf(bookshelf);
     }
