@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import ru.ikupdev.library.repository.BookRepository;
 import ru.ikupdev.library.repository.BookshelfRepository;
 import ru.ikupdev.library.repository.UserRepository;
+import ru.ikupdev.library.service.impl.BookService;
 import ru.ikupdev.library.service.impl.UserService;
 
 /**
@@ -23,6 +24,8 @@ public class TestComponents {
     protected MockMvc mockMvc;
     @Autowired
     private UserService userService;
+    @Autowired
+    private BookService bookService;
     @Autowired
     private UserRepository userRepository;
     @Autowired
