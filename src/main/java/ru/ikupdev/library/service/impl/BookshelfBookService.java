@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
+import ru.ikupdev.library.dto.BookResponseDto;
 import ru.ikupdev.library.dto.BookUpdateDto;
 import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.model.Book;
@@ -12,6 +13,7 @@ import ru.ikupdev.library.service.IBookService;
 import ru.ikupdev.library.service.IBookshelfBookService;
 import ru.ikupdev.library.service.IBookshelfService;
 import ru.ikupdev.library.service.IGBookService;
+import ru.ikupdev.library.util.MapperUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -26,9 +28,10 @@ public class BookshelfBookService implements IBookshelfBookService {
     private final IGBookService gBookService;
     private final IBookService bookService;
     private final IBookshelfService bookshelfService;
+    private final MapperUtil mapperUtil;
 
     @Override
-    public RestResponseDto<Book> addBookToBookshelf(Long userId, Long bookshelfId, String volumeId) {
+    public RestResponseDto<BookResponseDto> addBookToBookshelf(Long userId, Long bookshelfId, String volumeId) {
         Bookshelf bookshelf = bookshelfService.getById(bookshelfId);
         Book existBook = bookService.findByVolumeIdOrElseNull(volumeId);
         Book book = existBook != null ? existBook : gBookService.getBookByVolumeId(volumeId).getData();
@@ -36,18 +39,18 @@ public class BookshelfBookService implements IBookshelfBookService {
             bookshelf.addBook(book);
             bookshelfService.saveBookshelf(bookshelf);
         }
-        return new RestResponseDto<>(book);
+        return new RestResponseDto<>(mapperUtil.convertBookToBookResponseDto(book));
     }
 
     @Override
-    public RestResponseDto<Book> getBookById(Long bookId) {
-        return new RestResponseDto<>(getBookOrElseThrow(bookId));
+    public RestResponseDto<BookResponseDto> getBookById(Long bookId) {
+        return new RestResponseDto<>(mapperUtil.convertBookToBookResponseDto(getBookOrElseThrow(bookId)));
     }
 
     @Override
-    public RestResponseDto<List<Book>> findBooks(MultiValueMap<String, String> parameters,
-                                                 Pageable pageable) {
-        return bookService.findBooks(parameters, pageable);
+    public RestResponseDto<List<BookResponseDto>> getBookResponseDtoList(MultiValueMap<String, String> parameters,
+                                                                         Pageable pageable) {
+        return bookService.getBookResponseDtoList(parameters, pageable);
     }
 
     @Override
@@ -59,7 +62,7 @@ public class BookshelfBookService implements IBookshelfBookService {
     }
 
     @Override
-    public RestResponseDto<Book> update(Long bookId, BookUpdateDto dto) {
+    public RestResponseDto<BookResponseDto> update(Long bookId, BookUpdateDto dto) {
         Book bookForUpdate = getBookOrElseThrow(bookId);
         if (dto.getVolumeId() != null) bookForUpdate.setVolumeId(dto.getVolumeId());
         if (dto.getTitle() != null) bookForUpdate.setTitle(dto.getTitle());
@@ -78,7 +81,7 @@ public class BookshelfBookService implements IBookshelfBookService {
         if (dto.getWebReaderLink() != null) bookForUpdate.setWebReaderLink(dto.getWebReaderLink());
         if (dto.getBuyLink() != null) bookForUpdate.setBuyLink(dto.getBuyLink());
         bookForUpdate.setUpdated(new Date());
-        return new RestResponseDto<>(bookService.saveBook(bookForUpdate));
+        return new RestResponseDto<>(mapperUtil.convertBookToBookResponseDto(bookService.saveBook(bookForUpdate)));
     }
 
     private Book getBookOrElseThrow(Long id) {

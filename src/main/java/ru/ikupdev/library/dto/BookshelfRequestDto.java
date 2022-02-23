@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
  * @version 16.02.2022
  */
 @Data
-@ToString
 @NoArgsConstructor
 public class BookshelfRequestDto {
     @ApiModelProperty(notes = "Наименование книжной полки", required = true)

@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import ru.ikupdev.library.dto.*;
+import ru.ikupdev.library.model.Book;
 import ru.ikupdev.library.model.Bookshelf;
 import ru.ikupdev.library.model.Role;
 import ru.ikupdev.library.model.User;
@@ -54,6 +55,10 @@ public class MapperUtil {
 
     public BookshelfResponseDto convertBookshelfToBookshelfResponseDto(Bookshelf bookshelf) {
         return modelMapper.map(bookshelf, BookshelfResponseDto.class);
+    }
+
+    public BookResponseDto convertBookToBookResponseDto(Book book) {
+        return modelMapper.map(book, BookResponseDto.class);
     }
 
 }

@@ -8,8 +8,7 @@ import java.util.Date;
  * @author Ilya V. Kupriyanov
  * @version 22.02.2022
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 public class BookshelfResponseDto {
     private Long id;

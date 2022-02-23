@@ -2,6 +2,7 @@ package ru.ikupdev.library.service;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.MultiValueMap;
+import ru.ikupdev.library.dto.BookResponseDto;
 import ru.ikupdev.library.dto.BookUpdateDto;
 import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.model.Book;
@@ -19,7 +20,7 @@ public interface IBookService {
 
     Book saveBook(Book book);
 
-    RestResponseDto<List<Book>> findBooks(MultiValueMap<String, String> parameters, Pageable pageable);
+    RestResponseDto<List<BookResponseDto>> getBookResponseDtoList(MultiValueMap<String, String> parameters, Pageable pageable);
 
     Book findById(Long id);
 

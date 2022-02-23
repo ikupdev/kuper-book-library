@@ -1,10 +1,7 @@
 package ru.ikupdev.library.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import ru.ikupdev.library.bean.type.Status;
 
 import java.util.*;
@@ -13,8 +10,7 @@ import java.util.*;
  * @author Ilya V. Kupriyanov
  * @version 22.02.2022
  */
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserResponseDto {

@@ -3,11 +3,13 @@ package ru.ikupdev.library.service.impl;
 import com.querydsl.core.types.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
+import ru.ikupdev.library.dto.BookResponseDto;
 import ru.ikupdev.library.dto.BookUpdateDto;
 import ru.ikupdev.library.dto.RestResponseDto;
 import ru.ikupdev.library.dto.filter.BookFilter;
@@ -15,7 +17,7 @@ import ru.ikupdev.library.exception.NotFoundException;
 import ru.ikupdev.library.model.Book;
 import ru.ikupdev.library.repository.BookRepository;
 import ru.ikupdev.library.service.IBookService;
-import ru.ikupdev.library.service.IBookshelfService;
+import ru.ikupdev.library.util.MapperUtil;
 import ru.ikupdev.library.util.OrderUtil;
 import ru.ikupdev.library.util.QPredicates;
 
@@ -32,6 +34,7 @@ import static ru.ikupdev.library.model.QBook.book;
 public class BookService implements IBookService {
     private final ResourceBundle BUNDLE = ResourceBundle.getBundle(BookService.class.getName());
     private final BookRepository bookRepository;
+    private final MapperUtil mapperUtil;
 
     @Override
     public Book findByVolumeIdOrElseNull(String volumeId) {
@@ -49,8 +52,7 @@ public class BookService implements IBookService {
         return bookRepository.save(book);
     }
 
-    @Override
-    public RestResponseDto<List<Book>> findBooks(MultiValueMap<String, String> parameters, @PageableDefault Pageable pageable) {
+    public RestResponseDto<List<BookResponseDto>> getBookResponseDtoList(MultiValueMap<String, String> parameters, @PageableDefault Pageable pageable) {
         BookFilter filter = BookFilter.builder()
                 .title(parameters.getFirst("title"))
                 .subtitle(parameters.getFirst("subtitle"))
@@ -72,8 +74,10 @@ public class BookService implements IBookService {
                 .add(filter.getUserId(), book.bookshelfs.any().user.id::eq)
                 .buildAnd();
         QPageRequest qPageRequest = OrderUtil.booksOrder(pageable);
-        Page<Book> page = predicate == null ? bookRepository.findAll(qPageRequest) : bookRepository.findAll(predicate, qPageRequest);
-        return RestResponseDto.fromPage(page);
+        Page<Book> bookPage = predicate == null ? bookRepository.findAll(qPageRequest) : bookRepository.findAll(predicate, qPageRequest);
+        List<BookResponseDto> bookResponseDtos = MapperUtil.convertList(bookPage.getContent(), mapperUtil::convertBookToBookResponseDto);
+        Page<BookResponseDto> bookResponseDtoPage = new PageImpl<>(bookResponseDtos, bookPage.getPageable(), bookPage.getTotalElements());
+        return RestResponseDto.fromPage(bookResponseDtoPage);
     }
 
     @Override

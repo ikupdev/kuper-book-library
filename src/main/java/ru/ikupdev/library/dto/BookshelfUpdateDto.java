@@ -2,7 +2,7 @@ package ru.ikupdev.library.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import lombok.ToString;
+import lombok.NoArgsConstructor;
 import javax.validation.constraints.Size;
 
 /**
@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
  * @version 16.02.2022
  */
 @Data
-@ToString
+@NoArgsConstructor
 public class BookshelfUpdateDto {
     @ApiModelProperty(notes = "Наименование книжной полки")
     @Size(max = 512)
