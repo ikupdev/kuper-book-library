@@ -44,7 +44,7 @@ public class BookService implements IBookService {
     @Override
     public Book findByVolumeIdOrElseThrow(String volumeId) {
         return bookRepository.findByVolumeId(volumeId).orElseThrow(() ->
-                new NotFoundException(String.format(BUNDLE.getString("book.not.found"), volumeId)));
+                new NotFoundException(String.format(BUNDLE.getString("book.by.volume.id.not.found"), volumeId)));
     }
 
     @Override

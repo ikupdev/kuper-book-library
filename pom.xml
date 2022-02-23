@@ -18,16 +18,15 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <java.version>11</java.version>
         <testcontainers.version>1.16.2</testcontainers.version>
         <swagger.springfox.version>2.9.2</swagger.springfox.version>
-        <port.commons.version>1.72</port.commons.version>
         <jsowebtoken.version>0.8.0</jsowebtoken.version>
         <modelmapper.version>2.3.9</modelmapper.version>
         <spring.cloud.version>2.2.5.RELEASE</spring.cloud.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.release.plugin>2.5.3</maven.release.plugin>
+        <com.google.code.gson.version>2.7</com.google.code.gson.version>
+        <commons.lang.version>2.6</commons.lang.version>
+        <javax.servlet.api.version>3.0.1</javax.servlet.api.version>
     </properties>
     <dependencies>
         <dependency>
@@ -121,7 +120,7 @@
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
-            <version>2.7</version>
+            <version>${com.google.code.gson.version}</version>
         </dependency>
         <dependency>
             <groupId>org.modelmapper</groupId>
@@ -147,12 +146,12 @@
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
+            <version>${commons.lang.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <version>${javax.servlet.api.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -167,6 +166,17 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <profiles>
+        <profile>
+            <id>alwaysActiveProfile</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <plugins>
@@ -184,7 +194,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>${project.artifactId}</finalName>
+                    <finalName>${project.artifactId}-${project.version}</finalName>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -238,7 +248,7 @@
                 <version>${maven.release.plugin}</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
-                    <tagNameFormat>service-library-@{project.version}</tagNameFormat>
+                    <tagNameFormat>${project.artifactId}-@{project.version}</tagNameFormat>
                     <checkModificationExcludes>
                         <checkModificationExclude>**/*.iml</checkModificationExclude>
                     </checkModificationExcludes>

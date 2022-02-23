@@ -1,4 +1,4 @@
-package ru.ikupdev.library.initializer;
+package ru.ikupdev.library;
 
 import lombok.experimental.UtilityClass;
 import org.springframework.boot.test.util.TestPropertyValues;

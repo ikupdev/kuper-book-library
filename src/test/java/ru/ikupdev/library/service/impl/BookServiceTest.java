@@ -11,7 +11,7 @@ import ru.ikupdev.library.AbstractIntegrationTest;
 class BookServiceTest extends AbstractIntegrationTest {
 
     @Test
-    void whenDeleteOrphanBooks() {
+    void testDeleteOrphanBooks() {
         Assert.assertEquals(1, components.getBookRepository().findOrphanBookIds().size());
         components.getBookService().deleteOrphanBooks();
         Assert.assertEquals(0, components.getBookRepository().findOrphanBookIds().size());
