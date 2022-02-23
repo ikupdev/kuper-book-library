@@ -14,5 +14,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends PagingAndSortingRepository<User, Long>, QuerydslPredicateExecutor<User> {
     Optional<User> findByLogin(String name);
+
     Optional<User> findByEmail(String email);
 }

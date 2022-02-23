@@ -1,7 +1,5 @@
 package ru.ikupdev.library.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -16,7 +14,6 @@ import java.util.Set;
  * @author Ilya V. Kupriyanov
  * @version 11.12.2021
  */
-@JsonInclude(JsonInclude.Include.NON_NULL)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -88,7 +85,6 @@ public class Book extends DatedEntity {
     @Size(max = 4096)
     @Column(name = "buy_link")
     private String buyLink;
-    @JsonIgnore
     @ToString.Exclude
     @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
     private Set<Bookshelf> bookshelfs = new HashSet<>();

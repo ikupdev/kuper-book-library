@@ -1,6 +1,5 @@
 package ru.ikupdev.library.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -32,7 +31,6 @@ public class Bookshelf extends DatedEntity {
     @Size(max = 2048)
     @Column(name = "description")
     private String description;
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
     @ManyToMany(cascade = {
@@ -44,7 +42,6 @@ public class Bookshelf extends DatedEntity {
             joinColumns = {@JoinColumn(name = "bookshelf_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "book_id", referencedColumnName = "id")}
     )
-    @JsonIgnore
     private Set<Book> books = new HashSet<>();
 
     public void addBook(Book book) {
