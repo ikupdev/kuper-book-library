@@ -34,7 +34,7 @@ docker-compose up -d
 ```
 После запуска контейнеров приложения REST API доступен по адресу: http://localhost:8086/service-library/
 
-Документация Swagger доступна по адресу: http://localhost:8086/service-library/swagger-ui.html#:
+Документация Swagger доступна по адресу: http://localhost:8086/service-library/swagger-ui.html#
 
 Адрес базы данных: jdbc:postgresql://localhost:5435/library
 
