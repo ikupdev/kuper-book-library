@@ -2,6 +2,8 @@ server:
   port: 8080
   servlet.context-path: /service-library
 spring:
+  application:
+    name: service-library
   mvc:
     locale: ru
   profiles:
