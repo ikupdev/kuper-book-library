@@ -72,7 +72,7 @@ public class LibrarySettings {
         private CronSetting removeOrphanBooks;
         @NotNull
         @Valid
-        private LibrarySettings.SyncSettings syncGoogleBookAPI;
+        private LibrarySettings.SyncSettings syncGoogleBookApi;
 
         public CronSetting getRemoveOrphanBooks() {
             return removeOrphanBooks;
@@ -82,12 +82,12 @@ public class LibrarySettings {
             this.removeOrphanBooks = removeOrphanBooks;
         }
 
-        public SyncSettings getSyncGoogleBookAPI() {
-            return syncGoogleBookAPI;
+        public SyncSettings getSyncGoogleBookApi() {
+            return syncGoogleBookApi;
         }
 
-        public void setSyncGoogleBookAPI(SyncSettings syncGoogleBookAPI) {
-            this.syncGoogleBookAPI = syncGoogleBookAPI;
+        public void setSyncGoogleBookApi(SyncSettings syncGoogleBookApi) {
+            this.syncGoogleBookApi = syncGoogleBookApi;
         }
     }
 

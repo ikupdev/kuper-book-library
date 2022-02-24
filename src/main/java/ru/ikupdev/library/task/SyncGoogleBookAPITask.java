@@ -19,7 +19,7 @@ import ru.ikupdev.library.service.ISyncBookService;
 public class SyncGoogleBookAPITask {
     private final ISyncBookService syncBookService;
 
-    @Scheduled(cron = "${library.task.syncGoogleBookAPI.cron:-}")
+    @Scheduled(cron = "${library.task.sync-google-book-api.cron:-}")
     public void startSyncTask() {
         try {
             syncBookService.processSync();

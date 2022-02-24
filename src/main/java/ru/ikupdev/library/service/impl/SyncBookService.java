@@ -34,7 +34,7 @@ public class SyncBookService implements ISyncBookService {
     private final GBookToBookConverter converter;
     Long updatedCounter = 0L;
 
-    @Value("${library.task.syncGoogleBookAPI.batchSize}")
+    @Value("${library.task.sync-google-book-api.batch-size}")
     private Integer batchSize;
 
     @Override

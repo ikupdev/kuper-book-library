@@ -1,0 +1,82 @@
+server:
+  port: 8080
+  servlet.context-path: /service-library
+spring:
+  mvc:
+    locale: ru
+  profiles:
+    active: alwaysActiveProfile
+  datasource:
+    url: jdbc:postgresql://localhost:5432/library
+    platform: postgresql
+    driver-class-name: org.postgresql.Driver
+    username: kuper
+    password: abcd1234
+    hikari:
+      schema: ${library.schema-name}
+    initialization-mode: always
+    continue-on-error: false
+    tomcat:
+      initial-size: 0
+      max-active: 10
+      remove-abandoned: true
+      remove-abandoned-timeout: 60
+      time-between-eviction-runs-millis: 5000
+      min-evictable-idle-time-millis: 5000
+      min-idle: 0
+  jpa:
+    properties:
+      hibernate:
+        database: postgresql
+        default_schema: ${library.schema-name}
+        ddl-auto: validate
+        show_sql: false
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+          time_zone: UTC
+        temp:
+          use_jdbc_metadata_defaults: false
+    database: postgresql
+  jackson:
+    time-zone: UTC
+    mapper:
+      default-view-inclusion: true
+  liquibase:
+    database-change-log-table: LIBRARY_DATABASECHANGELOG
+    database-change-log-lock-table: LIBRARY_DATABASECHANGELOGLOCK
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    default-schema: ${library.schema-name}
+    liquibase-schema: ${library.schema-name}
+    user: kuper
+    password: abcd1234
+    contexts: default
+  flyway:
+    enabled: false
+  main:
+    banner-mode: off
+logging:
+  config: classpath:logback-library.xml
+  file:
+    path: /opt/library-platform/logs
+
+library:
+  schema-name: com
+  jwt:
+    token:
+      expired: 3600000
+      secret: ikupdevsecret
+  # not defined - removing turned off
+  task:
+    ## not defined - removing turned off
+    remove-orphan-books:
+      cron: 0 0 0 * * * #every day at 00:00 am
+      ## not defined - sync turned off
+    sync-google-book-api:
+      cron: 0 0 1 * * * #every day at 01:00 am
+      batch-size: 10 #sync book batch size
+google:
+  api:
+    key: AIzaSyDIo47O3Sy9s4zOfyXvL_zSRxpMf2XeD3s
+    url: https://www.googleapis.com/books/v1/

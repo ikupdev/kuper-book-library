@@ -25,7 +25,7 @@ public class RemoveOrphanBooksTask {
     private final ResourceBundle BUNDLE = ResourceBundle.getBundle(RemoveOrphanBooksTask.class.getName());
     private final BookService bookService;
 
-    @Scheduled(cron = "${library.task.removeOrphanBooks.cron:-}")
+    @Scheduled(cron = "${library.task.remove-orphan-books.cron:-}")
     public void startRemoveOrphanBooksTask() {
         try {
             List<Long> removedIds = bookService.deleteOrphanBooks();
