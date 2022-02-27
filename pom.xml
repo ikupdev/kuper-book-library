@@ -22,7 +22,7 @@
         <swagger.springfox.version>2.9.2</swagger.springfox.version>
         <jsowebtoken.version>0.8.0</jsowebtoken.version>
         <modelmapper.version>2.3.9</modelmapper.version>
-        <spring.cloud.version>2.2.5.RELEASE</spring.cloud.version>
+        <spring.cloud.version>Hoxton.SR4</spring.cloud.version>
         <maven.release.plugin>2.5.3</maven.release.plugin>
         <com.google.code.gson.version>2.7</com.google.code.gson.version>
         <commons.lang.version>2.6</commons.lang.version>
@@ -65,12 +65,10 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
-            <version>${spring.cloud.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-contract-wiremock</artifactId>
-            <version>${spring.cloud.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -162,6 +160,13 @@
                 <groupId>org.testcontainers</groupId>
                 <artifactId>testcontainers-bom</artifactId>
                 <version>${testcontainers.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
