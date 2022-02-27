@@ -1,5 +1,6 @@
 package ru.ikupdev.library.dto;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
 
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotBlank;
  * @version 03.02.2022
  */
 @Data
+@Builder
 @ToString(of = {"login", "firstName", "lastName", "email"})
 public class UserRequestDto {
     @NotBlank
