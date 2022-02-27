@@ -8,7 +8,9 @@ import ru.ikupdev.library.bean.type.Status;
 import ru.ikupdev.library.dto.UserRequestDto;
 import ru.ikupdev.library.model.User;
 import ru.ikupdev.library.dto.UserViewDto;
+import ru.ikupdev.library.service.IRoleService;
 import ru.ikupdev.library.service.ISignUpService;
+import ru.ikupdev.library.service.IUserService;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,8 +25,8 @@ import java.util.ResourceBundle;
 @RequiredArgsConstructor
 public class SignUpService implements ISignUpService {
     private static final ResourceBundle BUNDLE = ResourceBundle.getBundle(SignUpService.class.getName());
-    private final UserService userService;
-    private final RoleService roleService;
+    private final IUserService userService;
+    private final IRoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
     @Override
