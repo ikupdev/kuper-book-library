@@ -1,5 +1,6 @@
 package ru.ikupdev.library.listener;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.AbstractAuthenticationEvent;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Component;
  * @version 15.12.2021
  */
 @Component
+@Slf4j
 public class AuthenticationEventListener implements ApplicationListener<AbstractAuthenticationEvent> {
     @Override
     public void onApplicationEvent(AbstractAuthenticationEvent event) {
@@ -22,7 +24,7 @@ public class AuthenticationEventListener implements ApplicationListener<Abstract
                 authentication.getCredentials() + " " +
                 authentication.getPrincipal() + "\n" +
                 "SUCCESS: " + authentication.isAuthenticated();
-        System.out.println(auditMessage);
+        log.info(auditMessage);
     }
 
 }
