@@ -113,6 +113,6 @@ public class Book extends DatedEntity {
 
     @Override
     public int hashCode() {
-        return Objects.hash(volumeId, title, subtitle, description, pageCount, language, imageLink, previewLink, infoLink, canonicalVolumeLink, authors, searchInfo, epubDownloadLink, pdfDownloadLink, webReaderLink, buyLink);
+        return Objects.hash(volumeId, title, subtitle, description, pageCount, language, previewLink, infoLink, canonicalVolumeLink, authors, searchInfo, epubDownloadLink, pdfDownloadLink, webReaderLink, buyLink);
     }
 }
