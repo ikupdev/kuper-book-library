@@ -308,6 +308,24 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.2.1</version>
+                <configuration>
+                    <container>
+                        <ports>
+                            <port>8082</port>
+                        </ports>
+                    </container>
+                    <from>
+                        <image>openjdk:alpine</image>
+                    </from>
+                    <to>
+                        <image>registry.hub.docker.com/ikupdev/service-library</image>
+                    </to>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
